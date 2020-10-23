@@ -1,3 +1,80 @@
+# Instagram
+​
+# User Stories
+----------------
+​
+​
+# Features - MVP
+-----------------
+- [ ] Images
+- [ ] Likes
+- [ ] Commenting on images
+- [ ] Following & Photo feed
+​
+​
+# FEATURES - Reach
+--------------------
+- [ ] Bonus: direct messaging
+- [ ] Bonus: hashtags
+- [ ] Bonus: OAuth
+- [ ] Bonus: Dark Theme
+​
+​
+# Tables
+----------
+- Users
+    -id
+    -userName
+    -hashedPassword
+    -dateCreated
+- Posts
+    -id
+    -liked(bool)
+    -url
+    userId
+- Hashtags
+    -array?
+- DMs
+    -senderid
+    -friendid
+    -time
+    -message
+- Comments
+    -id
+    -postId
+    -comment
+    -userId
+    -time
+- Friends(join)
+    -userId
+    -friendId
+​
+​
+# Pages & Routes
+-----------------
+​
+`/` Home
+----------
+​
+`/sign-up` Sign-Up
+--------------------
+​
+`/login` Login
+----------------
+​
+`logout` Logout
+-----------------
+​
+`/profile/:username` user profile with pictures
+------------------------------------------------
+​
+`/hashtags/:hashtag` filtered timeline
+---------------------------------------
+​
+`photofeed/userid` Main news feed after login
+-----------------------------------------------
+
+
 # Flask React Project
 
 This is the backend for the Flask React project.
