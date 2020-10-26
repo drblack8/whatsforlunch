@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-
 import UserList from './components/UsersList';
-import PhotoUpload from './components/PhotoUpload'
+import UploadPage from './components/PhotoUpload/UploadPage';
 
 function App() {
 
@@ -12,18 +11,18 @@ function App() {
             <ul>
                 <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                 <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                <li><NavLink to="/posts/new" activeclass="active">Post</NavLink></li>
             </ul>
         </nav>
         <Switch>
             <Route path="/users">
                 <UserList />
             </Route>
-
+            <Route path="/posts/new" component={UploadPage} />
             <Route path="/">
                 <h1>My Home Page</h1>
             </Route>
         </Switch>
-        <PhotoUpload />
     </BrowserRouter>
   );
 }
