@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 
 import UserList from './components/UsersList';
-
+import PhotoUpload from './components/PhotoUpload'
 
 function App() {
 
@@ -23,6 +23,7 @@ function App() {
                 <h1>My Home Page</h1>
             </Route>
         </Switch>
+        <PhotoUpload />
     </BrowserRouter>
   );
 }
