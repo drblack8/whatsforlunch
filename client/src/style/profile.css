@@ -1,0 +1,44 @@
+#profile-wrap {
+    display: flex;
+    flex-flow: column;
+    margin: 0 363px;
+    /* border: 1px solid black; */
+    padding: 30px 0 0;
+    flex-grow: 0;
+}
+
+#user-card {
+    display: inherit;
+    flex-flow: row nowrap;
+    height: 150px;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.329);
+}
+
+#user-photo {
+    width: 150px;
+    height: inherit;
+    justify-content: center;
+    justify-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.233);
+    border-radius: 50%;
+}
+
+#user-pic {
+    margin-left: -50px;
+    overflow: hidden;
+}
+
+#user-content {
+    display: inherit;
+    flex-flow: row wrap;
+    padding-top: 20px;
+}
+
+#user-post {
+    height: 293px;
+    width: 293px;
+    border: 1px solid black;
+    margin: 10px;
+}

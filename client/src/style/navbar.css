@@ -1,0 +1,153 @@
+/* TODO Add site wide styles */
+/*  classes: leftnav, rightnav, middlenav, navbar, rightnavlogged
+    id: logo, home, library, search, signin, signup, settings
+*/
+.outer-nav {
+    display: flex;
+    width: 100%;
+    height: 55px;
+    background-color: #011c3b00;
+    position: static;
+    flex-grow: 0;
+    border: 1px solid rgba(0, 0, 0, 0.329);
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.13); */
+    justify-content: center;
+}
+
+.navbar {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    width: 954px;
+    height: 54px;
+    background-color: inherit;
+    /* margin-left: 10px;
+    margin-right: 128px; */
+    font: 100 14px/1.5 Interstate,Lucida Grande,Arial,sans-serif;
+    flex-grow: 0;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.leftnav {
+    /* position: absolute; */
+    display: inherit;
+    flex-direction: row;
+    width: 360px;
+    height: inherit;
+    overflow: visible;
+    margin-left: 0px;
+    /* border-left: 1px solid black; */
+}
+
+#logo {
+    position: static;
+    width: 100%;
+    height: inherit;
+    border: inherit;
+    text-align: left;
+
+}
+
+#logoimg {
+    position: static;
+    width: auto;
+    margin-top: 3px;
+    height: 100%;
+}
+
+.middlenav {
+    display: inherit;
+    width: 215px;
+    height: inherit;
+    margin-left: 20px;
+    text-align: center;
+    justify-content: center;
+    /* position: relative; */
+}
+
+#search {
+    position: static;
+    flex-direction: row;
+    height: 18px;
+    width: 199px;
+    margin-top: 15px;
+    margin-left: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.507);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.13);
+    text-align: center;
+}
+
+#search:focus {
+    background: white;
+}
+
+.rightnav {
+    display: inherit;
+    height: inherit;
+    width: 360px;
+    font: inherit;
+    justify-content: center;
+    /* border-right: 1px solid black; */
+}
+
+#settings {
+    justify-self: flex-end;
+    float: inline-end;
+    font: inherit;
+    color: black;
+}
+
+#home-icon {
+    fill: "rgba(255, 255, 255, 0.20)";
+    
+}
+#navlink-login {
+    color: black;
+    text-decoration: none;
+}
+#navlink-profile {
+    color: black;
+    text-decoration: none;
+}
+
+/* .rightnav {
+    display: inherit;
+    width: 100%;
+    height: inherit;
+    font: inherit;
+    padding: 13px;
+    border-radius: 5px;
+    align-content: flex-end;
+    justify-content: flex-end;
+} */
+
+/* #login {
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
+    color: white;
+    background-color: inherit;
+    margin-right: 10px;
+    width: 60px;
+    height: 25px;
+    flex-basis: auto;
+} */
+
+/* #demologin {
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
+    color: white;
+    background-color: inherit;
+    margin-right: 10px;
+    width: 100px;
+    height: 25px;
+    flex-basis: auto;
+} */
+/* #signup {
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(8, 174, 240);
+    height: 25px;
+} */
