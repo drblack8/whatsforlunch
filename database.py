@@ -1,4 +1,4 @@
-from starter_app.models import User
+from starter_app.models import User, Post, Comment
 from starter_app import app, db
 from dotenv import load_dotenv
 load_dotenv()
