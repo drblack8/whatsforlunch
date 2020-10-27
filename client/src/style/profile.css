@@ -13,10 +13,13 @@
     height: 150px;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.329);
+    padding-bottom: 10px;
+    padding-left: 10px;
 }
 
 #user-photo {
     width: 150px;
+    min-width: 150px;
     height: inherit;
     justify-content: center;
     justify-items: center;
@@ -37,8 +40,14 @@
 }
 
 #user-post {
-    height: 293px;
-    width: 293px;
+    min-width: 275px;
+    height: 275px;
+    width: 275px;
     border: 1px solid black;
     margin: 10px;
+    overflow: hidden;
+}
+
+#demo-post {
+    max-width: 150%;
 }

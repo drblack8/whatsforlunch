@@ -12,7 +12,9 @@ function Profile(){
                     <div id='user-info'></div>
                 </div>
                 <div id='user-content'>
-                    <div id='user-post'>this a post</div>
+                    <div id='user-post'>
+                        <img id='demo-post' src='https://www.chicagotribune.com/resizer/rokWHg3OWbgljv40wHD3ocd21kI=/800x600/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/QJ3L4OIW6NEFXHPK2EENBEOLTE.jpg' alt='' ></img>
+                    </div>
                     <div id='user-post'>this a post</div>
                     <div id='user-post'>this a post</div>
                     <div id='user-post'>this a post</div>
