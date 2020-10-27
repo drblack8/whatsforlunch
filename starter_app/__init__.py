@@ -33,7 +33,7 @@ def inject_csrf_token(response):
     return response
 
 
-q
+
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

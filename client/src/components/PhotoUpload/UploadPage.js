@@ -1,6 +1,6 @@
 import React from 'react';
 import PhotoUpload from './PhotoUpload';
-import '../../css/post-page.css'
+import '../../style/post-page.css'
 
 
 const UploadPage = () => {
