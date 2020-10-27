@@ -1,3 +1,99 @@
+# Instagram
+​
+# User Stories
+----------------
+​-uploading an image as an user
+   -where is the uploading coming from?
+      -upload link in the nav bar
+      
+-how is the feed going to work?
+   -how are you going to model out followers?
+   -how will follows work?
+   -how will newsfeed be organized
+      -chronologically
+   -how do you follow someone?
+      -follow button on user profile
+
+-username or userid in url?
+   -what is on the profile page?
+      -pictures that the user has uploaded
+      -profile picture
+      -number of posts
+      -bio
+      -number following, number followers
+
+
+# Features - MVP
+-----------------
+- [ ] Images
+- [ ] Likes
+- [ ] Commenting on images
+- [ ] Following & Photo feed
+​
+​
+# FEATURES - Reach
+--------------------
+- [ ] Bonus: direct messaging
+- [ ] Bonus: hashtags
+- [ ] Bonus: OAuth
+- [ ] Bonus: Dark Theme
+​
+​
+# Tables
+----------
+- Users
+    -id
+    -userName
+    -hashedPassword
+    -dateCreated
+- Posts
+    -id
+    -liked(bool)
+    -url
+    userId
+- Hashtags
+    -array?
+- DMs
+    -senderid
+    -friendid
+    -time
+    -message
+- Comments
+    -id
+    -postId
+    -comment
+    -userId
+    -time
+- Follows(join)
+    -userId
+    -friendId
+​
+​
+# Pages & Routes
+-----------------
+​
+`/` Home
+----------
+​
+`/sign-up` Sign-Up
+--------------------
+​
+`/login` Login
+----------------
+​
+`logout` Logout
+-----------------
+​
+`/profile/:username` user profile with pictures
+------------------------------------------------
+​
+`/hashtags/:hashtag` filtered timeline
+---------------------------------------
+​
+`photofeed/userid` Main news feed after login
+-----------------------------------------------
+
+
 # Flask React Project
 
 This is the backend for the Flask React project.
@@ -73,3 +169,4 @@ This is the backend for the Flask React project.
    ```
 10. Under Settings find "Config Vars" and add any additional/secret .env variables.
 11. profit
+
