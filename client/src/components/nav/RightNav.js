@@ -9,7 +9,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { NavLink, Redirect } from 'react-router-dom';
 import UserLogo from "../../style/svg/usericon.svg"
 import HomeLogo from "../../style/svg/home.svg"
-
+import PostLogo from "../../style/svg/post.svg"
     
 function RightNav(){
     const [open, setOpen] = React.useState(false);
@@ -68,6 +68,15 @@ function RightNav(){
                   onClick={() => <Redirect to='/' />}
                 >
                   <img src={HomeLogo} alt=''/>  
+                </Button>
+              </NavLink>
+            </div>
+            <div >
+              <NavLink to="/posts/new" activeclass="active" >
+                <Button
+                  onClick={() => <Redirect to="/posts/new" />}
+                >
+                  <img src={PostLogo} alt=''/>  
                 </Button>
               </NavLink>
             </div>
