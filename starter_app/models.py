@@ -41,7 +41,7 @@ class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
-    image_url = db.Column(db.String(40), nullable=False, unique=True)
+    image_url = db.Column(db.String(200), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     desc = db.Column(db.String(255))
 
