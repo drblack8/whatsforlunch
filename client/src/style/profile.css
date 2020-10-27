@@ -14,7 +14,7 @@
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.329);
     padding-bottom: 10px;
-    padding-left: 10px;
+    padding-left: 40px;
 }
 
 #user-photo {
@@ -31,6 +31,39 @@
 #user-pic {
     margin-left: -50px;
     overflow: hidden;
+}
+
+#user-info {
+    margin-left: 50px;
+    width: 100%;
+    text-align: left;
+    justify-content: left;
+}
+
+#username {
+    display: flex;
+    flex-flow: row;
+    height: 50%;
+    width: 100%;
+    justify-content: left;
+}
+#follows-posts {
+    height: 25%;
+    width: 100%;
+}
+
+#add-follow {
+    height: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    background-color: #0095f6;
+    color: white;
+}
+
+#bio {
+    height: 50%;
+    width: 100%;
 }
 
 #user-content {

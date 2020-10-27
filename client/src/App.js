@@ -10,15 +10,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        <NavBar />
-        <nav>
-            <ul>
-                <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                <li><NavLink to="/profile" activeclass="active">Profile</NavLink></li>
-                <li><NavLink to="/posts/new" activeclass="active">Post</NavLink></li>
-            </ul>
-        </nav> 
+        <NavBar /> 
         <Switch>
             <Route path="/users" component={UserList} />
             <Route path="/profile" component={Profile} />
