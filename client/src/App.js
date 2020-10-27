@@ -1,27 +1,108 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import Profile from './pages/Profile'
 import Feed from './pages/Feed'
+import LoginForm from './components/LoginForm';
 import UserList from './components/UsersList';
 import NavBar from './components/nav/NavBar'
 import UploadPage from './components/PhotoUpload/UploadPage';
+import AuthContext from './auth'
+
+import { ProtectedRoute, AuthRoute } from './Routes';
 
 function App() {
+  const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const authContextValue = {
+    fetchWithCSRF,
+    currentUserId,
+    setCurrentUserId
+  };
+
+
+
+  const logoutUser = async ()=> {
+    const response = await fetchWithCSRF('/logout', {
+        method: 'POST',
+        credentials: 'include'
+    });
+    if(response.ok){
+        setCurrentUserId(null)
+    }
+  }
+
+  useEffect(() => {
+    async function restoreCSRF() {
+        const response = await fetch('/api/csrf/restore', {
+            method: 'GET',
+            credentials: 'include'
+        });
+        if (response.ok) {
+            const authData = await response.json();
+            setFetchWithCSRF(() => {
+                return (resource, init) => {
+                    if (init.headers) {
+                        init.headers['X-CSRFToken'] = authData.csrf_token;
+                    } else {
+                        init.headers = {
+                            'X-CSRFToken': authData.csrf_token
+                        }
+                    }
+                    return fetch(resource, init);
+                }
+            });
+            if(authData.current_user_id){
+                console.log(authData)
+                setCurrentUserId(authData.current_user_id)
+            }
+        }
+        setLoading(false)
+    }
+    restoreCSRF();
+  }, []);
 
   return (
-    <BrowserRouter>
-        <NavBar />
-        <Switch>
-            <Route path="/users" component={UserList} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/users">
-                <UserList />
-            </Route>
-            <Route path="/posts/new" component={UploadPage} />
-            <Route path="/" component={Feed} />
-        </Switch>
-    </BrowserRouter>
+    <>
+      <AuthContext.Provider value={authContextValue}>
+      <BrowserRouter>
+          <NavBar />
+          <Switch>
+              <Route path="/users" component={UserList} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/users">
+                  <UserList />
+              </Route>
+              <Route path="/posts/new" component={UploadPage} />
+              <Route path="/feed" component={Feed} />
+          </Switch>
+        </BrowserRouter>
+          {loading && <div>Loading...</div>}
+          {!loading &&
+          <BrowserRouter>
+            <Switch>
+                {/*<ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />*/}
+                {/*<ProtectedRoute path="/users/:id/edit" component={UserForm} currentUserId={currentUserId} />*/}
+                <AuthRoute path="/login" component={LoginForm} />
+                <Route path="/feed">
+                    <h1>sum feed here</h1>
+                </Route>
+            </Switch>
+        </BrowserRouter>}
+      </AuthContext.Provider>
+
+    </>
+
   );
 }
 
 export default App;
+
+{/* <nav>
+<ul>
+<li><NavLink to="/" activeclass="active">Home</NavLink></li>
+<li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+<li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
+<li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+</ul>  */}
