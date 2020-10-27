@@ -14,3 +14,8 @@ def new_post():
     db.session.commit()
     print(newpost)
     return data['image_url']
+
+@post_routes.route('/feed')
+def index():
+    res = Post.query.all()
+    return res
