@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ImageCard = () => {
+const ImageCard = (props) => {
 
 
     return (
