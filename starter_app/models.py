@@ -44,9 +44,10 @@ class Post(db.Model):
     image_url = db.Column(db.String(200), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     desc = db.Column(db.String(255))
-
     users = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="posts")
+
+
 
 
 class Comment(db.Model):
