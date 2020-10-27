@@ -4,6 +4,7 @@ from starter_app.models import User, Post, db
 
 post_routes = Blueprint('posts', __name__)
 
+
 @post_routes.route('/new', methods=['POST'])
 def new_post():
     data = request.get_json()
@@ -14,6 +15,7 @@ def new_post():
     db.session.commit()
     print(newpost)
     return data['image_url']
+
 
 @post_routes.route('/feed')
 def index():

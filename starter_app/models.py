@@ -48,8 +48,6 @@ class Post(db.Model):
     comments = db.relationship("Comment", back_populates="posts")
 
 
-
-
 class Comment(db.Model):
     __tablename__ = 'comments'
 
