@@ -46,7 +46,6 @@ const PhotoUpload = () => {
 
     return (
         <>
-            <h3>AWS Upload</h3>
             <div>
                 <input id="upload-input" type="file" />
             </div>
