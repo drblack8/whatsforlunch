@@ -9,6 +9,7 @@ pylint = "*"
 pycodestyle = "*"
 autopep8 = "*"
 
+
 [packages]
 click = "==7.1.2"
 gunicorn = "==20.0.4"
