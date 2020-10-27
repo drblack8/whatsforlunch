@@ -16,11 +16,15 @@ with app.app_context():
                   password='password')
     alissa = User(username='Alissa', email='alissa@aa.io', password='password')
 
+    post1 = Post(image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
+                 user_id=1, desc='this is a test bud')
+
     db.session.add(ian)
     db.session.add(javier)
     db.session.add(dean)
     db.session.add(angela)
     db.session.add(soonmi)
     db.session.add(alissa)
+    db.session.add(post1)
 
     db.session.commit()
