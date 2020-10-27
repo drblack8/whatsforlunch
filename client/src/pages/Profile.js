@@ -1,18 +1,42 @@
 import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import '../style/profile.css'
+import { makeStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+  },
+}));
+
 function Profile(){
+    // Post fetch----------------------------------------------->
     const [posts, setPosts] = useState([]);
+    const classes = useStyles();
 
     useEffect(() =>{
         async function fetchData(){
-            const res = await fetch('/api/posts')
+            const res = await fetch('/api/posts/feed')
+            console.log(res)
             const resData = await res.json()
             setPosts(resData.posts)
+            // return resData
         }
         fetchData()
     }, [])
+
     console.log(posts)
+    //--------------------------------------------------------->
     return (
         <>
             <div id='profile-wrap'>
@@ -26,14 +50,18 @@ function Profile(){
                         <div id='bio'>Owner and CEO of Weenie Hut Jr</div>
                     </div>
                 </div>
-                <div id='user-content'>                  
-                    <div id='user-post'>
+                <div id='user-content'>
+                    <GridList cellHeight={160} className={classes.gridList} cols={3}>
+                        {posts.map((post) => (
+                            <GridListTile key={post.image_url} >
+                                <img src={post.image_url} alt='' />
+                            </GridListTile>
+                        ))}
+                    </GridList>                  
+                    {/* <div id='user-post'>
                         <img id='demo-post' src='https://www.chicagotribune.com/resizer/rokWHg3OWbgljv40wHD3ocd21kI=/800x600/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/QJ3L4OIW6NEFXHPK2EENBEOLTE.jpg' alt='' ></img>
-                    </div>
-                    <div id='user-post'>this a post</div>
-                    <div id='user-post'>this a post</div>
-                    <div id='user-post'>this a post</div>
-                    <div id='user-post'>this a post</div>
+                    </div> */}
+                    
                 </div>
             </div>
         </>
