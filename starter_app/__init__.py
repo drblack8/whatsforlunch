@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 
 from starter_app.models import db, User, Comment, Post
 from starter_app.api.user_routes import user_routes
+from starter_app.api.post_routes import post_routes
 
 from starter_app.config import Config
 
@@ -13,6 +14,7 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(post_routes, url_prefix='/api/posts')
 db.init_app(app)
 Migrate(app, db)
 
@@ -31,6 +33,8 @@ def inject_csrf_token(response):
     return response
 
 
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
@@ -38,3 +42,5 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+
