@@ -72,13 +72,14 @@ function App() {
               <Route path="/login" component={LoginForm} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
               <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
-              <Route path="/profile" component={Profile} />
+              <Route path="/profile" exact={true} component={Profile} currentUserId={currentUserId}/>
+              <Route path="/users"><UserList /></Route>
               <Route path="/posts/new" component={UploadPage} />
           </Switch>
         </BrowserRouter>
       </AuthContext.Provider>
-
     )}
+
     </>
   );
 }
