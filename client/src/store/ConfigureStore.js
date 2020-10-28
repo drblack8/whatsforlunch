@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import Posts from './posts'
+import Feed from './feed'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducer = combineReducers({
-    Posts
+    Posts,
+    Feed
 });
 
 const configureStore = initialState => {

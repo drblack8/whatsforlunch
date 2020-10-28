@@ -5,7 +5,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import ConfigureStore from './store/ConfigureStore';
 
-const store =  ConfigureStore()
+export const store =  ConfigureStore()
 
 window.state = store;
 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import Profile from './pages/Profile'
-import Feed from './pages/Feed'
+// import Feed from './pages/Feed'
 import LoginForm from './components/LoginForm';
 import UserList from './components/UsersList';
 import NavBar from './components/nav/NavBar'
 import UploadPage from './components/PhotoUpload/UploadPage';
 import AuthContext from './auth'
-
+import Feed from './components/feed/Feed'
 import { ProtectedRoute, AuthRoute } from './Routes';
 
 function App() {
@@ -20,8 +20,6 @@ function App() {
     currentUserId,
     setCurrentUserId
   };
-
-
 
     const logoutUser = async ()=> {
         const response = await fetchWithCSRF('/logout', {
@@ -65,22 +63,23 @@ function App() {
 
   return (
     <>
+    {loading && <h1>Loading...</h1> }
+    {!loading && (
       <AuthContext.Provider value={authContextValue}>
       <BrowserRouter>
           <NavBar />
           <Switch>
               <Route path="/login" component={LoginForm} />
+              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
               <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
               <Route path="/profile" component={Profile} />
-              <Route path="/users"><UserList /></Route>
               <Route path="/posts/new" component={UploadPage} />
-              <Route path="/feed" component={Feed} />
           </Switch>
         </BrowserRouter>
       </AuthContext.Provider>
 
+    )}
     </>
-
   );
 }
 
