@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { uploadFile } from 'react-s3';
 import  { configuration } from '../../config/index.js'
 import { changePosted } from '../../store/posts'
@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
+import AuthContext from '../../auth'
 
 const config = {
     bucketName: 'whats4lunch-images',
@@ -29,6 +30,7 @@ const PhotoUpload = () => {
     const [imageRef, setImageRef] = useState()
     const [croppedImage, setCroppedImage] = useState()
     const [src, setSrc] = useState()
+    const { fetchWithCSRF } = useContext(AuthContext);
 
     //crop magic
     // https://levelup.gitconnected.com/crop-images-on-upload-in-your-react-app-with-react-image-crop-5f3cd0ad2b35
@@ -120,7 +122,7 @@ const PhotoUpload = () => {
         const data = await uploadFile(croppedImage, config)
         console.log(data.location)
         if (data.location) {
-            const post = await fetch('/api/posts/new', {
+            const post = await fetchWithCSRF('/api/posts/new', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ image_url:data.location, user_id:1, desc:caption }),
