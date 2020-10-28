@@ -71,7 +71,7 @@ function App() {
           <Switch>
               <Route path="/login" component={LoginForm} />
               <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
-              <ProtectedRoute path="/profile" exact={true} component={Profile} currentUserId={currentUserId}/>
+              <Route path="/profile" exact={true} component={Profile} currentUserId={currentUserId}/>
               <Route path="/users"><UserList /></Route>
               <Route path="/posts/new" component={UploadPage} />
               <Route path="/feed" component={Feed} />
