@@ -31,9 +31,12 @@ with app.app_context():
     db.session.add(soonmi)
     db.session.add(alissa)
     db.session.add(post1)
+
+    db.session.commit()
+
     db.session.add(social1)
     db.session.add(social2)
-    
+
     db.session.add(social3)
     db.session.add(social4)
 
