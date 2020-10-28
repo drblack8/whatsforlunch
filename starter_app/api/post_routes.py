@@ -21,3 +21,10 @@ def new_post():
 def index():
     res = Post.query.all()
     return {"posts": [{"image_url": post.image_url, "user_id": post.user_id, "desc": post.desc} for post in res]}
+
+
+@post_routes.route('/post/<post_id>')
+def single_post(post_id):
+    response = Post.query.get(post_id)
+    return {"post": {"image_url": response.image_url, "user_id": response.user_id, "desc": response.desc}}
+
