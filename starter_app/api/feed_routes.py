@@ -9,8 +9,8 @@ feed_routes = Blueprint('feed', __name__)
 def get_feed(userId):
     user_id = userId
     feed = Post.query.join(User, Post.user_id == User.id).add_columns(User.username).filter(Post.user_id == user_id).order_by(Post.id.desc())
-    return jsonify({"feed": [{"image_url": post.image_url, 
-                              "user_id": post.user_id, 
-                              "username": username, 
-                              "desc": post.desc} 
+    return jsonify({"feed": [{"image_url": post.image_url,
+                              "user_id": post.user_id,
+                              "username": username,
+                              "desc": post.desc}
                               for post, username in feed]})
