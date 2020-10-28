@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: "100%",
+    height: "100%",
   },
 }));
 
@@ -51,10 +51,10 @@ function Profile(){
                     </div>
                 </div>
                 <div id='user-content'>
-                    <GridList cellHeight={160} className={classes.gridList} cols={3}>
+                    <GridList cellHeight={275} className={classes.gridList} cols={6}>
                         {posts.map((post) => (
-                            <GridListTile key={post.image_url} >
-                                <img src={post.image_url} alt='' />
+                            <GridListTile id='user-post' key={post.image_url} >
+                                <img id='demo-post' src={post.image_url} alt='' />
                             </GridListTile>
                         ))}
                     </GridList>                  
