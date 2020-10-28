@@ -11,7 +11,7 @@ from flask_login import (
     login_required
 )
 
-from starter_app.models import db, User, Comment, Post
+from starter_app.models import db, User, Comment, Post, Social
 from starter_app.api.user_routes import user_routes
 from starter_app.api.post_routes import post_routes
 from starter_app.api.auth_routes import auth_routes
