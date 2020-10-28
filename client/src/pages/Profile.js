@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import '../style/profile.css'
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import AuthContext from '../auth.js'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,28 +16,34 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: "100%",
+    height: "100%",
   },
 }));
 
 function Profile(){
-    // Post fetch----------------------------------------------->
-    const [posts, setPosts] = useState([]);
-    const classes = useStyles();
-
-    useEffect(() =>{
-        async function fetchData(){
-            const res = await fetch('/api/posts/feed')
-            console.log(res)
-            const resData = await res.json()
-            setPosts(resData.posts)
-            // return resData
-        }
-        fetchData()
-    }, [])
-
-    console.log(posts)
+        // User/Post vars and state
+        const [user, setUser] = useState();
+        const { currentUserId } = useContext(AuthContext);
+        const [posts, setPosts] = useState([]);
+        const classes = useStyles();
+        // Post/User fetch----------------------------------------------->
+        useEffect(() =>{
+            async function fetchUser() {
+                const response = await fetch(`/api/users/${currentUserId}`);
+                const responseData = await response.json();
+                setUser(responseData.user);
+            }
+            async function fetchData(){
+                const res = await fetch('/api/posts/feed')
+                console.log(res)
+                const resData = await res.json()
+                setPosts(resData.posts)
+            }
+            fetchUser();
+            fetchData();
+        }, [])
+        console.log(user, 'user')
     //--------------------------------------------------------->
     return (
         <>
@@ -45,23 +53,19 @@ function Profile(){
                         <img id='user-pic' src='https://i.pinimg.com/originals/13/76/10/137610fb11df66ba8aa2b496fc17d6d7.jpg' alt=''></img>
                     </div>
                     <div id='user-info'>
-                        <div id='username'><h1>Hotdog Man</h1><Button id='add-follow'>Follow</Button></div>
+                        <div id='username'><h1>{user ? user.username : user}</h1><Button id='add-follow'>Follow</Button></div>
                         <div id='follows-posts'>5 posts 1 followers 200 following</div>
                         <div id='bio'>Owner and CEO of Weenie Hut Jr</div>
                     </div>
                 </div>
                 <div id='user-content'>
-                    <GridList cellHeight={160} className={classes.gridList} cols={3}>
+                    <GridList cellHeight={275} className={classes.gridList} cols={6}>
                         {posts.map((post) => (
-                            <GridListTile key={post.image_url} >
-                                <img src={post.image_url} alt='' />
+                            <GridListTile id='user-post' key={post.image_url} >
+                                <img id='demo-post' src={post.image_url} alt='' />
                             </GridListTile>
                         ))}
                     </GridList>                  
-                    {/* <div id='user-post'>
-                        <img id='demo-post' src='https://www.chicagotribune.com/resizer/rokWHg3OWbgljv40wHD3ocd21kI=/800x600/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/QJ3L4OIW6NEFXHPK2EENBEOLTE.jpg' alt='' ></img>
-                    </div> */}
-                    
                 </div>
             </div>
         </>

@@ -10,3 +10,11 @@ user_routes = Blueprint('users', __name__)
 def index():
     response = User.query.all()
     return {"users": [user.to_dict() for user in response]}
+
+
+@user_routes.route('/<currentUserId>')
+@login_required
+def user(currentUserId):
+    response = User.query.get(currentUserId)
+    return {"user": response.to_dict()}
+
