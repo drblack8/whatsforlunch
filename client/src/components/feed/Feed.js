@@ -21,13 +21,13 @@ const Feed = () => {
             {feed.length > 0 && feed.map(post => 
                 <div key={post.image_url} className="feed-post-container">
                     <div className="feed-post-poster-div">
-                        <p className="feed-post-poster">{post.user_id}</p>
+                        <p className="feed-post-poster">{post.username}</p>
                     </div>
                     <div className="feed-post-image-div">
                         <img className="feed-post-image" src={post.image_url}/>
                     </div>
                     <div className="feed-post-desc-div">
-                        <p className="feed-post-desc"><stong className="feed-post-desc-user">{post.user_id}</stong>{post.desc}</p>
+                        <p className="feed-post-desc"><stong className="feed-post-desc-user">{post.username}</stong>{post.desc}</p>
                     </div>
                 </div>
             )}
