@@ -5,10 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
-pylint = "*"
-pycodestyle = "*"
-autopep8 = "*"
-
 
 [packages]
 click = "==7.1.2"
@@ -28,3 +24,6 @@ WTForms = "==2.3.3"
 Flask-JWT-Extended = "==3.24.1"
 flask-login = "*"
 flask-migrate = "*"
+
+[requires]
+python_version = "3.8"

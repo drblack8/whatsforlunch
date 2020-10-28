@@ -1,4 +1,4 @@
-from starter_app.models import User, Post, Comment
+from starter_app.models import User, Post, Comment, Social
 from starter_app import app, db
 from dotenv import load_dotenv
 load_dotenv()
@@ -19,6 +19,11 @@ with app.app_context():
     post1 = Post(image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
                  user_id=1, desc='this is a test bud')
 
+    social1 = Social(user=2, follower=1)
+    social2 = Social(user=3, follower=1)
+    social3 = Social(user=4, follower=1)
+    social4 = Social(user=5, follower=1)
+
     db.session.add(ian)
     db.session.add(javier)
     db.session.add(dean)
@@ -26,5 +31,10 @@ with app.app_context():
     db.session.add(soonmi)
     db.session.add(alissa)
     db.session.add(post1)
+    db.session.add(social1)
+    db.session.add(social2)
+    
+    db.session.add(social3)
+    db.session.add(social4)
 
     db.session.commit()
