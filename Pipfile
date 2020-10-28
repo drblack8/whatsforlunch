@@ -25,5 +25,4 @@ Flask-JWT-Extended = "==3.24.1"
 flask-login = "*"
 flask-migrate = "*"
 
-[requires]
-python_version = "3.8"
+

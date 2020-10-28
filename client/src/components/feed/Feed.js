@@ -8,12 +8,13 @@ const Feed = () => {
     const dispatch = useDispatch()
     const { feed } = useSelector(store => store.Feed)
     const { currentUserId } = useContext(AuthContext)
+    const { posts } = useSelector(state => state);
 
 
     useEffect(() => {
         if (feed.length > 0) return
         dispatch(getFeed(currentUserId))
-    }, [])
+    }, [posts])
 
     return (
         <div className="feed-page-container">

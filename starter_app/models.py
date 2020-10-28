@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(255))
     pfp = db.Column(db.String(255))
 
-    socials = db.relationship("Social", back_populates="users")
+    # socials = db.relationship("Social", back_populates="users")
     posts = db.relationship("Post", back_populates="users")
     comments = db.relationship("Comment", back_populates="users")
 
@@ -72,6 +72,6 @@ class Social(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey("users.id"))
-    follower = db.Column(db.Integer, db.ForeignKey("users.id"))
+    following = db.Column(db.Integer, db.ForeignKey("users.id"))
 
-    users = db.relationship("User", back_populates="socials")
+    # users = db.relationship("User", back_populates="socials")

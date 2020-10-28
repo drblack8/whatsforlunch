@@ -19,10 +19,10 @@ with app.app_context():
     post1 = Post(image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
                  user_id=1, desc='this is a test bud')
 
-    social1 = Social(user=2, follower=1)
-    social2 = Social(user=3, follower=1)
-    social3 = Social(user=4, follower=1)
-    social4 = Social(user=5, follower=1)
+    social1 = Social(user=1, following=5)
+    social2 = Social(user=1, following=4)
+    social3 = Social(user=1, following=3)
+    social4 = Social(user=1, following=2)
 
     db.session.add(ian)
     db.session.add(javier)
