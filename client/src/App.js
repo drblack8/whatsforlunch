@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import Profile from './pages/Profile'
-// import Feed from './pages/Feed'
 import LoginForm from './components/LoginForm';
 import UserList from './components/UsersList';
 import NavBar from './components/nav/NavBar'

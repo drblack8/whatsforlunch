@@ -15,6 +15,7 @@ from starter_app.models import db, User, Comment, Post
 from starter_app.api.user_routes import user_routes
 from starter_app.api.post_routes import post_routes
 from starter_app.api.auth_routes import auth_routes
+from starter_app.api.feed_routes import feed_routes
 
 from starter_app.config import Config
 
@@ -24,6 +25,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(feed_routes, url_prefix='/api/feed')
 
 
 db.init_app(app)
