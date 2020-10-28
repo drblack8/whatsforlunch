@@ -22,7 +22,7 @@ const Feed = () => {
             {feed.length > 0 && feed.map(post => 
                 <div key={post.image_url} className="feed-post-container">
                     <div className="feed-post-poster-div">
-                        <p className="feed-post-poster">{post.username}</p>
+                        <p className="feed-post-poster">{post.date.split(" ").slice(0,3).join(" ")}</p>
                     </div>
                     <div className="feed-post-image-div">
                         <img className="feed-post-image" src={post.image_url}/>
