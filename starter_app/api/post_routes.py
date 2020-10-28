@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from starter_app.models import User, Post, db
-
+import datetime
 
 post_routes = Blueprint('posts', __name__)
 
@@ -9,8 +9,10 @@ post_routes = Blueprint('posts', __name__)
 def new_post():
     data = request.get_json()
     newpost = Post(image_url=data["image_url"],
-                   user_id=1,
-                   desc=data["desc"])
+                   user_id=data["user_id"],
+                   desc=data["desc"],
+                   date=datetime.datetime.now())
+
     db.session.add(newpost)
     db.session.commit()
     print(newpost)

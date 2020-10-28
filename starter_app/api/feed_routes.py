@@ -12,5 +12,6 @@ def get_feed(userId):
     return jsonify({"feed": [{"image_url": post.image_url, 
                               "user_id": post.user_id, 
                               "username": username, 
-                              "desc": post.desc} 
+                              "desc": post.desc,
+                              "date": post.date} 
                               for post, username in feed]})

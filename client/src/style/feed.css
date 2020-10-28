@@ -14,9 +14,6 @@
 }
 
 .feed-post-container {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
     display: grid;
     grid-template-rows: 10% 70% 20%;
     width: 90%;
