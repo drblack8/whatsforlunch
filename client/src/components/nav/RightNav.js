@@ -78,9 +78,9 @@ function RightNav(){
     return(
         <div className="rightnav">
             <div >
-              <NavLink to='/' >
+              <NavLink to='/feed' >
                 <Button
-                  onClick={() => <Redirect to='/' />}
+                  onClick={() => <Redirect to='/feed' />}
                 >
                   <img src={HomeLogo} alt=''/>
                 </Button>
