@@ -23,15 +23,15 @@ function App() {
 
 
 
-  const logoutUser = async ()=> {
-    const response = await fetchWithCSRF('/logout', {
-        method: 'POST',
-        credentials: 'include'
-    });
-    if(response.ok){
-        setCurrentUserId(null)
+    const logoutUser = async ()=> {
+        const response = await fetchWithCSRF('/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        if(response.ok){
+            setCurrentUserId(null)
+        }
     }
-  }
 
   useEffect(() => {
     async function restoreCSRF() {
@@ -69,27 +69,14 @@ function App() {
       <BrowserRouter>
           <NavBar />
           <Switch>
-              <Route path="/users" component={UserList} />
+              <Route path="/login" component={LoginForm} />
+              <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
               <Route path="/profile" component={Profile} />
-              <Route path="/users">
-                  <UserList />
-              </Route>
+              <Route path="/users"><UserList /></Route>
               <Route path="/posts/new" component={UploadPage} />
               <Route path="/feed" component={Feed} />
           </Switch>
         </BrowserRouter>
-          {loading && <div>Loading...</div>}
-          {!loading &&
-          <BrowserRouter>
-            <Switch>
-                {/*<ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />*/}
-                {/*<ProtectedRoute path="/users/:id/edit" component={UserForm} currentUserId={currentUserId} />*/}
-                <AuthRoute path="/login" component={LoginForm} />
-                <Route path="/feed">
-                    <h1>sum feed here</h1>
-                </Route>
-            </Switch>
-        </BrowserRouter>}
       </AuthContext.Provider>
 
     </>

@@ -17,7 +17,6 @@ const config = {
     secretAccessKey: configuration.aws.secretKey,
 }
 
-
 const PhotoUpload = () => {
     const dispatch = useDispatch();
     const { posts } = useSelector(state => state);
@@ -31,13 +30,6 @@ const PhotoUpload = () => {
     const [croppedImage, setCroppedImage] = useState()
     const [src, setSrc] = useState()
 
-    const handleFile = e => {
-        const fileReader = new FileReader()
-        fileReader.onloadend = () => {
-            setSrc(fileReader.result)
-        }   
-        fileReader.readAsDataURL(e.target.files[0])
-    }
     //crop magic
     // https://levelup.gitconnected.com/crop-images-on-upload-in-your-react-app-with-react-image-crop-5f3cd0ad2b35
     const onImageLoaded = image => {
@@ -185,12 +177,6 @@ const PhotoUpload = () => {
                       className="react-crop"
                      /> 
                 )}
-                {/*(
-                <div className="upload-form">
-                    <img src={preview} />
-                </div>
-                )*/}
-
                 <div className="upload-text-area-div">
                     <TextField multiline={true} onChange={handleCaption} value={caption} placeholder="write a caption"></TextField>
                 </div>
