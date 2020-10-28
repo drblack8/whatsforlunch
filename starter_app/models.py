@@ -18,6 +18,13 @@ class User(db.Model, UserMixin):
     posts = db.relationship("Post", back_populates="users")
     comments = db.relationship("Comment", back_populates="users")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email
+        }
+
     @property
     def password(self):
         return self.hashed_password
@@ -29,12 +36,10 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email
-        }
+    @classmethod
+    def authenticate(cls, username, password):
+        user = cls.query.filter(User.username == username).scalar()
+        return check_password_hash(user.password, password), user
 
 
 class Post(db.Model):
