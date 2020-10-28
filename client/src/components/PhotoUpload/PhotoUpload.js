@@ -30,7 +30,7 @@ const PhotoUpload = () => {
     const [imageRef, setImageRef] = useState()
     const [croppedImage, setCroppedImage] = useState()
     const [src, setSrc] = useState()
-    const { fetchWithCSRF } = useContext(AuthContext);
+    const { fetchWithCSRF, currentUserId } = useContext(AuthContext);
 
     //crop magic
     // https://levelup.gitconnected.com/crop-images-on-upload-in-your-react-app-with-react-image-crop-5f3cd0ad2b35
@@ -125,7 +125,7 @@ const PhotoUpload = () => {
             const post = await fetchWithCSRF('/api/posts/new', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ image_url:data.location, user_id:1, desc:caption }),
+                body: JSON.stringify({ image_url:data.location, user_id:currentUserId, desc:caption }),
             })
             if (post.ok){
                 dispatch(changePosted(true))
