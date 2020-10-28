@@ -17,7 +17,6 @@ with app.app_context():
                   password='password')
     alissa = User(username='Alissa', email='alissa@aa.io', password='password')
 
-<<<<<<< HEAD
     post1 = Post(
         image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
         user_id=1, desc='this is a test bud')
@@ -25,10 +24,6 @@ with app.app_context():
     comment1 = Comment(
         content="This must be a joke, totally repulsive.",
         user_id=3, post_id=1)
-=======
-    post1 = Post(image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
-                 user_id=1, desc='this is a test bud', date=datetime.datetime.now())
->>>>>>> eaea57ed55b30f705760752c8a7c5275fb88f60d
 
     social1 = Social(user=1, following=5)
     social2 = Social(user=1, following=4)
