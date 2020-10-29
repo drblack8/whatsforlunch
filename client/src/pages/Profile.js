@@ -29,7 +29,8 @@ function Profile(){
         const [loading, setLoading] = useState(true);
         const classes = useStyles();
         // Post/User fetch----------------------------------------------->
-        const { currentUserId } = useContext(AuthContext);
+        const { currentUserId, fetchWithCSRF } = useContext(AuthContext);
+
         useEffect(() =>{
             async function fetchUser() {
                 const response = await fetch(`/api/users/${currentUserId}`);
@@ -48,6 +49,17 @@ function Profile(){
         }, [])
         // console.log(user, 'user')
     //--------------------------------------------------------->
+    // const handleFollow = () => {
+    //     fetchWithCSRF(`/api/users/${currentUserId}`, {
+    //         method: "POST",
+    //         body: JSON.stringify(body),
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         }
+    //       })
+    //         .then((res) => res.json())
+    //         .catch((err) => console.log("ERROR: ", err))
+    // }
 
     return (
         <>
@@ -59,7 +71,7 @@ function Profile(){
                         <img id='user-pic' src='https://i.pinimg.com/originals/13/76/10/137610fb11df66ba8aa2b496fc17d6d7.jpg' alt=''></img>
                     </div>
                     <div id='user-info'>
-                        <div id='username'><h1>{user.username}</h1><Button id='add-follow'>Follow</Button></div>
+                        <div id='username'><h1>{user.username}</h1><Button  id='add-follow'>Follow</Button></div>
                         <div id='follows-posts'>5 posts 1 followers 200 following</div>
                         <div id='bio'>Owner and CEO of Weenie Hut Jr</div>
                     </div>
@@ -73,7 +85,7 @@ function Profile(){
                                 </Button>
                             </GridListTile>
                         ))}
-                    </GridList>                  
+                    </GridList>
                 </div>
             </div>)}
         </>

@@ -44,10 +44,6 @@ with app.app_context():
 
     db.session.add(social1)
     db.session.add(social2)
-<<<<<<< HEAD
-=======
-
->>>>>>> eaea57ed55b30f705760752c8a7c5275fb88f60d
     db.session.add(social3)
     db.session.add(social4)
 

@@ -11,6 +11,7 @@ const Feed = () => {
     const { feed } = useSelector(store => store.Feed)
     const { currentUserId } = useContext(AuthContext)
     const { posts } = useSelector(state => state);
+    const [ setComment, comment ] = useState(null)
 
     useEffect(() => {
         if (feed.length > 0) return
@@ -21,10 +22,17 @@ const Feed = () => {
         e.target.setAttribute('src', liked)
     }
 
+    const commentChange = (e) => {
+        setComment(e.target.value)
+    }
+    const handleComment = () => {
+
+    }
+
     return (
         <div className="feed-page-container">
             <div className="feed-container">
-            {feed.length > 0 && feed.map(post => 
+            {feed.length > 0 && feed.map(post =>
                 <div key={post.image_url} className="feed-post-container">
                     <div className="feed-post-poster-div">
                         <p className="feed-post-poster">{post.date.split(" ").slice(0,3).join(" ")}</p>
@@ -39,8 +47,8 @@ const Feed = () => {
                         <p className="feed-post-desc"><stong className="feed-post-desc-user">{post.username}</stong>{post.desc}</p>
                     </div>
                     <div className="feed-post-comment-container">
-                        <input type="text" placeholder="Add a comment..."></input>
-                        <a className="feed-post-comment-button">Post</a>
+                        <input type="text" placeholder="Add a comment..." onChange={commentChange}></input>
+                        <a className="feed-post-comment-button" onClick={handleComment}>Post</a>
                     </div>
                 </div>
             )}
