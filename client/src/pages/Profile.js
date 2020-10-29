@@ -56,7 +56,17 @@ function Profile(){
             // fetchUser();
             fetchData();
         }, [currentUserId])
-        // console.log(user, 'user')
+        let postAm = (arr, userId) => {
+            let newArr = []
+            arr.filter(post => {
+                if(post.user_id === userId){
+                   newArr.push(post)
+                }
+            })
+            return newArr.length
+        }
+
+       
     //--------------------------------------------------------->
 
     return (
@@ -74,8 +84,7 @@ function Profile(){
                     </div>
                     <div id='user-info'>
                         <div id='username'><h1>{user.username}</h1><Button id='add-follow'>Follow</Button></div>
-                        <div id='follows-posts'>5 posts 1 followers 200 following</div>
-                        <div id='bio'>Owner and CEO of Weenie Hut Jr</div>
+                        <div id='follows-posts'>{`${postAm(posts, user.id)} posts 1 followers 200 following`}</div>
                     </div>
                 </div>
                 <div id='user-content'>
