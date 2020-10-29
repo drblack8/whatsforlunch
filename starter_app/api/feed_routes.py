@@ -5,9 +5,8 @@ from starter_app.models import User, Post, db, Social
 feed_routes = Blueprint('feed', __name__)
 
 
-@feed_routes.route('/<int:userId>', methods=['GET'])
-def get_feed(userId):
-    user_id = userId
+@feed_routes.route('/<int:user_id>', methods=['GET'])
+def get_feed(user_id):
     socials = Social.query.filter(Social.user == user_id)
     social_list = [{"user": social.user, "following": social.following} for social in socials]
     posts_array = []

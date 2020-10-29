@@ -10,6 +10,7 @@ import Feed from './components/feed/Feed'
 import { ProtectedRoute, AuthRoute } from './Routes';
 import './style/app.css'
 import wheel from './style/images/wedge.gif'
+import Start from './pages/Start'
 
 function App() {
   const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
@@ -62,8 +63,8 @@ function App() {
         setLoading(false)
     }
     
-    wheelDiv.setAttribute("class", "loading-wheel-container hidden")
     restoreCSRF();
+    wheelDiv.setAttribute("class", "loading-wheel-container hidden")
   }, []);
 
   return (
@@ -74,9 +75,9 @@ function App() {
     {!loading && (
       <AuthContext.Provider value={authContextValue}>
       <BrowserRouter>
-          <NavBar />
+          {currentUserId && <NavBar />}
           <Switch>
-              <Route path="/login" component={LoginForm} />
+              <Route path="/login" component={Start} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
               <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
               <ProtectedRoute path="/profile" exact={true} component={Profile} currentUserId={currentUserId}/>

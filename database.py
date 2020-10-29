@@ -23,7 +23,7 @@ with app.app_context():
 
     comment1 = Comment(
         content="This must be a joke, totally repulsive.",
-        user_id=3, post_id=1)
+        user_id=3, post_id=1, date=datetime.datetime.now())
 
     social1 = Social(user=1, following=5)
     social2 = Social(user=1, following=4)
@@ -44,10 +44,6 @@ with app.app_context():
 
     db.session.add(social1)
     db.session.add(social2)
-<<<<<<< HEAD
-=======
-
->>>>>>> eaea57ed55b30f705760752c8a7c5275fb88f60d
     db.session.add(social3)
     db.session.add(social4)
 
