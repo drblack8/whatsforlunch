@@ -7,6 +7,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import AuthContext from '../auth.js'
 // import { NavLink } from 'react-router-dom';
 import wheel from '../style/images/wedge.gif'
+import { NavLink, Redirect } from 'react-router-dom';
 
 
 
@@ -81,7 +82,7 @@ function Profile(){
                     <GridList cellHeight={275} className={classes.gridList} cols={6}>
                         {posts.map((post) => ( user.id === post.user_id &&
                             <GridListTile id='user-post' key={post.image_url} >
-                                <Button id='user-post' >
+                                <Button id='user-post' onClick={() => (<Redirect to={`/posts/${post.id}`} />)} >
                                     <img id='demo-post' src={post.image_url} alt='' />
                                 </Button>
                             </GridListTile>
