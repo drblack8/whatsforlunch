@@ -22,7 +22,11 @@ def get_feed(userId):
                         "username": username, 
                         "desc": thing.desc,
                         "date": thing.date} for (thing, username) in self_feed]]
-    return jsonify(posts_array)
+    new_arr = []
+    for arr in posts_array:
+        new_arr = [*new_arr, *arr]
+    sorted_arr =  sorted(new_arr, key=lambda k: k['date'], reverse=True) 
+    return jsonify(sorted_arr)
     
     
 

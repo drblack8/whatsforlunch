@@ -5,12 +5,13 @@
     justify-content: center;
     align-items: flex-start;
     background-color: rgb(247, 247, 247);
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
 }
 
 .upload-form-container {
     margin-top: 5%;
-    width: 50%;
-    height: 35%;
+    width: 70%;
+    height: 65%;
     border: 1px solid lightgray;
     display: flex;
     justify-content: center;
@@ -26,8 +27,8 @@
 }
 
 .upload-photo {
-    height: 20%;
-    width: 20%;
+    height: 10%;
+    width: 10%;
 }
 
 .upload-photo:hover {
@@ -35,7 +36,7 @@
 }
 
 .upload-text-area-div {
-    margin: 2%;
+    margin: 4%;
     width: 80%;
     display: flex;
     justify-content: center;
@@ -55,4 +56,16 @@
 .react-crop {
     width: 65%;
     height: 65%;
+}
+
+.loading-wheel-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+
+.hidden {
+    display: none
 }

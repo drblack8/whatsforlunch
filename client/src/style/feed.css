@@ -2,11 +2,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(252, 248, 248);
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
 }
 
 .feed-container {
-    width: 50%;
+    width: 600px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -15,35 +16,39 @@
 
 .feed-post-container {
     display: grid;
-    grid-template-rows: 10% 70% 20%;
+    grid-template-rows: 5% 84% 10% 18%, 10%;
     width: 90%;
-    border: 1px solid lightgray;
+    border: 1px solid rgb(208, 207, 207);
     margin: 5%;
     max-width: 550px;
     background-color: white;
-    
+    height: 100%;
 }
 
 .feed-post-image-div {
     width: 100%;
+    height: 100%;
     grid-row: 2/3; 
 }
 
 .feed-post-image {
     width: 100%;
-    max-height: 100%;
+    height: 100%;
 }
 
 .feed-post-poster-div {
-    grid-row: 1/2
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
 }
 
 .feed-post-poster{
     margin-left: 2%;
+    color: gray;
 }
 
 .feed-post-desc-div {
-    grid-row: 3/4
+    grid-row: 4/5
 }
 
 .feed-post-desc-user{
@@ -55,3 +60,47 @@
 .feed-post-desc{
 
 } 
+
+.feed-post-comment-container {
+    grid-row: 5/6;
+    border-top: 1px solid rgb(238, 236, 236);;
+}
+
+.feed-post-comment-container > input {
+    border: none;
+    width: 88%;
+    margin-left: 3%;
+    height: 100%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.feed-post-comment-container > input:focus {
+    outline: none;
+}
+
+.feed-post-comment-button {
+    color: gray;
+}
+
+.feed-post-comment-button:hover {
+    color:rgb(0,149,246);
+    cursor: pointer;
+}
+
+.feed-post-likes-container {
+    grid-row: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-top: 10px;
+}
+
+.feed-post-likes-heart:hover {
+    cursor: pointer;
+}
+
+.feed-post-likes-heart {
+    height:20px;
+    padding-left: 10px;
+}
