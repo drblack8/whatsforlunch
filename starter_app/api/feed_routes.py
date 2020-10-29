@@ -13,19 +13,18 @@ def get_feed(user_id):
     self_feed = Post.query.join(User, Post.user_id == User.id).add_columns(User.username).filter(Post.user_id == user_id).order_by(Post.id.desc())
     for social in social_list:
         person_posts = Post.query.join(User, Post.user_id == User.id).add_columns(User.username).filter(Post.user_id == social['following']).order_by(Post.id.desc())
-        posts_array = [*posts_array, [{"image_url": thing.image_url,"user_id": thing.user_id, 
-                        "username": username, 
+        posts_array = [*posts_array, [{"image_url": thing.image_url,"user_id": thing.user_id,
+                        "id": thing.id,
+                        "username": username,
                         "desc": thing.desc,
                         "date": thing.date} for (thing, username) in person_posts]]
-    posts_array = [*posts_array, [{"image_url": thing.image_url,"user_id": thing.user_id, 
-                        "username": username, 
+    posts_array = [*posts_array, [{"image_url": thing.image_url,"user_id": thing.user_id,
+                        "id": thing.id,
+                        "username": username,
                         "desc": thing.desc,
                         "date": thing.date} for (thing, username) in self_feed]]
     new_arr = []
     for arr in posts_array:
         new_arr = [*new_arr, *arr]
-    sorted_arr =  sorted(new_arr, key=lambda k: k['date'], reverse=True) 
+    sorted_arr =  sorted(new_arr, key=lambda k: k['date'], reverse=True)
     return jsonify(sorted_arr)
-    
-    
-
