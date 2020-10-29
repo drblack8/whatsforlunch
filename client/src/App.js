@@ -10,16 +10,18 @@ import Feed from './components/feed/Feed'
 import { ProtectedRoute, AuthRoute } from './Routes';
 import './style/app.css'
 import wheel from './style/images/wedge.gif'
+import Start from './pages/Start'
 
 function App() {
   const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState([]);
 
   const authContextValue = {
     fetchWithCSRF,
     currentUserId,
-    setCurrentUserId
+    setCurrentUserId,
   };
 
     const logoutUser = async ()=> {
@@ -31,41 +33,51 @@ function App() {
             setCurrentUserId(null)
         }
     }
+  
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await fetch('/api/users/');
+      const responseData = await response.json();
+      setUsers(responseData.users);
+    }
+    fetchUsers()
+  }, [])
 
   useEffect(() => {
+    
     const wheelDiv = document.getElementById('wheel')
     wheelDiv.setAttribute("class", "loading-wheel-container")
     async function restoreCSRF() {
-        const response = await fetch('/api/csrf/restore', {
-            method: 'GET',
-            credentials: 'include'
-        });
-        if (response.ok) {
-            const authData = await response.json();
-            setFetchWithCSRF(() => {
-                return (resource, init) => {
-                    if (init.headers) {
-                        init.headers['X-CSRFToken'] = authData.csrf_token;
-                    } else {
-                        init.headers = {
-                            'X-CSRFToken': authData.csrf_token
-                        }
-                    }
-                    return fetch(resource, init);
-                }
-            });
-            if(authData.current_user_id){
-                console.log(authData)
-                setCurrentUserId(authData.current_user_id)
+      const response = await fetch('/api/csrf/restore', {
+        method: 'GET',
+        credentials: 'include'
+      });
+      if (response.ok) {
+        const authData = await response.json();
+        setFetchWithCSRF(() => {
+          return (resource, init) => {
+            if (init.headers) {
+              init.headers['X-CSRFToken'] = authData.csrf_token;
+            } else {
+              init.headers = {
+                'X-CSRFToken': authData.csrf_token
+              }
             }
+            return fetch(resource, init);
+          }
+        });
+        if(authData.current_user_id){
+          console.log(authData)
+          setCurrentUserId(authData.current_user_id)
         }
-        setLoading(false)
+      }
+      setLoading(false)
     }
     
-    wheelDiv.setAttribute("class", "loading-wheel-container hidden")
     restoreCSRF();
+    wheelDiv.setAttribute("class", "loading-wheel-container hidden")
   }, []);
-
+  
   return (
     <>
     {loading && <div id="wheel" className="loading-wheel-container hidden">
@@ -74,12 +86,14 @@ function App() {
     {!loading && (
       <AuthContext.Provider value={authContextValue}>
       <BrowserRouter>
-          <NavBar />
+          {currentUserId && <NavBar />}
           <Switch>
-              <Route path="/login" component={LoginForm} />
+              <Route path="/login" component={Start} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
               <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
-              <ProtectedRoute path="/profile" exact={true} component={Profile} currentUserId={currentUserId}/>
+              {users.map((user) => {
+                return <Route key={user.id} path={`/users/${user.username}`} component={Profile}/>
+              })}
               <Route path="/users"><UserList /></Route>
               <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
               <ProtectedRoute path="/" exact={true} component={Feed} currentUserId={currentUserId}/>

@@ -27,7 +27,7 @@ const PhotoUpload = () => {
     const [ready, setReady] = useState(true)
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
-    const [crop, setCrop] = useState({unit: "%", width: 100, height: 100, x: 25, y: 25, aspect: 1 / 1})
+    const [crop, setCrop] = useState({unit: "%", width: 50, height: 50, x: 25, y: 25, aspect: 1 / 1})
     const [croppedImageUrl, setCroppedImageUrl] = useState(null)
     const [imageRef, setImageRef] = useState()
     const [croppedImage, setCroppedImage] = useState()

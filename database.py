@@ -21,9 +21,10 @@ with app.app_context():
         image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
         user_id=1, date=datetime.datetime.now(), desc='this is a test bud')
 
+
     comment1 = Comment(
         content="This must be a joke, totally repulsive.",
-        user_id=3, post_id=1)
+        user_id=3, post_id=1, date=datetime.datetime.now())
 
     social1 = Social(user=1, following=5)
     social2 = Social(user=1, following=4)

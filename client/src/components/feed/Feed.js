@@ -61,7 +61,12 @@ const Feed = () => {
                         <img onClick={handledLike} id='heart' className="feed-post-likes-heart" src={like}/>
                     </div>
                     <div className="feed-post-desc-div">
-                        <p className="feed-post-desc"><stong className="feed-post-desc-user">{post.username}</stong>{post.desc}</p>
+                        <p className="feed-post-desc">
+                            <a className="feed-post-profile-link" href={`/users/${post.username}`}>
+                                <stong className="feed-post-desc-user">{post.username}</stong>
+                            </a>
+                            {post.desc}
+                        </p>
                     </div>
                     <div className="feed-post-comment-container">
                         <input type="text" placeholder="Add a comment..." onChange={commentChange}></input>
