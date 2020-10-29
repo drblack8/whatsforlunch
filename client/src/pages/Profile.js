@@ -59,14 +59,14 @@ function Profile(){
 
         const handleFollow = async (e) => {
             const profId = e.target.id
-            const data = fetchWithCSRF("/api/users/profId", {
+            const data = fetchWithCSRF(`/api/social/`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     user_id: currentUserId,
-                    followId: profId
+                    follow_id: profId
                 })
             })
             if (data.ok) {
