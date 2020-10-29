@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import Profile from './pages/Profile'
 import LoginForm from './components/LoginForm';
 import UserList from './components/UsersList';
@@ -8,6 +8,8 @@ import UploadPage from './components/PhotoUpload/UploadPage';
 import AuthContext from './auth'
 import Feed from './components/feed/Feed'
 import { ProtectedRoute, AuthRoute } from './Routes';
+import './style/app.css'
+import wheel from './style/images/wedge.gif'
 
 function App() {
   const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
@@ -31,6 +33,8 @@ function App() {
     }
 
   useEffect(() => {
+    const wheelDiv = document.getElementById('wheel')
+    wheelDiv.setAttribute("class", "loading-wheel-container")
     async function restoreCSRF() {
         const response = await fetch('/api/csrf/restore', {
             method: 'GET',
@@ -57,12 +61,16 @@ function App() {
         }
         setLoading(false)
     }
+    
+    wheelDiv.setAttribute("class", "loading-wheel-container hidden")
     restoreCSRF();
   }, []);
 
   return (
     <>
-    {loading && <h1>Loading...</h1> }
+    {loading && <div id="wheel" className="loading-wheel-container hidden">
+                  <img src={wheel}/>
+                </div> }
     {!loading && (
       <AuthContext.Provider value={authContextValue}>
       <BrowserRouter>
@@ -71,9 +79,10 @@ function App() {
               <Route path="/login" component={LoginForm} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
               <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
-              <Route path="/profile" exact={true} component={Profile} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/profile" exact={true} component={Profile} currentUserId={currentUserId}/>
               <Route path="/users"><UserList /></Route>
-              <Route path="/posts/new" component={UploadPage} />
+              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/" exact={true} component={Feed} currentUserId={currentUserId}/>
           </Switch>
         </BrowserRouter>
       </AuthContext.Provider>

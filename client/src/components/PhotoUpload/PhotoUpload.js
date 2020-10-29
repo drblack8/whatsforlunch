@@ -123,7 +123,7 @@ const PhotoUpload = () => {
 
     const upload = async() => {
         const wheelDiv = document.getElementById('wheel')
-        wheelDiv.setAttribute('class', '.loading-wheel-container')
+        wheelDiv.setAttribute("class", "loading-wheel-container")
         const data = await uploadFile(croppedImage, config)
         if (data.location) {
             const post = await fetchWithCSRF('/api/posts/new', {
@@ -135,7 +135,7 @@ const PhotoUpload = () => {
                 dispatch(changePosted(true))
                 setReady(true)
                 setCaption('')
-                wheelDiv.setAttribute('class', '.loading-wheel-container hidden')
+                wheelDiv.setAttribute("class", "loading-wheel-container hidden")
             }
         }
     }
