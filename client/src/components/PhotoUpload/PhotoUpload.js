@@ -10,6 +10,7 @@ import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import AuthContext from '../../auth'
 import wheel from '../../style/images/wedge.gif'
+import hotdog from '../../style/images/hotdogupload.png'
 
 const config = {
     bucketName: 'whats4lunch-images',
@@ -172,7 +173,7 @@ const PhotoUpload = () => {
                     onChange={onSelectFile}
                 />
                 <label className="upload-button-label" htmlFor="raised-button-file">
-                    <img className="upload-photo" src="https://whats4lunch-images.s3.amazonaws.com/photos/hotdogupload.png"/>
+                    <img className="upload-photo" src={hotdog}/>
                     <Button variant="raised" component="span" className="upload-button">
                     </Button>
                 </label> 
@@ -188,7 +189,7 @@ const PhotoUpload = () => {
                      /> 
                 )}
                 <div className="upload-text-area-div">
-                    <TextField multiline={true} onChange={handleCaption} value={caption} placeholder="write a caption"></TextField>
+                    <TextField multiline={true} onChange={handleCaption} value={caption} placeholder="Write a caption"></TextField>
                 </div>
                 <div>
                     <Button variant="contained" color="primary" id="upload-button" onClick={upload} disabled={ready}>
