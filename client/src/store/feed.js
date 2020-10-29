@@ -12,8 +12,11 @@ export const setFeed = (value) => {
 export const getFeed = (userId) => async dispatch => {
     const data = await fetch(`/api/feed/${userId}`);
     if (data.ok) {
-        const  { feed } = await data.json();
-        dispatch(setFeed(feed))
+        const  feed = await data.json();
+        const feeds = []
+        feed.forEach(post => feeds.push(...post))
+        console.log(feed)
+        dispatch(setFeed(feeds))
     }
 }
 
