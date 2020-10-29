@@ -9,6 +9,7 @@ import { TextField } from '@material-ui/core';
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import AuthContext from '../../auth'
+import wheel from '../../style/images/wedge.gif'
 
 const config = {
     bucketName: 'whats4lunch-images',
@@ -25,12 +26,13 @@ const PhotoUpload = () => {
     const [ready, setReady] = useState(true)
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
-    const [crop, setCrop] = useState({unit: "%", width: 30, aspect: 1 / 1})
+    const [crop, setCrop] = useState({unit: "%", width: 100, height: 100, x: 25, y: 25, aspect: 1 / 1})
     const [croppedImageUrl, setCroppedImageUrl] = useState(null)
     const [imageRef, setImageRef] = useState()
     const [croppedImage, setCroppedImage] = useState()
     const [src, setSrc] = useState()
     const { fetchWithCSRF, currentUserId } = useContext(AuthContext);
+
 
     //crop magic
     // https://levelup.gitconnected.com/crop-images-on-upload-in-your-react-app-with-react-image-crop-5f3cd0ad2b35
@@ -119,8 +121,9 @@ const PhotoUpload = () => {
     }
 
     const upload = async() => {
+        const wheelDiv = document.getElementById('wheel')
+        wheelDiv.setAttribute('class', '.loading-wheel-container')
         const data = await uploadFile(croppedImage, config)
-        console.log(data.location)
         if (data.location) {
             const post = await fetchWithCSRF('/api/posts/new', {
                 method: 'POST',
@@ -130,6 +133,8 @@ const PhotoUpload = () => {
             if (post.ok){
                 dispatch(changePosted(true))
                 setReady(true)
+                setCaption('')
+                wheelDiv.setAttribute('class', '.loading-wheel-container hidden')
             }
         }
     }
@@ -151,6 +156,9 @@ const PhotoUpload = () => {
 
     return (
         <>
+            <div id="wheel" className="loading-wheel-container hidden">
+                <img src={wheel}/>
+            </div>
             <div className="upload-form">
                 {ready ? (
                 <div className="upload-button">

@@ -1,8 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFeed } from '../../store/feed';
 import AuthContext from '../../auth.js';
 import '../../style/feed.css'
+import like from '../../style/images/like.png'
+import liked from '../../style/images/liked.png'
 
 const Feed = () => {
     const dispatch = useDispatch()
@@ -10,11 +12,14 @@ const Feed = () => {
     const { currentUserId } = useContext(AuthContext)
     const { posts } = useSelector(state => state);
 
-
     useEffect(() => {
         if (feed.length > 0) return
         dispatch(getFeed(currentUserId))
     }, [posts])
+
+    const handledLike = (e) => {
+        e.target.setAttribute('src', liked)
+    }
 
     return (
         <div className="feed-page-container">
@@ -27,8 +32,15 @@ const Feed = () => {
                     <div className="feed-post-image-div">
                         <img className="feed-post-image" src={post.image_url}/>
                     </div>
+                    <div className="feed-post-likes-container">
+                        <img onClick={handledLike} id='heart' className="feed-post-likes-heart" src={like}/>
+                    </div>
                     <div className="feed-post-desc-div">
                         <p className="feed-post-desc"><stong className="feed-post-desc-user">{post.username}</stong>{post.desc}</p>
+                    </div>
+                    <div className="feed-post-comment-container">
+                        <input type="text" placeholder="Add a comment..."></input>
+                        <a className="feed-post-comment-button">Post</a>
                     </div>
                 </div>
             )}
