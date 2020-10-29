@@ -19,7 +19,8 @@ with app.app_context():
 
     post1 = Post(
         image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
-        user_id=1, desc='this is a test bud', date=datetime.datetime.now())
+        user_id=1, desc='this is a test bud',
+        date=datetime.datetime.now())
 
     comment1 = Comment(
         content="This must be a joke, totally repulsive.",
