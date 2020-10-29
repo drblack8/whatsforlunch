@@ -33,7 +33,8 @@ function Profile(){
         const [loading, setLoading] = useState(true);
         const classes = useStyles();
         // Post/User fetch----------------------------------------------->
-        const { currentUserId } = useContext(AuthContext);
+        const { currentUserId, fetchWithCSRF } = useContext(AuthContext);
+
         useEffect(() =>{
             // async function fetchUser() {
             //     const response = await fetch(`/api/users/${currentUserId}`);
@@ -68,6 +69,17 @@ function Profile(){
 
        
     //--------------------------------------------------------->
+    // const handleFollow = () => {
+    //     fetchWithCSRF(`/api/users/${currentUserId}`, {
+    //         method: "POST",
+    //         body: JSON.stringify(body),
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         }
+    //       })
+    //         .then((res) => res.json())
+    //         .catch((err) => console.log("ERROR: ", err))
+    // }
 
     return (
         <>
@@ -96,7 +108,7 @@ function Profile(){
                                 </Button>
                             </GridListTile>
                         ))}
-                    </GridList>                  
+                    </GridList>
                 </div>
                 </div>)))}
         </>

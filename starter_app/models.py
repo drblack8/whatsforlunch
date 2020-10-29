@@ -52,6 +52,7 @@ class Post(db.Model):
     desc = db.Column(db.String(255))
     date = db.Column(db.Date, nullable=False)
     users = db.relationship("User", back_populates="posts")
+
     comments = db.relationship("Comment", back_populates="posts")
 
 

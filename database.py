@@ -1,8 +1,8 @@
+import datetime
 from starter_app.models import User, Post, Comment, Social
 from starter_app import app, db
 from dotenv import load_dotenv
 load_dotenv()
-import datetime
 
 
 with app.app_context():
@@ -19,11 +19,12 @@ with app.app_context():
 
     post1 = Post(
         image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
-        user_id=1, desc='this is a test bud', date=datetime.datetime.now())
+        user_id=1, date=datetime.datetime.now(), desc='this is a test bud')
+
 
     comment1 = Comment(
         content="This must be a joke, totally repulsive.",
-        user_id=3, post_id=1)
+        user_id=3, post_id=1, date=datetime.datetime.now())
 
     social1 = Social(user=1, following=5)
     social2 = Social(user=1, following=4)
