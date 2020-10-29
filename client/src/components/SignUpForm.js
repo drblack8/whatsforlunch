@@ -76,7 +76,7 @@ const SignUpForm = () => {
                         <FormLabel>Password:</FormLabel>
                     </div>
                     <div>
-                        <input className="form-input" onChange={handlePassword} value={password} type="text"/>
+                        <input className="form-input" onChange={handlePassword} value={password} type="password"/>
                     </div>
                 </div>
                 <div className="signup-username-confirm-container">
@@ -84,7 +84,7 @@ const SignUpForm = () => {
                         <FormLabel>Confirm:</FormLabel>
                     </div>
                     <div>
-                        <input className="form-input" onChange={handleConfirmPassword} value={confirmPassword} type="text"/>
+                        <input className="form-input" onChange={handleConfirmPassword} value={confirmPassword} type="password"/>
                     </div>
                 </div>
                 <div className="signup-username-submit-container">

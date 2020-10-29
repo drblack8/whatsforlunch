@@ -18,7 +18,12 @@ const Feed = () => {
     }, [posts])
 
     const handledLike = (e) => {
-        e.target.setAttribute('src', liked)
+        const isLiked = e.target.getAttribute('src')
+        if (isLiked == like){
+            e.target.setAttribute('src', liked)
+        }else {
+            e.target.setAttribute('src', like)
+        }
     }
 
     return (
