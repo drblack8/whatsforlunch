@@ -8,17 +8,16 @@ import liked from '../../style/images/liked.png'
 
 const Feed = () => {
     const dispatch = useDispatch()
-    const { feed } = useSelector(store => store.Feed)
+    const { feed, comments } = useSelector(store => store.Feed)
     const { currentUserId, fetchWithCSRF } = useContext(AuthContext)
     const { posts } = useSelector(state => state);
     const [ comment, setComment ] = useState(null)
-    const [ setCurrentPost, currentPost ] = useState(null)
-
 
     useEffect(() => {
         if (feed.length > 0) return
         dispatch(getFeed(currentUserId))
     }, [posts])
+
 
     const handledLike = (e) => {
         const isLiked = e.target.getAttribute('src')
@@ -47,14 +46,14 @@ const Feed = () => {
                 })
             })
             if(data.ok) {
-                console.log('WOOOOOOOOOOHOOOOOOOOOO');
+
             }
     }
 
     return (
         <div className="feed-page-container">
             <div className="feed-container">
-            {feed.length > 0 && feed.map(post =>
+            {feed.length > 0 && feed.map((post, i) =>
                 <div key={post.image_url} className="feed-post-container">
                     <div className="feed-post-poster-div">
                         <p className="feed-post-poster">{post.date.split(" ").slice(0,3).join(" ")}</p>
@@ -72,6 +71,16 @@ const Feed = () => {
                             </a>
                             {post.desc}
                         </p>
+                        {comments && comments.length > 0 ? (comments[i].map(comment => (
+                        <div className="feed-post-comments">
+                            <p className="feed-post-desc">
+                                <a className="feed-post-profile-link" href={`/users/${comment.username}`}>
+                                    <stong className="feed-post-desc-user">{comment.username}</stong>
+                                </a>
+                              {comment.content}
+                          </p>
+                        </div>
+                        ))): null}
                     </div>
                     <div className="feed-post-comment-container">
                         <input type="text" placeholder="Add a comment..." onChange={commentChange}></input>
