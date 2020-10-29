@@ -22,7 +22,6 @@ with app.app_context():
         user_id=1, desc='this is a test bud',
         date=datetime.datetime.now())
 
-
     comment1 = Comment(
         content="This must be a joke, totally repulsive.",
         user_id=3, post_id=1)

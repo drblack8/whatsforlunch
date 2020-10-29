@@ -5,7 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import AuthContext from '../auth.js'
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
+import wheel from '../style/images/wedge.gif'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,17 +26,23 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile(){
         // User/Post vars and state
-        const [user, setUser] = useState({});
+        // const [user, setUser] = useState({});
+        const [users, setUsers] = useState([]);
         const [posts, setPosts] = useState([]);
         const [loading, setLoading] = useState(true);
         const classes = useStyles();
         // Post/User fetch----------------------------------------------->
         const { currentUserId } = useContext(AuthContext);
         useEffect(() =>{
-            async function fetchUser() {
-                const response = await fetch(`/api/users/${currentUserId}`);
+            // async function fetchUser() {
+            //     const response = await fetch(`/api/users/${currentUserId}`);
+            //     const responseData = await response.json();
+            //     setUser(responseData.user);
+            // }
+            async function fetchUsers() {
+                const response = await fetch('/api/users/');
                 const responseData = await response.json();
-                setUser(responseData.user);
+                setUsers(responseData.users);
             }
             async function fetchData(){
                 const res = await fetch('/api/posts/feed')
@@ -43,17 +51,22 @@ function Profile(){
                 setPosts(resData.posts)
             }
             setLoading(false);
-            fetchUser();
+            fetchUsers()
+            // fetchUser();
             fetchData();
-        }, [])
+        }, [currentUserId])
         // console.log(user, 'user')
     //--------------------------------------------------------->
 
     return (
         <>
-            {loading && <h1>Loading...</h1> }
-            {!loading && (
+
+            {loading && <div id="wheel" className="loading-wheel-container hidden">
+                  <img src={wheel}/>
+                </div> }
+            {!loading && ( users.map( user => ( `/users/${user.username}` === window.location.pathname &&
             <div id='profile-wrap'>
+               
                 <div id='user-card'>
                     <div id='user-photo'>
                         <img id='user-pic' src='https://i.pinimg.com/originals/13/76/10/137610fb11df66ba8aa2b496fc17d6d7.jpg' alt=''></img>
@@ -66,7 +79,7 @@ function Profile(){
                 </div>
                 <div id='user-content'>
                     <GridList cellHeight={275} className={classes.gridList} cols={6}>
-                        {posts.map((post) => ( currentUserId === post.user_id &&
+                        {posts.map((post) => ( user.id === post.user_id &&
                             <GridListTile id='user-post' key={post.image_url} >
                                 <Button id='user-post' >
                                     <img id='demo-post' src={post.image_url} alt='' />
@@ -75,7 +88,7 @@ function Profile(){
                         ))}
                     </GridList>                  
                 </div>
-            </div>)}
+                </div>)))}
         </>
     )
 }

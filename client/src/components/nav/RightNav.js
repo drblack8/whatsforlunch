@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -16,7 +16,17 @@ import AuthContext from '../../auth.js'
 function RightNav(){
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, currentUserId } = useContext(AuthContext);
+    const [user, setUser] = useState({});
+
+    useEffect(() =>{
+      async function fetchUser() {
+          const response = await fetch(`/api/users/${currentUserId}`);
+          const responseData = await response.json();
+          setUser(responseData.user);
+      }
+      fetchUser();
+    }, [currentUserId])
 
 
     const handleToggle = () => {
@@ -54,7 +64,7 @@ function RightNav(){
     const handleProfile = (event) => {
         setOpen(false);
 
-        return <Redirect to='/profile' />
+        return <Redirect to={`/${user.username}`} />
     };
 
 
@@ -114,7 +124,7 @@ function RightNav(){
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem onClick={handleProfile}><NavLink to='/profile' id='navlink-profile'>Profile</NavLink></MenuItem>
+                                    <MenuItem onClick={handleProfile}><NavLink to={`/users/${user.username}`} id='navlink-profile'>Profile</NavLink></MenuItem>
                                     <MenuItem onClick={logoutUser}><NavLink to='/login' id='navlink-logout'>Logout</NavLink></MenuItem>
                                 </MenuList>
                                 </ClickAwayListener>
