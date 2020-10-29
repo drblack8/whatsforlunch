@@ -25,9 +25,4 @@ def get_feed(userId):
     return jsonify(posts_array)
     
     
-    
-    
 
-    
-    
-    

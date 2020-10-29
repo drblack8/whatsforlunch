@@ -29,4 +29,3 @@ def index():
 def single_post(post_id):
     response = Post.query.get(post_id)
     return {"post": {"image_url": response.image_url, "user_id": response.user_id, "desc": response.desc}}
-
