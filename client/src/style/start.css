@@ -1,0 +1,92 @@
+.start-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    height: 100%;
+}
+
+.start-logo-container {
+    width: 500px;
+    height: 200;
+    display: flex;
+    justify-content: center;
+
+}
+
+.start-logo {
+    width: 250px;
+    height: 200;
+}
+
+.forms-container {
+    height: 100%;
+    min-height: 100vw;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    margin-top: 5%;
+}
+
+.login-form-container {
+    border: 1px solid lightgray;
+    width: 30%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.login-form {
+    margin-top: 10%;
+}
+
+.login-form-title {
+    margin-top: 10%;
+}
+
+.signup-form-container {
+    border: 1px solid lightgray;
+    height: 400px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.signup-title {
+    margin-top: 10%;
+}
+
+.signup-form {
+    padding: 5%;
+    margin-bottom: 5%;
+}
+
+.signup-form > div > input {
+  height: 30px;  
+}
+
+.form-input {
+    height: 25px;
+    margin: 5px;
+    background-color: #E7F0FE;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+}
+
+label {
+    margin-left: 5px;
+}
+
+.signup-username-submit-container {
+    display: flex;
+    justify-content: center;
+}
