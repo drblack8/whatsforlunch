@@ -68,6 +68,24 @@ function Profile(){
         }
 
        
+
+        const handleFollow = async (e) => {
+            const profId = e.target.id
+            const data = fetchWithCSRF(`/api/social/`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    user_id: currentUserId,
+                    follow_id: profId
+                })
+            })
+            if (data.ok) {
+                console.log('Successful front prof fetch');
+            }
+        }
+        // console.log(user, 'user')
     //--------------------------------------------------------->
     // const handleFollow = () => {
     //     fetchWithCSRF(`/api/users/${currentUserId}`, {
@@ -89,7 +107,6 @@ function Profile(){
                 </div> }
             {!loading && ( users.map( user => ( `/users/${user.username}` === window.location.pathname &&
             <div id='profile-wrap'>
-               
                 <div id='user-card'>
                     <div id='user-photo'>
                         <img id='user-pic' src='https://i.pinimg.com/originals/13/76/10/137610fb11df66ba8aa2b496fc17d6d7.jpg' alt=''></img>
