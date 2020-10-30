@@ -2,8 +2,7 @@ import React from 'react';
 import like from '../../style/images/like.png';
 import liked from '../../style/images/liked.png';
 
-const PostComment = ({props}) => {
-    const { comment } = props
+const PostComment = ({comment}) => {
 
     const handledLike = (e) => {
         const isLiked = e.target.getAttribute('src')
