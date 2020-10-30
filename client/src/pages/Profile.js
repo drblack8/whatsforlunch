@@ -38,6 +38,7 @@ function Profile(){
         const { currentUserId, fetchWithCSRF } = useContext(AuthContext);
         const url = useLocation().pathname.split('/')[2]
         console.log('PATH: ', url)
+        const friend = `${url}-@${currentUserId}`
         useEffect(() =>{
             // async function fetchUser() {
             //     const response = await fetch(`/api/users/${currentUserId}`);
@@ -45,7 +46,7 @@ function Profile(){
             //     setUser(responseData.user);
             // }
             async function fetchFollow() {
-                const res = await fetch(`/api/socials/${url}`, {
+                const res = await fetch(`/api/social/${friend}`, {
                     headers: {
                         "Content-Type": "application/json",
                     },

@@ -22,12 +22,15 @@ def new_follow():
         return {"message": 'Already Following'}
 
 
-@social_routes.route('/<username>')
-def followed():
-    data = request.get_json()
-    friend = User.query.filter_by(username=username).first()
-    print(data)
+@social_routes.route('/<friend>')
+def followed(friend):
+    profile = friend.split('-@')[0]
+    current = int(friend.split('-@')[1])
+    # friend = request.args.get('friend')
+    # user_id = request.args.get('user')
+    friendName = User.query.filter_by(username=profile).first()
+    print('FRIEND +++++++++: ', friend)
     check = Social.query.filter_by(
-        user=data["user_id"], following=friend.id).first()
+        user=current, following=friendName.id).first()
     if check is not None:
         return {"followed": True}
