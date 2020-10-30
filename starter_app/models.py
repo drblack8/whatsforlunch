@@ -55,6 +55,15 @@ class Post(db.Model):
 
     comments = db.relationship("Comment", back_populates="posts")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "image_url": self.image_url,
+            "desc": self.desc,
+            "date": self.date,
+            "username": self.users.username
+        }
+
 
 class Comment(db.Model):
     __tablename__ = 'comments'

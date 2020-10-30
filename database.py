@@ -17,14 +17,9 @@ with app.app_context():
                   password='password')
     alissa = User(username='Alissa', email='alissa@aa.io', password='password')
 
-    post1 = Post(
-        image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
-        user_id=1, date=datetime.datetime.now(), desc='this is a test bud')
-
-
-    comment1 = Comment(
-        content="This must be a joke, totally repulsive.",
-        user_id=3, post_id=1, date=datetime.datetime.now())
+    # comment1 = Comment(
+    #     content="This must be a joke, totally repulsive.",
+    #     user_id=3, post_id=1, date=datetime.datetime.now())
 
     social1 = Social(user=1, following=5)
     social2 = Social(user=1, following=4)
@@ -39,7 +34,17 @@ with app.app_context():
     db.session.add(alissa)
     db.session.commit()
 
-    db.session.add(post1)
+    for i in range(0, 5):
+        lst = ['https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
+               'https://www.billeauds.com/wp-content/uploads/Andrew-Zimmerman-1080x675.jpg',
+               'https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+               'https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+               'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+               ]
+        post = Post(
+            image_url=lst[i],
+            user_id=i + 1, date=datetime.datetime.now(), desc='this is a test bud')
+        db.session.add(post)
 
     db.session.commit()
 
@@ -48,6 +53,6 @@ with app.app_context():
     db.session.add(social3)
     db.session.add(social4)
 
-    db.session.add(comment1)
+    # db.session.add(comment1)
 
     db.session.commit()
