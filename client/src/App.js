@@ -16,6 +16,7 @@ import Start from './pages/Start'
 function App() {
   const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState(null);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -23,6 +24,8 @@ function App() {
   const authContextValue = {
     fetchWithCSRF,
     currentUserId,
+    currentUsername,
+    setCurrentUsername,
     setCurrentUserId,
   };
 
@@ -35,7 +38,7 @@ function App() {
             setCurrentUserId(null)
         }
     }
-  
+
   useEffect(() => {
     async function fetchUsers() {
       const response = await fetch('/api/users/');
@@ -53,7 +56,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    
+
     const wheelDiv = document.getElementById('wheel')
     wheelDiv.setAttribute("class", "loading-wheel-container")
     async function restoreCSRF() {
@@ -77,15 +80,16 @@ function App() {
         });
         if(authData.current_user_id){
           setCurrentUserId(authData.current_user_id)
+          setCurrentUsername(authData.currentUsername)
         }
       }
       setLoading(false)
     }
-    
+
     restoreCSRF();
     wheelDiv.setAttribute("class", "loading-wheel-container hidden")
   }, []);
-  
+
   return (
     <>
     {loading && <div id="wheel" className="loading-wheel-container hidden">
@@ -97,7 +101,7 @@ function App() {
           {currentUserId && <NavBar />}
           <Switch>
               <Route path="/login" component={Start} />
-              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
               {users.map((user) => {
                 return <Route key={user.id} path={`/users/${user.username}`} component={Profile}/>
               })}
@@ -105,8 +109,8 @@ function App() {
                 return <Route key={post.id} path={`/posts/${post.id}`} component={FeedPost}/>
               })}
               <Route path="/users"><UserList /></Route>
-              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
-              <ProtectedRoute path="/" exact={true} component={Feed} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUsername={currentUsername} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
           </Switch>
         </BrowserRouter>
       </AuthContext.Provider>

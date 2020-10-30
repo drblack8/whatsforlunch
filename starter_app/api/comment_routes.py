@@ -28,7 +28,7 @@ def post_comments(post_id):
 
 
 
-@ comment_routes.route('/')
+@comment_routes.route('/')
 def index():
     res=Comment.query.all()
     return {"comments": [{"content": comment.content, "user_id": post.user_id, "post_id": comment.post_id} for comment in res]}
