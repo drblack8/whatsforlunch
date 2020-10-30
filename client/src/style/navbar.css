@@ -2,10 +2,22 @@
 /*  classes: leftnav, rightnav, middlenav, navbar, rightnavlogged
     id: logo, home, library, search, signin, signup, settings
 */
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+}
+
+
 .navbar-container {
     position: sticky;
     top: 0;
     background-color: white;
+    z-index: 100;
 }
 
 .outer-nav {
@@ -15,7 +27,7 @@
     background-color: #011c3b00;
     position: static;
     flex-grow: 0;
-    border: 1px solid rgba(0, 0, 0, 0.329);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.329);
     /* border-bottom: 1px solid rgba(255, 255, 255, 0.13); */
     justify-content: center;
 }
