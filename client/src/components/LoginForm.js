@@ -54,7 +54,7 @@ function UserForm(props) {
                         <input className="form-input input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" />
                     </div>
                 </div>
-                <div className="signup-username-submit-container">
+                <div className="login-username-submit-container">
                     <Button onClick={submitForm} className="forms-button" variant="contained" color="primary">Login</Button>
                 </div>
             </form>

@@ -3,6 +3,7 @@ import like from '../../style/images/like.png';
 import liked from '../../style/images/liked.png';
 import AuthContext from '../../auth.js';
 import PostComment from './PostComment';
+import bubble from '../../style/images/bubble.png'
 
 
 const FeedPost = ({props}) => {
@@ -40,6 +41,11 @@ const FeedPost = ({props}) => {
 
             }
     }
+
+    const bubbleClick = (e) => {
+        document.getElementById('comment-input' + e.target.id).focus()
+    }
+
     return (
         <div key={post.image_url} className="feed-post-container">
             <div className="feed-post-poster-div">
@@ -50,6 +56,8 @@ const FeedPost = ({props}) => {
             </div>
             <div className="feed-post-likes-container">
                 <img onClick={handledLike} id='heart' className="feed-post-likes-heart" src={like}/>
+                <p className="feed-post-comment-count" >{comments && comments[i] ? comments[i].length : null}</p>
+                <img id={post.id}className="feed-post-bubble" onClick={bubbleClick} src={bubble}/>
             </div>
             <div className="feed-post-desc-div">
                 <p className="feed-post-desc">
@@ -63,7 +71,7 @@ const FeedPost = ({props}) => {
                 ))): null}
             </div>
             <div className="feed-post-comment-container">
-                <input type="text" placeholder="Add a comment..." onChange={commentChange}></input>
+                <input id={`comment-input${post.id}`} type="text" placeholder="Add a comment..." onChange={commentChange}></input>
                 <a id={post.id} className="feed-post-comment-button" onClick={handleComment}>Post</a>
             </div>
         </div>

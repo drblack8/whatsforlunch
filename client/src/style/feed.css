@@ -16,7 +16,7 @@
 
 .feed-post-container {
     display: grid;
-    grid-template-rows: 5% 84% 10% 18%, 10%;
+    grid-template-rows: 5% 84% 10% 10%, 10%;
     width: 90%;
     border: 1px solid rgb(208, 207, 207);
     margin: 5%;
@@ -48,7 +48,8 @@
 }
 
 .feed-post-desc-div {
-    grid-row: 4/5
+    grid-row: 4/5;
+    
 }
 
 .feed-post-desc-user{
@@ -58,8 +59,37 @@
 }
 
 .feed-post-desc{
-
+    margin: 10px;
 } 
+
+.feed-post-comments {
+    font-size:.9rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 30px;
+    align-items: center;
+    /* width: 90%; */
+}
+
+
+
+.feed-post-comments > a {
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+.feed-post-comments > img {
+    margin-right: 10px;
+}
+.feed-post-comments > img:hover{
+    cursor: pointer;
+}
+
+.feed-comment-image {
+    width:15px;
+    height: 15;
+}
 
 .feed-post-comment-container {
     grid-row: 5/6;
@@ -94,6 +124,7 @@
     justify-content: flex-start;
     flex-direction: row;
     padding-top: 10px;
+    margin-left: 10px;
 }
 
 .feed-post-likes-heart:hover {
@@ -103,6 +134,19 @@
 .feed-post-likes-heart {
     height:20px;
     padding-left: 10px;
+}
+
+.feed-post-bubble {
+    height:24px;
+    padding-left: 15px;
+}
+
+.feed-post-bubble:hover {
+    cursor: pointer;
+}
+
+.feed-post-comment-count {
+    padding-left: 15px;
 }
 
 .feed-post-profile-link{
