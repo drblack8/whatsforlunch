@@ -76,7 +76,6 @@ function App() {
           }
         });
         if(authData.current_user_id){
-          console.log(authData)
           setCurrentUserId(authData.current_user_id)
         }
       }
@@ -99,7 +98,6 @@ function App() {
           <Switch>
               <Route path="/login" component={Start} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
-              <ProtectedRoute path="/users" exact={true} component={UserList} currentUserId={currentUserId} />
               {users.map((user) => {
                 return <Route key={user.id} path={`/users/${user.username}`} component={Profile}/>
               })}

@@ -38,7 +38,6 @@ const SignUpForm = () => {
             setErrors([...errors, 'Passwords must match'])
             return
         }
-        console.log('working')
         const data = await fetchWithCSRF('/api/users/new', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -46,7 +45,6 @@ const SignUpForm = () => {
         })
         if (data.ok) {
             const response = await data.json();
-            console.log(response)
             return <Redirect to={`/users/${userName}`} />
         }
     }

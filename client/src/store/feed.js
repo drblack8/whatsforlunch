@@ -36,7 +36,7 @@ export const getFeed = (userId) => async dispatch => {
 }
 
 const intialState = {
-  feed: {},
+  feed: [],
   comments: [],
   friends: [],
 }

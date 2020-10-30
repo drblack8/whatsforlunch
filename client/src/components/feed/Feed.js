@@ -3,90 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFeed } from '../../store/feed';
 import AuthContext from '../../auth.js';
 import '../../style/feed.css'
-import like from '../../style/images/like.png'
-import liked from '../../style/images/liked.png'
+import FeedPost from './FeedPost';
 
 const Feed = () => {
     const dispatch = useDispatch()
     const { feed, comments } = useSelector(store => store.Feed)
-    const { currentUserId, fetchWithCSRF } = useContext(AuthContext)
+    const { currentUserId } = useContext(AuthContext)
     const { posts } = useSelector(state => state);
-    const [ comment, setComment ] = useState(null)
 
     useEffect(() => {
-        if (feed.length > 0) return
+        // if (feed.length > 0) return
         dispatch(getFeed(currentUserId))
     }, [posts])
-
-
-    const handledLike = (e) => {
-        const isLiked = e.target.getAttribute('src')
-        if (isLiked == like){
-            e.target.setAttribute('src', liked)
-        }else {
-            e.target.setAttribute('src', like)
-        }
-    }
-
-    const commentChange = (e) => {
-        setComment(e.target.value)
-    }
-    const handleComment = async (e) => {
-        const poost = e.target.id
-        console.log(poost, currentUserId, comment);
-            const data = await fetchWithCSRF('/api/comments/new', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    content: comment,
-                    user_id: currentUserId,
-                    post_id: parseInt(poost),
-                })
-            })
-            if(data.ok) {
-
-            }
-    }
 
     return (
         <div className="feed-page-container">
             <div className="feed-container">
             {feed.length > 0 && feed.map((post, i) =>
-                <div key={post.image_url} className="feed-post-container">
-                    <div className="feed-post-poster-div">
-                        <p className="feed-post-poster">{post.date.split(" ").slice(0,3).join(" ")}</p>
-                    </div>
-                    <div className="feed-post-image-div">
-                        <img className="feed-post-image" src={post.image_url}/>
-                    </div>
-                    <div className="feed-post-likes-container">
-                        <img onClick={handledLike} id='heart' className="feed-post-likes-heart" src={like}/>
-                    </div>
-                    <div className="feed-post-desc-div">
-                        <p className="feed-post-desc">
-                            <a className="feed-post-profile-link" href={`/users/${post.username}`}>
-                                <stong className="feed-post-desc-user">{post.username}</stong>
-                            </a>
-                            {post.desc}
-                        </p>
-                        {comments && comments.length > 0 ? (comments[i].map(comment => (
-                        <div className="feed-post-comments">
-                            <p className="feed-post-desc">
-                                <a className="feed-post-profile-link" href={`/users/${comment.username}`}>
-                                    <stong className="feed-post-desc-user">{comment.username}</stong>
-                                </a>
-                              {comment.content}
-                          </p>
-                        </div>
-                        ))): null}
-                    </div>
-                    <div className="feed-post-comment-container">
-                        <input type="text" placeholder="Add a comment..." onChange={commentChange}></input>
-                        <a id={post.id} className="feed-post-comment-button" onClick={handleComment}>Post</a>
-                    </div>
-                </div>
+                <FeedPost key={i} props={{post, comments, i}}/>
             )}
             </div>
         </div>
