@@ -1,10 +1,11 @@
 import React from 'react';
+import SearchBar from './SearchBar'
 
 function MiddleNav(){
    
     return(
         <div className="middlenav">
-            <input id="search" placeholder="Search"></input>
+            <SearchBar />
         </div>
     )
 }
