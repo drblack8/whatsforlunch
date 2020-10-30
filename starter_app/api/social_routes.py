@@ -14,3 +14,8 @@ def new_follow():
     db.session.add(new_social)
     db.session.commit()
     return data['user_id']
+
+@ social_routes.route('/')
+def index():
+    res=Social.query.all()
+    return {"social": [{"user": social.user, "following": social.following} for social in res]}

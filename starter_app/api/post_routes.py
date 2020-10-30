@@ -22,7 +22,7 @@ def new_post():
 @post_routes.route('/feed')
 def index():
     res = Post.query.all()
-    return {"posts": [{"image_url": post.image_url, "user_id": post.user_id, "desc": post.desc} for post in res]}
+    return {"posts": [{"id": post.id,"image_url": post.image_url, "user_id": post.user_id, "desc": post.desc, "date": post.date} for post in res]}
 
 
 @post_routes.route('/post/<post_id>')

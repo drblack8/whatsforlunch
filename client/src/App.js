@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import Profile from './pages/Profile'
-import FeedPost from './components/feed/FeedPost'
+import Post from './pages/Posts'
 import LoginForm from './components/LoginForm';
 import UserList from './components/UsersList';
 import NavBar from './components/nav/NavBar'
@@ -102,9 +102,9 @@ function App() {
                 return <Route key={user.id} path={`/users/${user.username}`} component={Profile}/>
               })}
               {posts.map((post) => {
-                return <Route key={post.id} path={`/posts/${post.id}`} component={FeedPost}/>
+                return <Route key={post.id} path={`/posts/${post.id}`} component={Post}/>
               })}
-              <Route path="/users"><UserList /></Route>
+              {/* <Route path="/users"><UserList /></Route> */}
               <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
               <ProtectedRoute path="/" exact={true} component={Feed} currentUserId={currentUserId}/>
           </Switch>
