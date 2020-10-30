@@ -25,10 +25,12 @@
 
 # Features - MVP
 -----------------
-- [ ] Images
+- [x] Images
 - [ ] Likes
-- [ ] Commenting on images
-- [ ] Following & Photo feed
+- [x] Commenting on images
+- [x] Following & Photo feed
+- [x] login with auth
+- [x] signup
 ​
 ​
 # FEATURES - Reach
