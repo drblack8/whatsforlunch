@@ -2,6 +2,12 @@
 /*  classes: leftnav, rightnav, middlenav, navbar, rightnavlogged
     id: logo, home, library, search, signin, signup, settings
 */
+.navbar-container {
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
 .outer-nav {
     display: flex;
     width: 100%;
@@ -67,9 +73,10 @@
     display: inherit;
     width: 215px;
     height: inherit;
-    margin-left: 20px;
+    margin-left: 30px;
     text-align: center;
     justify-content: center;
+    margin-right: 15px;
     /* position: relative; */
 }
 
@@ -84,10 +91,42 @@
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.13);
     text-align: center;
+    height: 30px;
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
 }
 
 #search:focus {
     background: white;
+}
+
+.search-component-container {
+
+}
+
+.search-bar-choices-container {
+    position: relative;
+    width: 205px;
+    background:  #E7F0FE;
+    z-index: initial;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+}
+
+.searchbar-choice-div {
+
+}
+
+.searchbar-choice-link {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+.searchbar-choice-link:hover {
+    color: rgb(64,80,181);
+    cursor: pointer;
 }
 
 .rightnav {
@@ -96,6 +135,7 @@
     width: 360px;
     font: inherit;
     justify-content: center;
+    margin-top: 8px;
     /* border-right: 1px solid black; */
 }
 
@@ -158,3 +198,7 @@
     background-color: rgb(8, 174, 240);
     height: 25px;
 } */
+
+#hotdogupload {
+    width: 35px;
+}

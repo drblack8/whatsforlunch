@@ -28,3 +28,13 @@ def new_user():
     except:
         return jsonify(data)
     return jsonify('ok')
+
+
+@user_routes.route('/search/<search_string>', methods=["GET"])
+@login_required
+def search_route(search_string):
+
+    response = User.query.filter(User.username.ilike(f'%{search_string}%')).limit(15)
+    print('-------=========----------=========-----------', response)
+    user_list = [user.username for user in response]
+    return jsonify(user_list)

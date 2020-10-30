@@ -9,8 +9,8 @@ import MenuList from '@material-ui/core/MenuList';
 import { NavLink, Redirect } from 'react-router-dom';
 import UserLogo from "../../style/svg/usericon.svg"
 import HomeLogo from "../../style/svg/home.svg"
-import PostLogo from "../../style/svg/post.svg"
 import AuthContext from '../../auth.js'
+import hotdog from '../../style/images/hotdoguploadblack.png'
 
 
 function RightNav(){
@@ -101,7 +101,7 @@ function RightNav(){
                 <Button
                   onClick={() => <Redirect to="/posts/new" />}
                 >
-                  <img src={PostLogo} alt=''/>
+                  <img id="hotdogupload" src={hotdog} alt=''/>
                 </Button>
               </NavLink>
             </div>
