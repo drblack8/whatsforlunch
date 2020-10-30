@@ -105,8 +105,9 @@
 
 .search-bar-choices-container {
     position: relative;
-    width: 205px;
-    background:  #E7F0FE;
+    width: 198px;
+    /* background:  #E7F0FE; */
+    background: white;
     z-index: initial;
     border-bottom-left-radius: 5%;
     border-bottom-right-radius: 5%;
@@ -201,4 +202,9 @@
 
 #hotdogupload {
     width: 35px;
+}
+
+#navlink-logout {
+    text-decoration: none;
+    color: black;
 }
