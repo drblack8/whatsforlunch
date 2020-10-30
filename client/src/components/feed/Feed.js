@@ -12,7 +12,6 @@ const Feed = () => {
     const { posts } = useSelector(state => state);
 
     useEffect(() => {
-        // if (feed.length > 0) return
         dispatch(getFeed(currentUserId))
     }, [posts])
 
@@ -20,7 +19,7 @@ const Feed = () => {
         <div className="feed-page-container">
             <div className="feed-container">
             {feed.length > 0 && feed.map((post, i) =>
-                <FeedPost key={i} props={{post, comments, i}}/>
+                <FeedPost key={i} post={post}/>
             )}
             </div>
         </div>

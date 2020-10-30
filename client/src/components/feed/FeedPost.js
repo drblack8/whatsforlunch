@@ -1,14 +1,14 @@
 import React from 'react';
 import like from '../../style/images/like.png';
 import liked from '../../style/images/liked.png';
-import AuthContext from '../../auth.js';
 import PostComment from './PostComment';
 import bubble from '../../style/images/bubble.png'
 import CommentInput from './CommentInput';
 
 
-const FeedPost = ({props}) => {
-    const {post, comments, i} = props
+
+const FeedPost = ({post}) => {
+    const comments = post.comments
 
     const handledLike = (e) => {
         const isLiked = e.target.getAttribute('src')
@@ -33,21 +33,21 @@ const FeedPost = ({props}) => {
             </div>
             <div className="feed-post-likes-container">
                 <img onClick={handledLike} id='heart' className="feed-post-likes-heart" src={like}/>
-                <p className="feed-post-comment-count" >{comments && comments[i] ? comments[i].length : null}</p>
+                <p className="feed-post-comment-count" >{comments ? comments.length : null}</p>
                 <img id={post.id}className="feed-post-bubble" onClick={bubbleClick} src={bubble}/>
             </div>
-            <div className="feed-post-desc-div">
+            <div id={`desc-div-${post.id}`} className="feed-post-desc-div">
                 <p className="feed-post-desc">
                     <a className="feed-post-profile-link" href={`/users/${post.username}`}>
                         <stong className="feed-post-desc-user">{post.username}</stong>
                     </a>
                     {post.desc}
                 </p>
-                {comments && comments.length > 0 ? (comments[i].map(comment => (
-                    <PostComment props={{comment}}/>
+                {comments && comments.length > 0 ? (comments.map(comment => (
+                    <PostComment comment={comment}/>
                 ))): null}
             </div>
-            <CommentInput props={{post}} />
+            <CommentInput post={post} />
         </div>
     );
 };
