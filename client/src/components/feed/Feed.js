@@ -12,7 +12,7 @@ const Feed = () => {
     const { posts } = useSelector(state => state);
 
     useEffect(() => {
-        if (feed.length > 0) return
+        // if (feed.length > 0) return
         dispatch(getFeed(currentUserId))
     }, [posts])
 

@@ -1,20 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import like from '../../style/images/like.png';
 import liked from '../../style/images/liked.png';
 import AuthContext from '../../auth.js';
 import PostComment from './PostComment';
 import bubble from '../../style/images/bubble.png'
+import CommentInput from './CommentInput';
 
 
 const FeedPost = ({props}) => {
-    const [ comment, setComment ] = useState(null)
-    const { currentUserId, fetchWithCSRF } = useContext(AuthContext)
     const {post, comments, i} = props
 
-    const commentChange = (e) => {
-        setComment(e.target.value)
-    }
-    
     const handledLike = (e) => {
         const isLiked = e.target.getAttribute('src')
         if (isLiked == like){
@@ -22,24 +17,6 @@ const FeedPost = ({props}) => {
         }else {
             e.target.setAttribute('src', like)
         }
-    }
-
-    const handleComment = async (e) => {
-        const postId = e.target.id
-            const data = await fetchWithCSRF('/api/comments/new', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    content: comment,
-                    user_id: currentUserId,
-                    post_id: parseInt(postId),
-                })
-            })
-            if(data.ok) {
-
-            }
     }
 
     const bubbleClick = (e) => {
@@ -70,10 +47,7 @@ const FeedPost = ({props}) => {
                     <PostComment props={{comment}}/>
                 ))): null}
             </div>
-            <div className="feed-post-comment-container">
-                <input id={`comment-input${post.id}`} type="text" placeholder="Add a comment..." onChange={commentChange}></input>
-                <a id={post.id} className="feed-post-comment-button" onClick={handleComment}>Post</a>
-            </div>
+            <CommentInput props={{post}} />
         </div>
     );
 };

@@ -7,15 +7,6 @@ export const setPosted = (value) => {
   }
 }
 
-// export const getBig = () => async dispatch => {
-//     const data = await fetch('/api/dashboard/big');
-//     if (data.ok) {
-//         const bigJackpot = await data.json();
-//         // debugger
-//         dispatch(setBig(bigJackpot))
-//     }
-// }
-
 export const changePosted = (val) => dispatch => {
     dispatch(setPosted(val))
 }
