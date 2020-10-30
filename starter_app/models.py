@@ -53,6 +53,15 @@ class Post(db.Model):
     date = db.Column(db.Date, nullable=False)
     users = db.relationship("User", back_populates="posts")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "image_url": self.image_url,
+            "desc": self.desc,
+            "date": self.date,
+            "username": self.users.username
+        }
+
     comments = db.relationship("Comment", back_populates="posts")
 
 

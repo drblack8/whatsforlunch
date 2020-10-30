@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { uploadFile } from 'react-s3';
 import  { configuration } from '../../config/index.js'
-import { changePosted } from '../../store/posts'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import '../../style/post-page.css'
 import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
@@ -22,7 +21,6 @@ const config = {
 
 const PhotoUpload = () => {
     const dispatch = useDispatch();
-    const { posts } = useSelector(state => state);
     const [caption, setCaption] = useState('')
     const [ready, setReady] = useState(true)
     const [selectedFile, setSelectedFile] = useState()
@@ -103,10 +101,6 @@ const PhotoUpload = () => {
         setPreview(objectUrl)
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
-    
-    useEffect(() => {
-        dispatch(changePosted(false))
-    }, [])
 
     const handleCaption = (e) => {
         setCaption(e.target.value)
@@ -132,7 +126,6 @@ const PhotoUpload = () => {
                 body: JSON.stringify({ image_url:data.location, user_id:currentUserId, desc:caption }),
             })
             if (post.ok){
-                dispatch(changePosted(true))
                 setReady(true)
                 setCaption('')
                 wheelDiv.setAttribute("class", "loading-wheel-container hidden")
