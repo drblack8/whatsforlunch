@@ -7,6 +7,7 @@ social_routes = Blueprint('social', __name__)
 
 @social_routes.route('/', methods=['POST'])
 def new_follow():
+    e
     data = request.get_json()
     new_social = Social(
         user=data["user_id"],
