@@ -47,7 +47,6 @@ function Profile(){
             }
             async function fetchData(){
                 const res = await fetch('/api/posts/feed')
-                console.log(res)
                 const resData = await res.json()
                 setPosts(resData.posts)
             }
@@ -70,7 +69,6 @@ function Profile(){
                 })
             })
             if (data.ok) {
-                console.log('Successful front prof fetch');
             }
         }
         // console.log(user, 'user')

@@ -67,7 +67,6 @@ function App() {
           }
         });
         if(authData.current_user_id){
-          console.log(authData)
           setCurrentUserId(authData.current_user_id)
         }
       }
