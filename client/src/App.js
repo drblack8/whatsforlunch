@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import Profile from './pages/Profile'
+import FeedPost from './components/feed/FeedPost'
 import LoginForm from './components/LoginForm';
 import UserList from './components/UsersList';
 import NavBar from './components/nav/NavBar'
@@ -17,6 +18,7 @@ function App() {
   const [currentUserId, setCurrentUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const authContextValue = {
     fetchWithCSRF,
@@ -40,7 +42,14 @@ function App() {
       const responseData = await response.json();
       setUsers(responseData.users);
     }
+    async function fetchPosts(){
+      const res = await fetch('/api/posts/feed')
+      console.log(res)
+      const resData = await res.json()
+      setPosts(resData.posts)
+    }
     fetchUsers()
+    fetchPosts()
   }, [])
 
   useEffect(() => {
@@ -91,6 +100,9 @@ function App() {
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
               {users.map((user) => {
                 return <Route key={user.id} path={`/users/${user.username}`} component={Profile}/>
+              })}
+              {posts.map((post) => {
+                return <Route key={post.id} path={`/posts/${post.id}`} component={FeedPost}/>
               })}
               <Route path="/users"><UserList /></Route>
               <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
