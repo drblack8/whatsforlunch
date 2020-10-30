@@ -29,6 +29,7 @@ function Profile(){
         // User/Post vars and state
         // const [user, setUser] = useState({});
         const [users, setUsers] = useState([]);
+        const [follows, setFollows] = useState([]);
         const [posts, setPosts] = useState([]);
         const [loading, setLoading] = useState(true);
         const classes = useStyles();
@@ -46,6 +47,11 @@ function Profile(){
                 const responseData = await response.json();
                 setUsers(responseData.users);
             }
+            async function fetchFollows() {
+                const response = await fetch('/api/social/');
+                const responseData = await response.json();
+                setFollows(responseData.social);
+            }
             async function fetchData(){
                 const res = await fetch('/api/posts/feed')
                 const resData = await res.json()
@@ -53,22 +59,44 @@ function Profile(){
             }
             setLoading(false);
             fetchUsers()
-            // fetchUser();
+            fetchFollows();
             fetchData();
         }, [currentUserId])
 
-        let postAm = (arr, userId) => {
+        let howManyPosts = (arr, userId) => {
             let newArr = []
-            arr.filter(post => {
-                if(post.user_id === userId){
-                   newArr.push(post)
+            arr.filter(el => {
+                if(el.user_id === userId){
+                   newArr.push(el)
+                }
+            })
+            return newArr.length
+        }
+        let howManyFollows = (arr, userId) => {
+            let newArr = []
+            arr.filter(el => {
+                if(el.user === userId){
+                   newArr.push(el)
+                }
+            })
+            return newArr.length
+        }
+        let howManyFollowers = (arr, userId) => {
+            let newArr = []
+            arr.filter(el => {
+                if(el.following === userId){
+                   newArr.push(el)
                 }
             })
             return newArr.length
         }
 
-       
+        let goToThisPost = (id) => {
+            console.log(id)
+            return <Redirect to={`/posts/${id}`} />
+        }
 
+        console.log(follows, howManyFollows(follows, currentUserId))
         const handleFollow = async (e) => {
             const profId = e.target.id
             const data = fetchWithCSRF(`/api/social/`, {
@@ -82,6 +110,7 @@ function Profile(){
                 })
             })
             if (data.ok) {
+                
             }
         }
         // console.log(user, 'user')
@@ -112,16 +141,18 @@ function Profile(){
                     </div>
                     <div id='user-info'>
                         <div id='username'><h1>{user.username}</h1><Button onClick={handleFollow} class='add-follow' id={user.id}>Follow</Button></div>
-                        <div id='follows-posts'>{`${postAm(posts, user.id)} posts 00 followers 200 following`}</div>
+                        <div id='follows-posts'>{`${howManyPosts(posts, user.id)} posts ${howManyFollowers(follows, user.id)} followers ${howManyFollows(follows, user.id)} following`}</div>
                     </div>
                 </div>
                 <div id='user-content'>
                     <GridList cellHeight={275} className={classes.gridList} cols={6}>
                         {posts.map((post) => ( user.id === post.user_id &&
                             <GridListTile id='user-post' key={post.image_url} >
-                                <Button id='user-post' onClick={() => (<Redirect to={`/posts/${post.id}`} />)} >
-                                    <img id='demo-post' src={post.image_url} alt='' />
-                                </Button>
+                                <NavLink to={`/posts/${post.id}`} >
+                                    <Button id='user-post' onClick={goToThisPost(post.id)} >
+                                        <img id='demo-post' src={post.image_url} alt='' />
+                                    </Button>   
+                                </NavLink>
                             </GridListTile>
                         ))}
                     </GridList>
