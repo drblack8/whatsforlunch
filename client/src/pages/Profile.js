@@ -56,6 +56,7 @@ function Profile(){
             // fetchUser();
             fetchData();
         }, [currentUserId])
+
         let postAm = (arr, userId) => {
             let newArr = []
             arr.filter(post => {
@@ -110,8 +111,8 @@ function Profile(){
                         <img id='user-pic' src='https://i.pinimg.com/originals/13/76/10/137610fb11df66ba8aa2b496fc17d6d7.jpg' alt=''></img>
                     </div>
                     <div id='user-info'>
-                        <div id='username'><h1>{user.username}</h1><Button id='add-follow'>Follow</Button></div>
-                        <div id='follows-posts'>{`${postAm(posts, user.id)} posts 1 followers 200 following`}</div>
+                        <div id='username'><h1>{user.username}</h1><Button onClick={handleFollow} class='add-follow' id={user.id}>Follow</Button></div>
+                        <div id='follows-posts'>{`${postAm(posts, user.id)} posts 00 followers 200 following`}</div>
                     </div>
                 </div>
                 <div id='user-content'>
