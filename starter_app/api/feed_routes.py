@@ -15,7 +15,7 @@ def get_feed(user_id):
     posts = [post.to_dict() for post in feed]
     for post in posts:
         _list = Comment.query.join(User, Comment.user_id == User.id).add_columns(
-            User.username).filter(Comment.post_id == post["id"]).limit(2)
+            User.username).filter(Comment.post_id == post["id"]).order_by(Comment.id.desc())
         post["comments"] = [{"content": thing.content, "user_id": thing.user_id,
                              "username": username} for (thing, username) in _list]
     return jsonify({"posts": posts})
