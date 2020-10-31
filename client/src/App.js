@@ -29,15 +29,15 @@ function App() {
     setCurrentUserId,
   };
 
-    const logoutUser = async ()=> {
-        const response = await fetchWithCSRF('/logout', {
-            method: 'POST',
-            credentials: 'include'
-        });
-        if(response.ok){
-            setCurrentUserId(null)
-        }
+  const logoutUser = async () => {
+    const response = await fetchWithCSRF('/logout', {
+      method: 'POST',
+      credentials: 'include'
+    });
+    if (response.ok) {
+      setCurrentUserId(null)
     }
+
 
   useEffect(() => {
     async function fetchUsers() {
@@ -78,7 +78,7 @@ function App() {
             return fetch(resource, init);
           }
         });
-        if(authData.current_user_id){
+        if (authData.current_user_id) {
           setCurrentUserId(authData.current_user_id)
           setCurrentUsername(authData.currentUsername)
         }
@@ -92,19 +92,20 @@ function App() {
 
   return (
     <>
-    {loading && <div id="wheel" className="loading-wheel-container hidden">
-                  <img src={wheel}/>
-                </div> }
-    {!loading && (
-      <AuthContext.Provider value={authContextValue}>
-      <BrowserRouter>
-          {currentUserId && <NavBar />}
-          <Switch>
+      {loading && <div id="wheel" className="loading-wheel-container hidden">
+        <img src={wheel} />
+      </div>}
+      {!loading && (
+        <AuthContext.Provider value={authContextValue}>
+          <BrowserRouter>
+            {currentUserId && <NavBar />}
+            <Switch>
               <Route path="/login" component={Start} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
               {users.map((user) => {
-                return <Route key={user.id} path={`/users/${user.username}`} component={Profile}/>
+                return <Route key={user.id} path={`/users/${user.username}`} component={Profile} />
               })}
+
               {posts.map((post) => {
                 return <Route key={post.id} path={`/posts/${post.id}`} component={Post}/>
               })}
