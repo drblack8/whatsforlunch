@@ -23,13 +23,16 @@ const Feed = () => {
     }, [])
 
     const loadMore = () => {
+        if (feed.length < 5) {
+            setHasNextPage(false)
+        }
         setLoading(true)
         setNumberOfPosts(numberOfPosts + 5)
         dispatch(getFeed(currentUserId, numberOfPosts))
         setLoading(false)
     }
 
-    const scrollContainer = document.querySelector('.feed-page-container')
+    const scrollContainer = window //document.querySelector('.feed-page-container')
 
     const infiniteRef = useInfiniteScroll({
         loading,
