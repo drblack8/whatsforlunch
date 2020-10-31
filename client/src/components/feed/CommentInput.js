@@ -3,7 +3,7 @@ import AuthContext from '../../auth.js';
 import { getFeed } from '../../store/feed';
 import { useDispatch } from 'react-redux';
 
-const CommentInput = ({post}) => {
+const CommentInput = ({post, numberOfPosts}) => {
     const dispatch = useDispatch()
     const [ comment, setComment ] = useState('')
     const { currentUserId, fetchWithCSRF } = useContext(AuthContext)
@@ -26,7 +26,7 @@ const CommentInput = ({post}) => {
             })
         })
         if(data.ok) {
-            dispatch(getFeed(currentUserId))
+            dispatch(getFeed(currentUserId, numberOfPosts))
             setComment('')
         }
     }

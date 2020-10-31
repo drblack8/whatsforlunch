@@ -5,13 +5,13 @@ from sqlalchemy.orm import joinedload
 
 feed_routes = Blueprint('feed', __name__)
 
-@feed_routes.route('/<int:user_id>', methods=['GET'])
-def get_feed(user_id):
+@feed_routes.route('/<int:user_id>/<int:number_of_posts>', methods=['GET'])
+def get_feed(user_id, number_of_posts):
     socials = Social.query.filter(Social.user == user_id)
     social_ids = [social.following for social in socials]
     social_ids.append(user_id)
     feed = Post.query.join(User, Post.user_id == User.id).options(
-        joinedload(Post.users)).filter(Post.user_id.in_(social_ids)).order_by(Post.date.desc()).all()
+        joinedload(Post.users)).filter(Post.user_id.in_(social_ids)).order_by(Post.date.desc()).limit(number_of_posts)
     posts = [post.to_dict() for post in feed]
     for post in posts:
         _list = Comment.query.join(User, Comment.user_id == User.id).add_columns(

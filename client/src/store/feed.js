@@ -24,8 +24,8 @@ export const setComments = (value) => {
   }
 }
 
-export const getFeed = (userId) => async dispatch => {
-    const data = await fetch(`/api/feed/${userId}`);
+export const getFeed = (userId, numberOfPosts) => async dispatch => {
+    const data = await fetch(`/api/feed/${userId}/${numberOfPosts}`);
     if (data.ok) {
         const  { posts, comments } = await data.json();
         dispatch(setFeed(posts))

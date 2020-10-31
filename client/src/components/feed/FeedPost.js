@@ -7,7 +7,7 @@ import CommentInput from './CommentInput';
 
 
 
-const FeedPost = ({post}) => {
+const FeedPost = ({post, numberOfPosts}) => {
     const comments = post.comments
 
     const handledLike = (e) => {
@@ -47,7 +47,7 @@ const FeedPost = ({post}) => {
                     <PostComment comment={comment}/>
                 ))): null}
             </div>
-            <CommentInput post={post} />
+            <CommentInput numberOfPosts= {numberOfPosts} post={post} />
         </div>
     );
 };
