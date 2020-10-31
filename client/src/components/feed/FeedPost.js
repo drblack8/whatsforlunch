@@ -43,7 +43,7 @@ const FeedPost = ({post}) => {
                     </a>
                     {post.desc}
                 </p>
-                {comments && comments.length > 0 ? (comments.map(comment => (
+                {comments && comments.length > 0 ? (comments.slice(0,2).map(comment => (
                     <PostComment comment={comment}/>
                 ))): null}
             </div>
