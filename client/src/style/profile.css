@@ -54,13 +54,14 @@
     width: 100%;
 }
 
-#add-follow {
+.add-follow {
     height: 50%;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
     background-color: #0095f6;
     color: white;
+    border-radius: 3px;
 }
 
 #bio {

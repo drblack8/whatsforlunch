@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import Profile from './pages/Profile'
+import Post from './pages/Posts'
 import LoginForm from './components/LoginForm';
 import UserList from './components/UsersList';
 import NavBar from './components/nav/NavBar'
@@ -15,12 +16,16 @@ import Start from './pages/Start'
 function App() {
   const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState(null);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const authContextValue = {
     fetchWithCSRF,
     currentUserId,
+    currentUsername,
+    setCurrentUsername,
     setCurrentUserId,
   };
 
@@ -32,7 +37,7 @@ function App() {
     if (response.ok) {
       setCurrentUserId(null)
     }
-  }
+
 
   useEffect(() => {
     async function fetchUsers() {
@@ -40,7 +45,14 @@ function App() {
       const responseData = await response.json();
       setUsers(responseData.users);
     }
+    async function fetchPosts(){
+      const res = await fetch('/api/posts/feed')
+      console.log(res)
+      const resData = await res.json()
+      setPosts(resData.posts)
+    }
     fetchUsers()
+    fetchPosts()
   }, [])
 
   useEffect(() => {
@@ -68,6 +80,7 @@ function App() {
         });
         if (authData.current_user_id) {
           setCurrentUserId(authData.current_user_id)
+          setCurrentUsername(authData.currentUsername)
         }
       }
       setLoading(false)
@@ -88,16 +101,21 @@ function App() {
             {currentUserId && <NavBar />}
             <Switch>
               <Route path="/login" component={Start} />
-              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId} />
+              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
               {users.map((user) => {
                 return <Route key={user.id} path={`/users/${user.username}`} component={Profile} />
               })}
-              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId} />
-              <ProtectedRoute path="/" exact={true} component={Feed} currentUserId={currentUserId} />
-            </Switch>
-          </BrowserRouter>
-        </AuthContext.Provider>
-      )}
+
+              {posts.map((post) => {
+                return <Route key={post.id} path={`/posts/${post.id}`} component={Post}/>
+              })}
+              {/* <Route path="/users"><UserList /></Route> */}
+              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUsername={currentUsername} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
+          </Switch>
+        </BrowserRouter>
+      </AuthContext.Provider>
+    )}
 
     </>
   );

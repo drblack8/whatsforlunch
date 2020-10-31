@@ -37,26 +37,15 @@ def new_user():
     return jsonify('ok')
 
 
-    # if user_inputs.validate_on_submit():
-    #     data = request.get_json()
-    #     new_user = User(username=data["username"],
-    #     email=data["email"],
-    #     password=data["password"])
-    #     db.session.add(new_user)
-    #     db.session.commit()
-    # else:
-    #     return 404
-    # return jsonify('ok')
+  
 
 
+@user_routes.route('/search/<search_string>', methods=["GET"])
+@login_required
+def search_route(search_string):
 
-    # try:
-    #     data = request.get_json()
-    #     new_user = User(username=data["username"],
-    #     email=data["email"],
-    #     password=data["password"])
-    #     db.session.add(new_user)
-    #     db.session.commit()
-    # except:
-    #     return jsonify(data)
-    # return jsonify('ok')
+    response = User.query.filter(User.username.ilike(f'%{search_string}%')).limit(15)
+    print('-------=========----------=========-----------', response)
+    user_list = [user.username for user in response]
+    return jsonify(user_list)
+

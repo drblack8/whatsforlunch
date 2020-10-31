@@ -4,24 +4,51 @@ import { getFeed } from '../../store/feed';
 import AuthContext from '../../auth.js';
 import '../../style/feed.css'
 import FeedPost from './FeedPost';
+import useInfiniteScroll from 'react-infinite-scroll-hook';
+import wheel from '../../style/images/wedge.gif'
+
 
 const Feed = () => {
     const dispatch = useDispatch()
-    const { feed, comments } = useSelector(store => store.Feed)
+    const { feed } = useSelector(store => store.Feed)
     const { currentUserId } = useContext(AuthContext)
-    const { posts } = useSelector(state => state);
+    const [numberOfPosts, setNumberOfPosts] = useState(5)
+    const [hasNextPage, setHasNextPage] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        // if (feed.length > 0) return
-        dispatch(getFeed(currentUserId))
-    }, [posts])
+        setLoading(true)
+        dispatch(getFeed(currentUserId, numberOfPosts))
+        setLoading(false)
+    }, [])
+
+    const loadMore = () => {
+        if (feed.length < 5) {
+            setHasNextPage(false)
+        }
+        setLoading(true)
+        setNumberOfPosts(numberOfPosts + 5)
+        dispatch(getFeed(currentUserId, numberOfPosts))
+        setLoading(false)
+    }
+
+    const scrollContainer = window //document.querySelector('.feed-page-container')
+
+    const infiniteRef = useInfiniteScroll({
+        loading,
+        hasNextPage,
+        onLoadMore: loadMore,
+        scrollContainer
+      });
 
     return (
         <div className="feed-page-container">
-            <div className="feed-container">
-            {feed.length > 0 && feed.map((post, i) =>
-                <FeedPost key={i} props={{post, comments, i}}/>
-            )}
+            <div className="feed-container" ref={infiniteRef}>
+                {
+                feed.length > 0 && feed.map((post, i) =>
+                    <FeedPost key={i} post={post} numberOfPosts={numberOfPosts}/>
+                )}
+                {loading && <div className="loading-wheel-container"><img src={wheel}/></div>}
             </div>
         </div>
     )

@@ -8,11 +8,13 @@ function NavBar(){
     
 
     return (
-        <div className="outer-nav">
-            <div className="navbar">
-                <LeftNav />
-                <MiddleNav />
-                <RightNav />
+        <div className="navbar-container">
+            <div className="outer-nav">
+                <div className="navbar">
+                    <LeftNav />
+                    <MiddleNav />
+                    <RightNav />
+                </div>
             </div>
         </div>
     )

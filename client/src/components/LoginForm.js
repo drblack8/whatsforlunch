@@ -12,7 +12,7 @@ function UserForm(props) {
     let history = useHistory();
 
     const [errors, setErrors] = useState([]);
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, setCurrentUsername } = useContext(AuthContext);
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -34,6 +34,7 @@ function UserForm(props) {
                 setErrors(responseData.errors);
             } else {
                 setCurrentUserId(responseData.current_user_id)
+                setCurrentUsername(responseData.current_username)
                 history.push('/feed')
             }
         }
