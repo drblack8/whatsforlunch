@@ -89,3 +89,10 @@
     height: 275px;
     max-width: 150%;
 }
+
+.errors-div > p {
+    margin: 0px;
+    margin-bottom: 1px;
+    color: red;
+    font-size: smaller;
+}

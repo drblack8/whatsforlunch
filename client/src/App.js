@@ -37,6 +37,7 @@ function App() {
     if (response.ok) {
       setCurrentUserId(null)
     }
+  }
 
 
   useEffect(() => {
@@ -45,7 +46,7 @@ function App() {
       const responseData = await response.json();
       setUsers(responseData.users);
     }
-    async function fetchPosts(){
+    async function fetchPosts() {
       const res = await fetch('/api/posts/feed')
       console.log(res)
       const resData = await res.json()
@@ -101,21 +102,21 @@ function App() {
             {currentUserId && <NavBar />}
             <Switch>
               <Route path="/login" component={Start} />
-              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId} />
               {users.map((user) => {
                 return <Route key={user.id} path={`/users/${user.username}`} component={Profile} />
               })}
 
               {posts.map((post) => {
-                return <Route key={post.id} path={`/posts/${post.id}`} component={Post}/>
+                return <Route key={post.id} path={`/posts/${post.id}`} component={Post} />
               })}
               {/* <Route path="/users"><UserList /></Route> */}
-              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUsername={currentUsername} currentUserId={currentUserId}/>
-              <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
-          </Switch>
-        </BrowserRouter>
-      </AuthContext.Provider>
-    )}
+              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUsername={currentUsername} currentUserId={currentUserId} />
+              <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId} />
+            </Switch>
+          </BrowserRouter>
+        </AuthContext.Provider>
+      )}
 
     </>
   );
