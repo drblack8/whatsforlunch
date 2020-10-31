@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from starter_app.models import User, db
 from flask_login import current_user, login_required
+from starter_app.forms import SignUpForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -20,11 +21,42 @@ def user(currentUserId):
 
 @user_routes.route('/new', methods=["POST"])
 def new_user():
-    try:
+    sign_up_form = SignUpForm()
+    if sign_up_form.validate():
+        print("aidhfakdsflksj")
         data = request.get_json()
-        new_user = User(username=data["username"], email=data["email"], password=data["password"])
+        new_user = User(username=data["username"],
+        email=data["email"],
+        password=data["password"])
         db.session.add(new_user)
         db.session.commit()
-    except:
-        return jsonify(data)
+    else:
+        # errors = [value for (key, value) in sign_up_form.errors.items]
+        print(sign_up_form.errors)
+        return jsonify(success=False, errors=sign_up_form.errors), 400
     return jsonify('ok')
+
+
+    # if user_inputs.validate_on_submit():
+    #     data = request.get_json()
+    #     new_user = User(username=data["username"],
+    #     email=data["email"],
+    #     password=data["password"])
+    #     db.session.add(new_user)
+    #     db.session.commit()
+    # else:
+    #     return 404
+    # return jsonify('ok')
+
+
+
+    # try:
+    #     data = request.get_json()
+    #     new_user = User(username=data["username"],
+    #     email=data["email"],
+    #     password=data["password"])
+    #     db.session.add(new_user)
+    #     db.session.commit()
+    # except:
+    #     return jsonify(data)
+    # return jsonify('ok')

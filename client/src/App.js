@@ -24,16 +24,16 @@ function App() {
     setCurrentUserId,
   };
 
-    const logoutUser = async ()=> {
-        const response = await fetchWithCSRF('/logout', {
-            method: 'POST',
-            credentials: 'include'
-        });
-        if(response.ok){
-            setCurrentUserId(null)
-        }
+  const logoutUser = async () => {
+    const response = await fetchWithCSRF('/logout', {
+      method: 'POST',
+      credentials: 'include'
+    });
+    if (response.ok) {
+      setCurrentUserId(null)
     }
-  
+  }
+
   useEffect(() => {
     async function fetchUsers() {
       const response = await fetch('/api/users/');
@@ -44,7 +44,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    
+
     const wheelDiv = document.getElementById('wheel')
     wheelDiv.setAttribute("class", "loading-wheel-container")
     async function restoreCSRF() {
@@ -66,39 +66,38 @@ function App() {
             return fetch(resource, init);
           }
         });
-        if(authData.current_user_id){
+        if (authData.current_user_id) {
           setCurrentUserId(authData.current_user_id)
         }
       }
       setLoading(false)
     }
-    
+
     restoreCSRF();
     wheelDiv.setAttribute("class", "loading-wheel-container hidden")
   }, []);
-  
+
   return (
     <>
-    {loading && <div id="wheel" className="loading-wheel-container hidden">
-                  <img src={wheel}/>
-                </div> }
-    {!loading && (
-      <AuthContext.Provider value={authContextValue}>
-      <BrowserRouter>
-          {currentUserId && <NavBar />}
-          <Switch>
+      {loading && <div id="wheel" className="loading-wheel-container hidden">
+        <img src={wheel} />
+      </div>}
+      {!loading && (
+        <AuthContext.Provider value={authContextValue}>
+          <BrowserRouter>
+            {currentUserId && <NavBar />}
+            <Switch>
               <Route path="/login" component={Start} />
-              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/feed" exact={true} component={Feed} currentUserId={currentUserId} />
               {users.map((user) => {
-                return <Route key={user.id} path={`/users/${user.username}`} component={Profile}/>
+                return <Route key={user.id} path={`/users/${user.username}`} component={Profile} />
               })}
-              <Route path="/users"><UserList /></Route>
-              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
-              <ProtectedRoute path="/" exact={true} component={Feed} currentUserId={currentUserId}/>
-          </Switch>
-        </BrowserRouter>
-      </AuthContext.Provider>
-    )}
+              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId} />
+              <ProtectedRoute path="/" exact={true} component={Feed} currentUserId={currentUserId} />
+            </Switch>
+          </BrowserRouter>
+        </AuthContext.Provider>
+      )}
 
     </>
   );

@@ -19,7 +19,7 @@ const SignUpForm = () => {
     const handleUserName = (e) => {
         setUserName(e.target.value)
     }
-    
+
     const handleEmail = (e) => {
         setEmail(e.target.value)
     }
@@ -41,11 +41,17 @@ const SignUpForm = () => {
         const data = await fetchWithCSRF('/api/users/new', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password:password, confirm_password:confirmPassword, username:userName, email:email }),
+            body: JSON.stringify({ password: password, confirm_password: confirmPassword, username: userName, email: email }),
         })
         if (data.ok) {
+            console.log("data ok")
             const response = await data.json();
             return <Redirect to={`/users/${userName}`} />
+        }
+        else {
+            const response = await data.json();
+            const { errors } = response
+            setErrors(errors)
         }
     }
 
@@ -58,7 +64,12 @@ const SignUpForm = () => {
                         <FormLabel>Username:</FormLabel>
                     </div>
                     <div>
-                        <input className="form-input" onChange={handleUserName} value={userName} type="text"/>
+                        <input className="form-input" onChange={handleUserName} value={userName} type="text" />
+                    </div>
+                    <div className="errors-div">
+                        {errors && errors.username && errors.username.map(error =>
+                            <p>{error}</p>
+                        )}
                     </div>
                 </div>
                 <div className="signup-username-email-container">
@@ -68,13 +79,23 @@ const SignUpForm = () => {
                     <div>
                         <input className="form-input" onChange={handleEmail} value={email} type="text" />
                     </div>
+                    <div className="errors-div">
+                        {errors && errors.email && errors.email.map(error =>
+                            <p>{error}</p>
+                        )}
+                    </div>
                 </div>
                 <div className="signup-username-password-container">
                     <div>
                         <FormLabel>Password:</FormLabel>
                     </div>
                     <div>
-                        <input className="form-input" onChange={handlePassword} value={password} type="password"/>
+                        <input className="form-input" onChange={handlePassword} value={password} type="password" />
+                    </div>
+                    <div className="errors-div">
+                        {errors && errors.password && errors.password.map(error =>
+                            <p>{error}</p>
+                        )}
                     </div>
                 </div>
                 <div className="signup-username-confirm-container">
@@ -82,16 +103,16 @@ const SignUpForm = () => {
                         <FormLabel>Confirm:</FormLabel>
                     </div>
                     <div>
-                        <input className="form-input" onChange={handleConfirmPassword} value={confirmPassword} type="password"/>
+                        <input className="form-input" onChange={handleConfirmPassword} value={confirmPassword} type="password" />
+                    </div>
+                    <div className="errors-div">
+                        {errors && errors.confirm && errors.confirm.map(error =>
+                            <p>{error}</p>
+                        )}
                     </div>
                 </div>
                 <div className="signup-username-submit-container">
                     <Button className="forms-button" variant="contained" color="primary" type="submit" >Signup</Button>
-                </div>
-                <div className="errors-div">
-                    {errors.length > 0 && errors.map(error =>
-                        <p>{error}</p>    
-                    )}
                 </div>
             </form>
         </div>
