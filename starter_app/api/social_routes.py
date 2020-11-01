@@ -33,9 +33,10 @@ def followed(friend):
     check = Social.query.filter_by(
         user=current, following=friendName.id).first()
     if check is not None:
-        return {"followed": True}
+        return {"followed": 'Good'}
+
 
 @social_routes.route('/')
 def index():
-    res=Social.query.all()
+    res = Social.query.all()
     return {"social": [{"user": social.user, "following": social.following} for social in res]}

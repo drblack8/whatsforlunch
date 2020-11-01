@@ -42,7 +42,7 @@
     justify-content: left;
 }
 
-#username {
+.username {
     display: flex;
     flex-flow: row;
     height: 50%;

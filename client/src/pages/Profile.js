@@ -40,21 +40,22 @@ function Profile(){
         const url = useLocation().pathname.split('/')[2]
         console.log('PATH: ', url)
         const friend = `${url}-@${currentUserId}`
+        async function fetchFollow() {
+            const res = await fetch(`/api/social/${friend}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            const resData = await res.json();
+            resData.followed ? setFollowed(true) : setFollowed(false)
+        }
         useEffect(() =>{
             // async function fetchUser() {
             //     const response = await fetch(`/api/users/${currentUserId}`);
             //     const responseData = await response.json();
             //     setUser(responseData.user);
             // }
-            async function fetchFollow() {
-                const res = await fetch(`/api/social/${friend}`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                const resData = await res.json();
-                resData.followed ? setFollowed(true) : setFollowed(false)
-            }
+
             async function fetchUsers() {
                 const response = await fetch('/api/users/');
                 const responseData = await response.json();
@@ -75,7 +76,7 @@ function Profile(){
             fetchFollows();
             fetchData();
             fetchFollow()
-        }, [currentUserId])
+        }, [])
 
         let howManyPosts = (arr, userId) => {
             let newArr = []
@@ -114,7 +115,10 @@ function Profile(){
         console.log(follows, howManyFollows(follows, currentUserId))
         const handleFollow = async (e) => {
             const profId = e.target.id
-            setProfileId(parseInt(profId))
+            console.log('KJHLFJKHSDFJKHSDFJKHSDFLJKSHDFLJKSHDFLJKSHDFLJKSDHFLJKSDHFSLJK');
+            console.log('DAN LOOK FOR THIS:', profId);
+            setProfileId(profId)
+            console.log(profileId);
             const data = fetchWithCSRF(`/api/social/`, {
                 method: 'POST',
                 headers: {
@@ -122,11 +126,11 @@ function Profile(){
                 },
                 body: JSON.stringify({
                     user_id: currentUserId,
-                    follow_id: profileId
+                    follow_id: parseInt(profId)
                 })
             })
             if (data.ok) {
-                
+                fetchFollow()
             }
         }
         // console.log(user, 'user')
@@ -150,13 +154,14 @@ function Profile(){
                   <img src={wheel}/>
                 </div> }
             {!loading && ( users.map( user => ( `/users/${user.username}` === window.location.pathname &&
+
             <div id='profile-wrap'>
                 <div id='user-card'>
                     <div id='user-photo'>
                         <img id='user-pic' src='https://i.pinimg.com/originals/13/76/10/137610fb11df66ba8aa2b496fc17d6d7.jpg' alt=''></img>
                     </div>
                     <div id='user-info'>
-                        <div id='username'><h1>{user.username}</h1><Button onClick={handleFollow} class='add-follow' disabled={followed} id={user.id}>Follow</Button></div>
+                        <div id={user.id} class='username'><h1>{user.username}</h1><Button onClick={handleFollow} class='add-follow' disabled={followed} id={user.id}>Follow</Button></div>
                         <div id='follows-posts'>{`${howManyPosts(posts, user.id)} posts ${howManyFollowers(follows, user.id)} followers ${howManyFollows(follows, user.id)} following`}</div>
                     </div>
                 </div>
@@ -167,7 +172,7 @@ function Profile(){
                                 <NavLink to={`/posts/${post.id}`} >
                                     <Button id='user-post' onClick={goToThisPost(post.id)} >
                                         <img id='demo-post' src={post.image_url} alt='' />
-                                    </Button>   
+                                    </Button>
                                 </NavLink>
                             </GridListTile>
                         ))}
