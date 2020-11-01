@@ -41,7 +41,7 @@ const SignUpForm = () => {
         const data = await fetchWithCSRF('/api/users/new', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password: password, confirm_password: confirmPassword, username: userName, email: email }),
+            body: JSON.stringify({ password: password, confirm: confirmPassword, username: userName, email: email }),
         })
         if (data.ok) {
             console.log("data ok")
