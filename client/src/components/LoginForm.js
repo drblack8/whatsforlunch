@@ -7,7 +7,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 function UserForm(props) {
-    const [username, setUsername] = useState("Ian");
+    const [username, setUsername] = useState("DemoUser");
     const [password, setPassword] = useState("password");
     let history = useHistory();
 
