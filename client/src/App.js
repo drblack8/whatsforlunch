@@ -12,6 +12,7 @@ import { ProtectedRoute, AuthRoute } from './Routes';
 import './style/app.css'
 import wheel from './style/images/wedge.gif'
 import Start from './pages/Start'
+import SinglePost from './components/feed/SinglePost'
 
 function App() {
   const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
@@ -106,18 +107,16 @@ function App() {
               {users.map((user) => {
                 return <Route key={user.id} path={`/users/${user.username}`} component={Profile} />
               })}
-
-              {posts.map((post) => {
-                return <Route key={post.id} path={`/posts/${post.id}`} component={Post} />
-              })}
-              {/* <Route path="/users"><UserList /></Route> */}
-              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUsername={currentUsername} currentUserId={currentUserId} />
-              <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId} />
-            </Switch>
-          </BrowserRouter>
-        </AuthContext.Provider>
-      )}
-
+              {/*posts.map((post) => {
+                return <Route key={post.id} path={`/posts/${post.id}`} component={Post}/>
+              })*/}
+              <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/posts/:id" component={SinglePost} currentUserId={currentUserId}/>
+              <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
+          </Switch>
+        </BrowserRouter>
+      </AuthContext.Provider>
+    )}
     </>
   );
 }

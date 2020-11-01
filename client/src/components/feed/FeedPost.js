@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import like from '../../style/images/like.png';
 import liked from '../../style/images/liked.png';
 import PostComment from './PostComment';
@@ -7,7 +8,7 @@ import CommentInput from './CommentInput';
 
 
 
-const FeedPost = ({post, numberOfPosts}) => {
+const FeedPost = ({post, numberOfPosts, single}) => {
     const comments = post.comments
 
     const handledLike = (e) => {
@@ -19,6 +20,11 @@ const FeedPost = ({post, numberOfPosts}) => {
         }
     }
 
+    // const handlePicClick = (e) => {
+    //     console.log(e.target.id)
+    //     return <Redirect to={`/posts/${e.target.id}`}/>
+    // }
+
     const bubbleClick = (e) => {
         document.getElementById('comment-input' + e.target.id).focus()
     }
@@ -28,9 +34,11 @@ const FeedPost = ({post, numberOfPosts}) => {
             <div className="feed-post-poster-div">
                 <p className="feed-post-poster">{post.date.split(" ").slice(0,3).join(" ")}</p>
             </div>
-            <div className="feed-post-image-div">
-                <img className="feed-post-image" src={post.image_url}/>
-            </div>
+            <a href={`/posts/${post.id}`}>
+                <div className="feed-post-image-div">
+                    <img id={post.id} className="feed-post-image" src={post.image_url}/>
+                </div>
+            </a>
             <div className="feed-post-likes-container">
                 <img onClick={handledLike} id='heart' className="feed-post-likes-heart" src={like}/>
                 <p className="feed-post-comment-count" >{comments ? comments.length : null}</p>
@@ -43,11 +51,14 @@ const FeedPost = ({post, numberOfPosts}) => {
                     </a>
                     {post.desc}
                 </p>
-                {comments && comments.length > 0 ? (comments.slice(0,2).map(comment => (
+                {!single && comments && comments.length > 0 ? (comments.slice(0,2).map(comment => (
+                    <PostComment comment={comment}/>
+                ))): null}
+                {single && comments && comments.length > 0 ? (comments.map(comment => (
                     <PostComment comment={comment}/>
                 ))): null}
             </div>
-            <CommentInput numberOfPosts= {numberOfPosts} post={post} />
+            <CommentInput numberOfPosts= {numberOfPosts} post={post} single={single}/>
         </div>
     );
 };
