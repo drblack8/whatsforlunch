@@ -70,15 +70,15 @@ body {
 #logoimg {
     position: static;
     width: auto;
-    margin-top: 3px;
-    height: 100%;
+    margin-top: 8px;
+    height: 80%;
 }
 
 #logoimg2 {
     position: static;
     width: auto;
     margin-top: 3px;
-    height: 100%;
+    height: 80%;
 }
 
 .middlenav {
@@ -95,7 +95,7 @@ body {
 #search {
     position: static;
     flex-direction: row;
-    height: 18px;
+    height: 15px;
     width: 199px;
     margin-top: 15px;
     margin-left: 0px;
@@ -213,7 +213,7 @@ body {
 } */
 
 #hotdogupload {
-    width: 35px;
+    width: 30px;
 }
 
 #navlink-logout {
