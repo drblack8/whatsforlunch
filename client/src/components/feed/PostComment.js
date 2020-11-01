@@ -6,7 +6,7 @@ const PostComment = ({comment}) => {
 
     const handledLike = (e) => {
         const isLiked = e.target.getAttribute('src')
-        if (isLiked == like){
+        if (isLiked === like){
             e.target.setAttribute('src', liked)
         }else {
             e.target.setAttribute('src', like)

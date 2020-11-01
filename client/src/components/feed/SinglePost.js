@@ -8,7 +8,7 @@ const SinglePost = (props) => {
 
     useEffect(() => {
         getPost()
-    }, [])
+    })
 
     const getPost = async () => {
         const data = await fetch(`/api/posts/get/${id}`)
