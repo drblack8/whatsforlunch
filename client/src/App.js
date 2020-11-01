@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, NavLink, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Profile from './pages/Profile'
-import Post from './pages/Posts'
-import LoginForm from './components/LoginForm';
-import UserList from './components/UsersList';
 import NavBar from './components/nav/NavBar'
 import UploadPage from './components/PhotoUpload/UploadPage';
 import AuthContext from './auth'
 import Feed from './components/feed/Feed'
-import { ProtectedRoute, AuthRoute } from './Routes';
+import { ProtectedRoute } from './Routes';
 import './style/app.css'
 import wheel from './style/images/wedge.gif'
 import Start from './pages/Start'
