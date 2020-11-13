@@ -154,13 +154,14 @@ body {
 }
 
 .upload-icon-button-div {
+margin-top: 2%;
    width: 15%;
    margin-right: 5%;
    margin-left: 5%;
 }
 
 #hotdogupload {
-    width: 60%;
+    width: 45%;
 }
 
 #navlink-logout {
@@ -170,10 +171,11 @@ body {
 
 .home-icon-button {
     width: 15%;
+    margin-top: 2%;
 }
 
 .home-icon {
-    width: 60%;
+    width: 45%;
 }
 
 #settings {
@@ -185,6 +187,6 @@ body {
 }
 
 .user-icon {
-    width: 70%;
+    width: 50%;
     margin-bottom: 5%;
 }
