@@ -26,14 +26,14 @@ def new_follow():
 def followed(friend):
     profile = friend.split('-@')[0]
     current = int(friend.split('-@')[1])
-    # friend = request.args.get('friend')
-    # user_id = request.args.get('user')
     friendName = User.query.filter_by(username=profile).first()
     print('FRIEND +++++++++: ', friend)
-    check = Social.query.filter_by(
-        user=current, following=friendName.id).first()
-    if check is not None:
-        return {"followed": 'Good'}
+    try:
+        check = Social.query.filter_by(
+            user=current, following=friendName.id).one()
+    except:
+        return jsonify({"followed": False, "id": friendName.id})
+    return jsonify({"followed": True, "id": friendName.id})
 
 
 @social_routes.route('/')

@@ -1,14 +1,10 @@
 import React, {useEffect, useState, useContext} from 'react';
-import Button from '@material-ui/core/Button';
 import '../style/profile.css'
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import AuthContext from '../auth.js'
-// import { NavLink } from 'react-router-dom';
 import wheel from '../style/images/wedge.gif'
-import { NavLink, Redirect, useLocation } from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
+import userPic from '../style/images/empty-user.png';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,161 +21,136 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Profile(){
-        // User/Post vars and state
-        // const [user, setUser] = useState({});
-        const [users, setUsers] = useState([]);
-        const [follows, setFollows] = useState([]);
-        const [posts, setPosts] = useState([]);
-        const [followed, setFollowed] = useState(null)
-        const [profileId, setProfileId] = useState(null)
-        const [loading, setLoading] = useState(true);
-        const classes = useStyles();
-        // Post/User fetch----------------------------------------------->
-        const { currentUserId, fetchWithCSRF } = useContext(AuthContext);
-        const url = useLocation().pathname.split('/')[2]
-        console.log('PATH: ', url)
+const Profile = () => {
+    const [users, setUsers] = useState([]);
+    const [follows, setFollows] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const [followed, setFollowed] = useState('cats')
+    const [myProfile, setMyProfile] = useState(false)
+    const [profileId, setProfileId] = useState(null)
+    const [loading, setLoading] = useState(true);
+    const { currentUserId, fetchWithCSRF } = useContext(AuthContext);
+    const url = useLocation().pathname.split('/')[2]
+    
+    const fetchFollow = async() => {
         const friend = `${url}-@${currentUserId}`
-        async function fetchFollow() {
-            const res = await fetch(`/api/social/${friend}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            const resData = await res.json();
-            resData.followed ? setFollowed(true) : setFollowed(false)
-        }
-        useEffect(() =>{
-            // async function fetchUser() {
-            //     const response = await fetch(`/api/users/${currentUserId}`);
-            //     const responseData = await response.json();
-            //     setUser(responseData.user);
-            // }
+        const res = await fetch(`/api/social/${friend}`, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        const resData = await res.json();
+        resData.followed ? setFollowed(true) : setFollowed(false);
+        resData.id === currentUserId ? setMyProfile(true) : setMyProfile(false);
+    }
 
-            async function fetchUsers() {
-                const response = await fetch('/api/users/');
-                const responseData = await response.json();
-                setUsers(responseData.users);
+    async function fetchUsers() {
+        const response = await fetch('/api/users/');
+        const responseData = await response.json();
+        setUsers(responseData.users);
+    }
+    async function fetchFollows() {
+        const response = await fetch('/api/social/');
+        const responseData = await response.json();
+        setFollows(responseData.social);
+    }
+    async function fetchData(){
+        const res = await fetch('/api/posts/feed')
+        const resData = await res.json()
+        setPosts(resData.posts)
+    }
+    useEffect(() => {
+        fetchFollow()
+        fetchFollows();
+        fetchUsers()
+        fetchData();
+        setLoading(false);
+    }, [followed])
+
+    let howManyPosts = (arr, userId) => {
+        let newArr = []
+        arr.filter(el => {
+            if(el.user_id === userId){
+                newArr.push(el)
             }
-            async function fetchFollows() {
-                const response = await fetch('/api/social/');
-                const responseData = await response.json();
-                setFollows(responseData.social);
+        })
+        return newArr.length
+    }
+    let howManyFollows = (arr, userId) => {
+        let newArr = []
+        arr.filter(el => {
+            if(el.user === userId){
+                newArr.push(el)
             }
-            async function fetchData(){
-                const res = await fetch('/api/posts/feed')
-                const resData = await res.json()
-                setPosts(resData.posts)
+        })
+        return newArr.length
+    }
+    let howManyFollowers = (arr, userId) => {
+        let newArr = []
+        arr.filter(el => {
+            if(el.following === userId){
+                newArr.push(el)
             }
-            setLoading(false);
-            fetchUsers()
-            fetchFollows();
-            fetchData();
-            fetchFollow()
-        }, [])
+        })
+        return newArr.length
+    }
 
-        let howManyPosts = (arr, userId) => {
-            let newArr = []
-            arr.filter(el => {
-                if(el.user_id === userId){
-                   newArr.push(el)
-                }
+    const handleFollow = async (e) => {
+        const profId = e.target.id
+        setProfileId(profId)
+        const data = await fetchWithCSRF(`/api/social/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_id: currentUserId,
+                follow_id: parseInt(profId)
             })
-            return newArr.length
-        }
-        let howManyFollows = (arr, userId) => {
-            let newArr = []
-            arr.filter(el => {
-                if(el.user === userId){
-                   newArr.push(el)
-                }
-            })
-            return newArr.length
-        }
-        let howManyFollowers = (arr, userId) => {
-            let newArr = []
-            arr.filter(el => {
-                if(el.following === userId){
-                   newArr.push(el)
-                }
-            })
-            return newArr.length
-        }
-
-
-        let goToThisPost = (id) => {
-            console.log(id)
-            return <Redirect to={`/posts/${id}`} />
-        }
-
-        console.log(follows, howManyFollows(follows, currentUserId))
-        const handleFollow = async (e) => {
-            const profId = e.target.id
-            console.log('KJHLFJKHSDFJKHSDFJKHSDFLJKSHDFLJKSHDFLJKSHDFLJKSDHFLJKSDHFSLJK');
-            console.log('DAN LOOK FOR THIS:', profId);
-            setProfileId(profId)
-            console.log(profileId);
-            const data = fetchWithCSRF(`/api/social/`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    user_id: currentUserId,
-                    follow_id: parseInt(profId)
-                })
-            })
-            if (data.ok) {
-                fetchFollow()
-            }
-        }
-        // console.log(user, 'user')
-    //--------------------------------------------------------->
-    // const handleFollow = () => {
-    //     fetchWithCSRF(`/api/users/${currentUserId}`, {
-    //         method: "POST",
-    //         body: JSON.stringify(body),
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         }
-    //       })
-    //         .then((res) => res.json())
-    //         .catch((err) => console.log("ERROR: ", err))
-    // }
+        })
+        fetchFollow()
+    }
 
     return (
-        <>
-
+        <div className="user-profile-page-container">
             {loading && <div id="wheel" className="loading-wheel-container hidden">
                   <img src={wheel}/>
                 </div> }
             {!loading && ( users.map( user => ( `/users/${user.username}` === window.location.pathname &&
-
-            <div id='profile-wrap'>
-                <div id='user-card'>
-                    <div id='user-photo'>
-                        <img id='user-pic' src='https://i.pinimg.com/originals/13/76/10/137610fb11df66ba8aa2b496fc17d6d7.jpg' alt=''></img>
+                <div id='profile-wrap' key={user.id}>
+                    <div id='user-card'>
+                        <div id='user-photo'>
+                            <img id='user-pic' src={userPic} alt=''></img>
+                        </div>
+                        <div id='user-info'>
+                            <div id={user.id} className='username'>
+                                <h1>{user.username}</h1>
+                                {!myProfile && <button disabled={followed} onClick={handleFollow} className={`add-follow ${followed ? 'disabled-button' : null}`} id={user.id}>{followed ? 'Followed' : 'Follow'}</button>}
+                            </div>
+                            <div id='follows-posts'>
+                                <span>
+                                    <span>{howManyPosts(posts, user.id)}</span> posts
+                                </span>
+                                <span>
+                                    <span>{howManyFollowers(follows, user.id)}</span>followers
+                                </span>
+                                <span>
+                                    <span>{howManyFollows(follows, user.id)}</span>following
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div id='user-info'>
-                        <div id={user.id} class='username'><h1>{user.username}</h1><Button onClick={handleFollow} class='add-follow' disabled={followed} id={user.id}>Follow</Button></div>
-                        <div id='follows-posts'>{`${howManyPosts(posts, user.id)} posts ${howManyFollowers(follows, user.id)} followers ${howManyFollows(follows, user.id)} following`}</div>
-                    </div>
-                </div>
-                <div id='user-content'>
-                    <GridList cellHeight={275} className={classes.gridList} cols={6}>
-                        {posts.map((post) => ( user.id === post.user_id &&
-                            <GridListTile id='user-post' key={post.image_url} >
-                                <NavLink to={`/posts/${post.id}`} >
-                                    <Button id='user-post' onClick={goToThisPost(post.id)} >
-                                        <img id='demo-post' src={post.image_url} alt='' />
-                                    </Button>
-                                </NavLink>
-                            </GridListTile>
-                        ))}
-                    </GridList>
-                </div>
-                </div>)))}
-        </>
+                        <div id='user-content'>
+                                {posts.map((post) => ( user.id === post.user_id &&
+                                    <div id='user-post' key={post.image_url} >
+                                            <a id='user-post' href={`/posts/${post.id}`} >
+                                                <img id='demo-post' src={post.image_url} alt='' />
+                                            </a>
+                                    </div>
+                                ))}
+                        </div>
+                    </div>)))}
+        </div>
     )
 }
 

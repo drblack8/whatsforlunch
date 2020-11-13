@@ -18,7 +18,7 @@ const SearchBar = () => {
     return (
         <>
             <div className="search-component-container">
-                <input type="search" onChange={handleInput} value={input} id="search" placeholder="Search" autocomplete="off"></input>
+                <input type="search" onChange={handleInput} value={input} id="search" placeholder="Search" autoComplete="off"></input>
                 <div className="search-bar-choices-container">
                     {choices.map(choice =>
                         <div className="searchbar-choice-div" key={choice}>

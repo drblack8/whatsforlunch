@@ -46,7 +46,6 @@ function App() {
     }
     async function fetchPosts() {
       const res = await fetch('/api/posts/feed')
-      console.log(res)
       const resData = await res.json()
       setPosts(resData.posts)
     }
@@ -101,12 +100,7 @@ function App() {
             <Switch>
               <Route path="/login" component={Start} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId} />
-              {users.map((user) => {
-                return <Route key={user.id} path={`/users/${user.username}`} component={Profile} />
-              })}
-              {/*posts.map((post) => {
-                return <Route key={post.id} path={`/posts/${post.id}`} component={Post}/>
-              })*/}
+              <Route  path={`/users/:username`} component={Profile} />
               <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
               <ProtectedRoute path="/posts/:id" component={SinglePost} currentUserId={currentUserId}/>
               <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
@@ -119,11 +113,3 @@ function App() {
 }
 
 export default App;
-
-/* <nav>
-<ul>
-<li><NavLink to="/" activeclass="active">Home</NavLink></li>
-<li><NavLink to="/login" activeclass="active">Login</NavLink></li>
-<li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
-<li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-</ul>  */
