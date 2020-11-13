@@ -7,8 +7,8 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { NavLink, Redirect } from 'react-router-dom';
-import UserLogo from "../../style/svg/usericon.svg"
-import HomeLogo from "../../style/svg/home.svg"
+import UserLogo from "../../style/svg/usericon.png"
+import HomeLogo from "../../style/svg/home.png"
 import AuthContext from '../../auth.js'
 import hotdog from '../../style/images/hotdoguploadblack.png'
 
@@ -87,12 +87,12 @@ function RightNav(){
 
     return(
         <div className="rightnav">
-            <div >
+            <div className="home-icon-button">
               <NavLink to='/feed' >
                 <Button
                   onClick={() => <Redirect to='/feed' />}
                 >
-                  <img src={HomeLogo} alt=''/>
+                  <img className="home-icon" src={HomeLogo} alt=''/>
                 </Button>
               </NavLink>
             </div>
@@ -105,7 +105,7 @@ function RightNav(){
                 </Button>
               </NavLink>
             </div>
-            <div>
+            <div className="user-icon-div">
                 <Button
                     id="settings"
                     ref={anchorRef}
@@ -113,7 +113,7 @@ function RightNav(){
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
-                  <img src={UserLogo} alt='' />
+                  <img className="user-icon" src={UserLogo} alt='' />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
