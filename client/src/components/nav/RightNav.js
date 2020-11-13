@@ -96,7 +96,7 @@ function RightNav(){
                 </Button>
               </NavLink>
             </div>
-            <div >
+            <div className="upload-icon-button-div">
               <NavLink to="/posts/new" activeclass="active" >
                 <Button
                   onClick={() => <Redirect to="/posts/new" />}
