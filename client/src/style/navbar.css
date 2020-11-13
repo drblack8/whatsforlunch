@@ -127,10 +127,12 @@ body {
 }
 
 .rightnav {
+    margin-bottom: 1%;
     display: flex;
     width: 33%;
     font: inherit;
     justify-content: center;
+    align-items: center;
 }
 
 #settings {
@@ -189,5 +191,5 @@ margin-top: 2%;
 
 .user-icon {
     width: 50%;
-    margin-bottom: 5%;
+    /* margin-bottom: 5%; */
 }
