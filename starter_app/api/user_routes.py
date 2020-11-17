@@ -24,7 +24,6 @@ def user(currentUserId):
 def new_user():
     sign_up_form = SignUpForm()
     if sign_up_form.validate():
-        print("aidhfakdsflksj")
         data = request.get_json()
         new_user = User(username=data["username"],
                         email=data["email"],
@@ -32,8 +31,6 @@ def new_user():
         db.session.add(new_user)
         db.session.commit()
     else:
-        # errors = [value for (key, value) in sign_up_form.errors.items]
-        print(sign_up_form.errors)
         return jsonify(success=False, errors=sign_up_form.errors), 400
     return jsonify('ok')
 
@@ -41,9 +38,7 @@ def new_user():
 @user_routes.route('/search/<search_string>', methods=["GET"])
 @login_required
 def search_route(search_string):
-
     response = User.query.filter(
         User.username.ilike(f'%{search_string}%')).limit(15)
-    print('-------=========----------=========-----------', response)
     user_list = [user.username for user in response]
     return jsonify(user_list)

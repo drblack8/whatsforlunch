@@ -20,10 +20,6 @@ const FeedPost = ({post, numberOfPosts, single}) => {
         }
     }
 
-    // const handlePicClick = (e) => {
-    //     console.log(e.target.id)
-    //     return <Redirect to={`/posts/${e.target.id}`}/>
-    // }
 
     const bubbleClick = (e) => {
         document.getElementById('comment-input' + e.target.id).focus()

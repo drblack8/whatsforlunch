@@ -23,7 +23,6 @@ def new_comment():
 def post_comments(post_id):
     _list = Comment.query.join(User, Comment.user_id == User.id).add_columns(User.username).filter(Comment.post_id == post_id).limit(2)
     comment_list = [{"content":thing.content, "user_id":thing.user_id, "username":username} for (thing, username) in _list]
-    print(comment_list)
     return jsonify(comment_list)
 
 

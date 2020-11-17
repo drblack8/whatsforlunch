@@ -8,7 +8,6 @@ social_routes = Blueprint('social', __name__)
 @social_routes.route('/', methods=['POST'])
 def new_follow():
     data = request.get_json()
-    print(data)
     check = Social.query.filter_by(
         user=data["user_id"], following=data["follow_id"]).first()
     if check is None:
@@ -27,7 +26,6 @@ def followed(friend):
     profile = friend.split('-@')[0]
     current = int(friend.split('-@')[1])
     friendName = User.query.filter_by(username=profile).first()
-    print('FRIEND +++++++++: ', friend)
     try:
         check = Social.query.filter_by(
             user=current, following=friendName.id).one()

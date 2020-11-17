@@ -44,7 +44,6 @@ const SignUpForm = () => {
             body: JSON.stringify({ password: password, confirm: confirmPassword, username: userName, email: email }),
         })
         if (data.ok) {
-            console.log("data ok")
             const response = await data.json();
             return <Redirect to={`/users/${userName}`} />
         }

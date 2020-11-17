@@ -16,7 +16,6 @@ def new_post():
 
     db.session.add(newpost)
     db.session.commit()
-    print(newpost)
     return data['image_url']
 
 
@@ -26,15 +25,8 @@ def index():
     return {"posts": [{"id": post.id,"image_url": post.image_url, "user_id": post.user_id, "desc": post.desc, "date": post.date} for post in res]}
 
 
-# @post_routes.route('/post/<post_id>')
-# def single_post(post_id):
-#     response = Post.query.get(post_id)
-#     return {"post": {"image_url": response.image_url, "user_id": response.user_id, "desc": response.desc}}
-
-
 @post_routes.route('/get/<int:post_id>', methods=['GET'])
 def get_post(post_id):
-    print('======================', post_id)
     single_post = Post.query.join(User, Post.user_id == User.id).options(joinedload(Post.users)).filter(Post.id == post_id).order_by(Post.date.desc())
     post = [post.to_dict() for post in single_post]
     _list = Comment.query.join(User, Comment.user_id == User.id).add_columns(
@@ -43,3 +35,14 @@ def get_post(post_id):
     # single_post = *post
     post[0]["comments"] = [{"content": thing.content, "user_id": thing.user_id, "username": username} for (thing, username) in _list]
     return jsonify(post)
+
+
+@post_routes.route('/delete/<int:post_id>', methods=['GET'])
+def delete_post(post_id):
+    try:
+        post_to_delete = Post.query.filter(Post.id == post_id).one()
+        db.session.delete(post_to_delete)
+        db.session.commit()
+        return jsonify('deleted')
+    except:
+        return jsonify('unsuccessful')

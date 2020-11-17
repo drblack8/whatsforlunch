@@ -59,7 +59,8 @@ class Post(db.Model):
             "image_url": self.image_url,
             "desc": self.desc,
             "date": self.date,
-            "username": self.users.username
+            "username": self.users.username,
+            "user_id": self.user_id
         }
 
     comments = db.relationship("Comment", back_populates="posts")
