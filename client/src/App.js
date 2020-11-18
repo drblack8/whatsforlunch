@@ -98,7 +98,9 @@ function App() {
           <BrowserRouter>
             {currentUserId && <NavBar />}
             <Switch>
-              <Route path="/login" component={Start} />
+              <Route exact={true} path="/login">
+                {currentUserId ? <Feed /> : <Start />}
+              </Route>
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId} />
               <Route  path={`/users/:username`} component={Profile} />
               <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
