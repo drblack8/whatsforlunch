@@ -23,11 +23,11 @@ body {
 
 .start-logo {
     width: 250px;
-    height: 200;
+    height: 220px;
 }
 
 .forms-container {
-    height: 465px;
+    height: 600px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -38,8 +38,8 @@ body {
 
 .login-form-container {
     border: 1px solid lightgray;
-    width: 400px;
-    height: 400px;
+    width: 30%;
+    height: 450px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -69,9 +69,9 @@ body {
 
 .signup-form-container {
     border: 1px solid lightgray;
-    width: 400px;
-    height: 400px;
-    width: 400;
+    width: 30%;
+    height: 450px;
+    /* width: 400; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,6 +87,7 @@ body {
 .signup-form {
     margin-bottom: 10%;
     margin-bottom: none;
+    height: 80%;
 }
 
 .signup-form > div > input {
