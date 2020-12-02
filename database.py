@@ -16,6 +16,7 @@ with app.app_context():
     soonmi = User(username='Soon-Mi', email='soonmi@aa.io',
                   password='password')
     alissa = User(username='Alissa', email='alissa@aa.io', password='password')
+    demo = User(username='DemoUser', email='demo@aa.io', password='password')
 
     post1 = Post(
         image_url='https://i.pinimg.com/originals/58/44/28/5844285eddc375e333bc5e02227e893f.jpg',
@@ -37,6 +38,8 @@ with app.app_context():
     db.session.add(angela)
     db.session.add(soonmi)
     db.session.add(alissa)
+    db.session.add(demo)
+
     db.session.commit()
 
     db.session.add(post1)
