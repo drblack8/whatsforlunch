@@ -6,11 +6,18 @@ from starter_app.forms import SignUpForm
 user_routes = Blueprint('users', __name__)
 
 
-@user_routes.route('/')
+@user_routes.route('/<user_name>')
 @login_required
-def index():
-    response = User.query.all()
-    return {"users": [user.to_dict() for user in response]}
+def index(user_name):
+    response = User.query.filter(User.username == user_name).one()
+    return jsonify(response.to_dict())
+
+
+@user_routes.route('/by_id/<user_id>')
+@login_required
+def index_by_id(user_id):
+    response = User.query.filter(User.id == user_id).one()
+    return jsonify(response.to_dict())
 
 
 @user_routes.route('/<currentUserId>', methods=["GET"])
@@ -42,3 +49,17 @@ def search_route(search_string):
         User.username.ilike(f'%{search_string}%')).limit(15)
     user_list = [user.username for user in response]
     return jsonify(user_list)
+
+
+@user_routes.route('/profile_pic', methods=["POST"])
+@login_required
+def change_pic_url():
+    try:
+        data = request.get_json()
+        user = User.query.filter(User.id == data["user_id"]).one()
+        user.pic_url = data["image_url"]
+        db.session.commit()
+        return jsonify('profile pic changed')
+    except:
+        return jsonify('something went wrong')
+

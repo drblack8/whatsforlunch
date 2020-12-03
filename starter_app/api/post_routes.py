@@ -19,9 +19,9 @@ def new_post():
     return data['image_url']
 
 
-@post_routes.route('/feed')
-def index():
-    res = Post.query.all()
+@post_routes.route('/feed/<user_id>')
+def index(user_id):
+    res = Post.query.filter(Post.user_id == user_id)
     return {"posts": [{"id": post.id,"image_url": post.image_url, "user_id": post.user_id, "desc": post.desc, "date": post.date} for post in res]}
 
 

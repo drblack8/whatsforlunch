@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(255))
     pfp = db.Column(db.String(255))
+    pic_url = db.Column(db.String(200), nullable=True, unique=True)
 
     # socials = db.relationship("Social", back_populates="users")
     posts = db.relationship("Post", back_populates="users")
@@ -23,7 +24,8 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "username": self.username,
-            "email": self.email
+            "email": self.email,
+            "pic_url": self.pic_url,
         }
 
     @property
@@ -60,7 +62,8 @@ class Post(db.Model):
             "desc": self.desc,
             "date": self.date,
             "username": self.users.username,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "user_pic_url": self.users.pic_url,
         }
 
     comments = db.relationship("Comment", back_populates="posts")
