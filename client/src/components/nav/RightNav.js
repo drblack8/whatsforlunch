@@ -21,9 +21,9 @@ function RightNav(){
 
     useEffect(() =>{
       async function fetchUser() {
-          const response = await fetch(`/api/users/${currentUserId}`);
+          const response = await fetch(`/api/users/by_id/${currentUserId}`);
           const responseData = await response.json();
-          setUser(responseData.user);
+          setUser(responseData);
       }
       fetchUser();
     }, [currentUserId])

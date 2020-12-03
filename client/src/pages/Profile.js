@@ -5,6 +5,9 @@ import AuthContext from '../auth.js'
 import wheel from '../style/images/wedge.gif'
 import { useLocation } from 'react-router-dom';
 import userPic from '../style/images/empty-user.png';
+import editProfilePic from '../style/images/edit-user.png';
+import PhotoUpload from '../components/PhotoUpload/PhotoUpload';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +33,12 @@ const Profile = () => {
     const [profileId, setProfileId] = useState(null)
     const [loading, setLoading] = useState(true);
     const { currentUserId, fetchWithCSRF } = useContext(AuthContext);
+    const [path, setPath] = useState('')
     const url = useLocation().pathname.split('/')[2]
+
+    useEffect(() => {
+        setPath(url)
+    }, [url])
     
     const fetchFollow = async() => {
         const friend = `${url}-@${currentUserId}`
@@ -45,9 +53,9 @@ const Profile = () => {
     }
 
     async function fetchUsers() {
-        const response = await fetch('/api/users/');
+        const response = await fetch(`/api/users/${url}`);
         const responseData = await response.json();
-        setUsers(responseData.users);
+        setUsers(responseData);
     }
     async function fetchFollows() {
         const response = await fetch('/api/social/');
@@ -55,7 +63,7 @@ const Profile = () => {
         setFollows(responseData.social);
     }
     async function fetchData(){
-        const res = await fetch('/api/posts/feed')
+        const res = await fetch(`/api/posts/feed/${currentUserId}`)
         const resData = await res.json()
         setPosts(resData.posts)
     }
@@ -66,6 +74,10 @@ const Profile = () => {
         fetchData();
         setLoading(false);
     }, [followed])
+
+    useEffect(() => {
+        fetchFollow()
+    }, [path])
 
     let howManyPosts = (arr, userId) => {
         let newArr = []
@@ -127,45 +139,61 @@ const Profile = () => {
         fetchFollow()
     }
 
+    const handleModal = () => {
+        const modal = document.getElementById('profile-modal-container');
+        modal.classList.toggle('hide')
+    }
+
     return (
         <div className="user-profile-page-container">
+            <div id="profile-modal-container" className="hide">
+                <div className="porfile-modal">
+                    <PhotoUpload fetchUsers={fetchUsers} handleModal={handleModal} type={"profile"}/>
+                    <button onClick={handleModal} className="profile-modal-button">Cancel</button>
+                </div>
+            </div>
             {loading && <div id="wheel" className="loading-wheel-container hidden">
                   <img src={wheel}/>
                 </div> }
-            {!loading && ( users.map( user => ( `/users/${user.username}` === window.location.pathname &&
-                <div id='profile-wrap' key={user.id}>
+            {!loading && (
+                <div id='profile-wrap' key={users.id}>
                     <div id='user-card'>
                         <div id='user-photo'>
-                            <img id='user-pic' src={userPic} alt=''></img>
+                            <img id='user-pic' src={users.pic_url ? users.pic_url : userPic} alt=''></img>
                         </div>
                         <div id='user-info'>
-                            <div id={user.id} className='username'>
-                                <h1>{user.username}</h1>
-                                {!myProfile && <button onClick={!followed ? handleFollow : handleUnfollow} className={`add-follow`} id={user.id}>{followed ? 'Unfollow' : 'Follow'}</button>}
+                            <div id={users.id} className='username'>
+                                {myProfile && (
+                                    <div onClick={handleModal} className="upload-profile-pic-div">
+                                        <img className="upload-profile-pic-icon" src={editProfilePic} />
+                                    </div>
+                                )}
+                                <h1>{users.username}</h1>
+                                {!myProfile && <button onClick={!followed ? handleFollow : handleUnfollow} className={`add-follow`} id={users.id}>{followed ? 'Unfollow' : 'Follow'}</button>}
                             </div>
                             <div id='follows-posts'>
                                 <span>
-                                    <span>{howManyPosts(posts, user.id)}</span> posts
+                                    <span>{howManyPosts(posts, users.id)}</span> posts
                                 </span>
                                 <span>
-                                    <span>{howManyFollowers(follows, user.id)}</span>followers
+                                    <span>{howManyFollowers(follows, users.id)}</span>followers
                                 </span>
                                 <span>
-                                    <span>{howManyFollows(follows, user.id)}</span>following
+                                    <span>{howManyFollows(follows, users.id)}</span>following
                                 </span>
                             </div>
                         </div>
                     </div>
                         <div id='user-content'>
-                                {posts.map((post) => ( user.id === post.user_id &&
-                                    <div id='user-post' key={post.image_url} >
+                                {posts.map((post, i) => (
+                                    <div key={i} id='user-post' key={post.image_url} >
                                             <a id='user-post' href={`/posts/${post.id}`} >
                                                 <img id='demo-post' src={post.image_url} alt='' />
                                             </a>
                                     </div>
                                 ))}
                         </div>
-                    </div>)))}
+                    </div>)}
         </div>
     )
 }
