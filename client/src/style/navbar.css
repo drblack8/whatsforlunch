@@ -31,41 +31,35 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 54px;
+    height: 64px;
     background-color: inherit;
 }
 
 .leftnav {
-    display: inherit;
+    display: flex;
     flex-direction: row;
+    align-items: center;
     width: 33%;
-    height: inherit;
-    overflow: visible;
 }
 
 #logo {
-    position: static;
     width: 100%;
-    height: inherit;
-    border: inherit;
+    height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    margin-left: 5%;
 }
 
 #logoimg {
-    position: static;
-    width: auto;
-    margin-top: 0%;
-    height: 60%;
+    width: 50px;
+    height: auto;
 }
 
 #logoimg2 {
-    position: static;
+    height: 33px;
     width: auto;
-    margin-top: 0%;
-    margin-left: 3%;
-    height: 50%;
+    margin-top: 5px;
 }
 
 .middlenav {
@@ -74,13 +68,13 @@ body {
     height: inherit;
     text-align: center;
     justify-content: center;
+    align-items: center;
 }
 
 #search {
     position: static;
     flex-direction: row;
-    width: 90%;
-    margin-top: 8%;
+    width: 100%;
     border: 1px solid rgb(219,219,219);
     background-color: rgb(250,250,250);
     text-align: center;
@@ -91,10 +85,6 @@ body {
 #search:focus {
     background-color: rgb(250,250,250);
     outline: none;
-}
-
-.search-component-container {
-
 }
 
 .search-bar-choices-container {
@@ -127,12 +117,13 @@ body {
 }
 
 .rightnav {
-    margin-bottom: 1%;
+    /* margin-bottom: 1%; */
     display: flex;
     width: 33%;
-    font: inherit;
-    justify-content: center;
+    /* font: inherit; */
+    justify-content: flex-end;
     align-items: center;
+    /* margin-right: 2%; */
 }
 
 #settings {
@@ -156,14 +147,15 @@ body {
 }
 
 .upload-icon-button-div {
-margin-top: 2%;
+   margin-top: 2%;
    width: 15%;
    margin-right: 5%;
    margin-left: 5%;
 }
 
 #hotdogupload {
-    width: 45%;
+    width: 28px;
+    height: 28px;
 }
 
 #navlink-logout {
@@ -177,7 +169,8 @@ margin-top: 2%;
 }
 
 .home-icon {
-    width: 45%;
+    width: 28px;
+    height: 28px;
 }
 
 #settings {
@@ -186,10 +179,48 @@ margin-top: 2%;
 
 .user-icon-div {
     width: 15%;
-    margin-top: 2%;
+    margin-top: 3%;
 }
 
 .user-icon {
-    width: 50%;
-    /* margin-bottom: 5%; */
+    width: 30px;
+    height: 30px;
 }
+
+
+@media screen and (max-width: 600px) {
+    .middlenav {
+        width: 33%;
+    }
+    #logoimg {
+        display: none;
+    }
+
+    #logoimg2 {
+        height: 25px;
+        width: auto;
+    }
+
+    .rightnav {
+        justify-content: center;
+        width: 33%;
+    }
+    .leftnav {
+        width: 33%;
+    }
+}
+
+/* @media screen and (max-width: 350px) {
+    #logoimg2 {
+        display: none;
+    }
+
+    .rightnav {
+        margin-left: 0%;
+        width: 65%;
+    }
+
+    .leftnav {
+        width: 20%;
+    }
+} */

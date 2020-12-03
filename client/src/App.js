@@ -16,7 +16,7 @@ function App() {
   const [currentUserId, setCurrentUserId] = useState(null);
   const [currentUsername, setCurrentUsername] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
 
   const authContextValue = {
@@ -38,20 +38,20 @@ function App() {
   }
 
 
-  useEffect(() => {
-    async function fetchUsers() {
-      const response = await fetch('/api/users/');
-      const responseData = await response.json();
-      setUsers(responseData.users);
-    }
-    async function fetchPosts() {
-      const res = await fetch('/api/posts/feed')
-      const resData = await res.json()
-      setPosts(resData.posts)
-    }
-    fetchUsers()
-    fetchPosts()
-  }, [])
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     // const response = await fetch('/api/users/');
+  //     // const responseData = await response.json();
+  //     // setUsers(responseData.users);
+  //   }
+  //   async function fetchPosts() {
+  //     const res = await fetch('/api/posts/feed')
+  //     const resData = await res.json()
+  //     setPosts(resData.posts)
+  //   }
+  //   fetchUsers()
+  //   fetchPosts()
+  // }, [])
 
   useEffect(() => {
 
