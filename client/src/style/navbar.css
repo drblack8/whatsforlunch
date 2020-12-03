@@ -1,95 +1,126 @@
-/* TODO Add site wide styles */
-/*  classes: leftnav, rightnav, middlenav, navbar, rightnavlogged
-    id: logo, home, library, search, signin, signup, settings
-*/
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+}
+
+.navbar-container {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+}
+
 .outer-nav {
     display: flex;
     width: 100%;
-    height: 55px;
     background-color: #011c3b00;
     position: static;
     flex-grow: 0;
-    border: 1px solid rgba(0, 0, 0, 0.329);
-    /* border-bottom: 1px solid rgba(255, 255, 255, 0.13); */
+    border-bottom: 1px solid rgb(211,211,211);
     justify-content: center;
 }
 
 .navbar {
-    position: static;
     display: flex;
     flex-direction: row;
-    width: 954px;
-    height: 54px;
+    width: 100%;
+    height: 64px;
     background-color: inherit;
-    /* margin-left: 10px;
-    margin-right: 128px; */
-    font: 100 14px/1.5 Interstate,Lucida Grande,Arial,sans-serif;
-    flex-grow: 0;
-    padding: 0 20px;
-    margin: 0 auto;
 }
 
 .leftnav {
-    /* position: absolute; */
-    display: inherit;
+    display: flex;
     flex-direction: row;
-    width: 360px;
-    height: inherit;
-    overflow: visible;
-    margin-left: 0px;
-    /* border-left: 1px solid black; */
+    align-items: center;
+    width: 33%;
 }
 
 #logo {
-    position: static;
     width: 100%;
-    height: inherit;
-    border: inherit;
-    text-align: left;
-
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 5%;
+    /* padding-bottom: 1.5%; */
 }
 
 #logoimg {
-    position: static;
+    width: 50px;
+    height: auto;
+}
+
+#logoimg2 {
+    height: 33px;
     width: auto;
-    margin-top: 3px;
-    height: 100%;
+    margin-top: 5px;
 }
 
 .middlenav {
-    display: inherit;
-    width: 215px;
+    display: flex;
+    width: 33%;
     height: inherit;
-    margin-left: 20px;
     text-align: center;
     justify-content: center;
-    /* position: relative; */
+    align-items: center;
 }
+
 
 #search {
     position: static;
     flex-direction: row;
-    height: 18px;
-    width: 199px;
-    margin-top: 15px;
-    margin-left: 0px;
-    border: 1px solid rgba(0, 0, 0, 0.507);
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.13);
+    width: 100%;
+    border: 1px solid rgb(219,219,219);
+    background-color: rgb(250,250,250);
     text-align: center;
+    height: 25px;
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
 }
 
 #search:focus {
+    background-color: rgb(250,250,250);
+    outline: none;
+}
+
+.search-bar-choices-container {
+    position: fixed;
+    width: 140px;
+    margin-left: 5px; 
     background: white;
+    z-index: initial;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+}
+
+.searchbar-choice-div {
+    border-bottom:1px solid rgb(219,219,219);
+    padding: 5%;
+}
+
+.searchbar-choice-link {
+    font-size: .8rem;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;    
+}
+
+.searchbar-choice-link:hover {
+    color: rgb(64,80,181);
+    cursor: pointer;
 }
 
 .rightnav {
-    display: inherit;
-    height: inherit;
-    width: 360px;
-    font: inherit;
-    justify-content: center;
-    /* border-right: 1px solid black; */
+    display: flex;
+    width: 33%;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 1%;
 }
 
 #settings {
@@ -101,7 +132,7 @@
 
 #home-icon {
     fill: "rgba(255, 255, 255, 0.20)";
-    
+
 }
 #navlink-login {
     color: black;
@@ -112,42 +143,66 @@
     text-decoration: none;
 }
 
-/* .rightnav {
-    display: inherit;
-    width: 100%;
-    height: inherit;
-    font: inherit;
-    padding: 13px;
-    border-radius: 5px;
-    align-content: flex-end;
-    justify-content: flex-end;
-} */
+.upload-icon-button-div {
+   margin-top: 2%;
+   width: 15%;
+   margin-right: 5%;
+   margin-left: 5%;
+}
 
-/* #login {
-    border: 1px solid #4b4b4b;
-    border-radius: 5px;
-    color: white;
-    background-color: inherit;
-    margin-right: 10px;
-    width: 60px;
-    height: 25px;
-    flex-basis: auto;
-} */
+#hotdogupload {
+    width: 28px;
+    height: 28px;
+}
 
-/* #demologin {
-    border: 1px solid #4b4b4b;
-    border-radius: 5px;
-    color: white;
-    background-color: inherit;
-    margin-right: 10px;
-    width: 100px;
-    height: 25px;
-    flex-basis: auto;
-} */
-/* #signup {
-    border: 1px solid #4b4b4b;
-    border-radius: 5px;
-    color: white;
-    background-color: rgb(8, 174, 240);
-    height: 25px;
-} */
+#navlink-logout {
+    text-decoration: none;
+    color: black;
+}
+
+.home-icon-button {
+    width: 15%;
+    margin-top: 2%;
+}
+
+.home-icon {
+    width: 28px;
+    height: 28px;
+}
+
+#settings {
+    height: 80%;
+}
+
+.user-icon-div {
+    width: 15%;
+    margin-top: 3%;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .middlenav {
+        width: 33%;
+    }
+    #logoimg {
+        display: none;
+    }
+
+    #logoimg2 {
+        height: 25px;
+        width: auto;
+    }
+
+    .rightnav {
+        justify-content: center;
+        width: 33%;
+    }
+    .leftnav {
+        width: 33%;
+    }
+}

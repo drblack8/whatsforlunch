@@ -1,14 +1,18 @@
 import React, {useState, useContext} from 'react';
 import { useHistory } from 'react-router-dom'
 import AuthContext from '../auth'
+import Button from '@material-ui/core/Button';
+import FormLabel from '@material-ui/core/FormLabel';
+
+
 
 function UserForm(props) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("DemoUser");
+    const [password, setPassword] = useState("password");
     let history = useHistory();
 
     const [errors, setErrors] = useState([]);
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, setCurrentUsername } = useContext(AuthContext);
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -30,26 +34,32 @@ function UserForm(props) {
                 setErrors(responseData.errors);
             } else {
                 setCurrentUserId(responseData.current_user_id)
+                setCurrentUsername(responseData.current_username)
                 history.push('/feed')
             }
         }
         loginUser();
     }
     return (
-        <form onSubmit={submitForm}>
-            {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
-            <div className="field">
-                <label>Username: </label>
-                <div className="control">
-                    <input className="input" type="text" value={username} onChange={(e) => setUsername(e.target.value)} name="username" />
+        <div className="login-form-container">
+            <h1 className="login-form-title">Login</h1>
+            <form className="login-form">
+                {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
+                <div className="field">
+                    <FormLabel>Username: </FormLabel>
+                    <div className="control">
+                        <input className="form-input input" type="text" value={username} onChange={(e) => setUsername(e.target.value)} name="username" />
+                    </div>
+                    <FormLabel>Password: </FormLabel>
+                    <div className="control">
+                        <input className="form-input input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" />
+                    </div>
                 </div>
-                <label>Password: </label>
-                <div className="control">
-                    <input className="input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" />
+                <div className="login-username-submit-container">
+                    <Button onClick={submitForm} className="forms-button" variant="contained" color="primary">Login</Button>
                 </div>
-            </div>
-            <button>Login</button>
-        </form>
+            </form>
+        </div>
     );
 }
 export default UserForm;

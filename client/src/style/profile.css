@@ -1,11 +1,20 @@
+body {
+    background-color: rgb(250,250,250);;
+}
+.user-profile-page-container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
 #profile-wrap {
     display: flex;
     flex-flow: column;
     margin: 0 363px;
-    /* border: 1px solid black; */
     padding: 30px 0 0;
     flex-grow: 0;
     align-items: center;
+    height: auto;
 }
 
 #user-card {
@@ -13,9 +22,10 @@
     flex-flow: row nowrap;
     height: 150px;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.329);
+    border-bottom: 1px solid lightgray;
     padding-bottom: 10px;
-    padding-left: 40px;
+    padding-left: 5%;
+    padding-bottom: 3%;
 }
 
 #user-photo {
@@ -30,8 +40,8 @@
 }
 
 #user-pic {
-    margin-left: -50px;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 #user-info {
@@ -41,25 +51,52 @@
     justify-content: left;
 }
 
-#username {
+.username {
     display: flex;
     flex-flow: row;
     height: 50%;
     width: 100%;
-    justify-content: left;
+    justify-content: flex-start;
+    align-items: center;
 }
 #follows-posts {
     height: 25%;
     width: 100%;
 }
 
-#add-follow {
-    height: 50%;
+#follows-posts > span {
+    margin: 2%;
+}
+
+#follows-posts > span > span {
+    font-weight: bold;
+    margin-right: 1%;
+}
+
+.add-follow {
+    height: 30px;
+    width: 80px;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
     background-color: #0095f6;
     color: white;
+    border-radius: 3px;
+    border: none;
+    z-index: 10;
+}
+
+.add-follow:hover {
+    cursor: pointer;
+    background-color: #0385db;
+}
+
+.disabled-button {
+    background-color: gray;
+}
+.disabled-button:hover {
+    background-color: gray;
+    cursor: auto;
 }
 
 #bio {
@@ -68,20 +105,36 @@
 }
 
 #user-content {
-    display: inherit;
-    flex-flow: row wrap;
-    padding-top: 20px;
- 
+    margin: auto;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90vw;
+    max-width: 640px;
+    height: auto;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #user-post {
-    min-width: 275px;
-    height: 275px;
-    width: 275px;
-    margin: 10px;
-    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    max-height: 200px;
+    max-width: 200px;
+    margin: 1%;
 }
 
 #demo-post {
-    max-width: 150%;
+    height: 100%;
+    width: 100%;
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.errors-div > p {
+    margin: 0px;
+    margin-bottom: 1px;
+    color: red;
+    font-size: smaller;
 }

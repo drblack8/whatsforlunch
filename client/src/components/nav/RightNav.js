@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -7,16 +7,26 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { NavLink, Redirect } from 'react-router-dom';
-import UserLogo from "../../style/svg/usericon.svg"
-import HomeLogo from "../../style/svg/home.svg"
-import PostLogo from "../../style/svg/post.svg"
+import UserLogo from "../../style/svg/usericon.png"
+import HomeLogo from "../../style/svg/home.png"
 import AuthContext from '../../auth.js'
+import hotdog from '../../style/images/hotdoguploadblack.png'
 
 
 function RightNav(){
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, currentUserId } = useContext(AuthContext);
+    const [user, setUser] = useState({});
+
+    useEffect(() =>{
+      async function fetchUser() {
+          const response = await fetch(`/api/users/${currentUserId}`);
+          const responseData = await response.json();
+          setUser(responseData.user);
+      }
+      fetchUser();
+    }, [currentUserId])
 
 
     const handleToggle = () => {
@@ -38,23 +48,13 @@ function RightNav(){
       });
       if(response.ok){
           setCurrentUserId(null)
-          // return (<Redirect to='/login' />)
       }
   }
-
-    // const handleLogOut = (event) => {
-    //     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-    //         return
-    //     }
-    //     setOpen(false);
-
-    //     return (<Redirect to='/login' />)
-    // };
 
     const handleProfile = (event) => {
         setOpen(false);
 
-        return <Redirect to='/profile' />
+        return <Redirect to={`/${user.username}`} />
     };
 
 
@@ -77,25 +77,25 @@ function RightNav(){
 
     return(
         <div className="rightnav">
-            <div >
+            <div className="home-icon-button">
               <NavLink to='/feed' >
                 <Button
                   onClick={() => <Redirect to='/feed' />}
                 >
-                  <img src={HomeLogo} alt=''/>
+                  <img className="home-icon" src={HomeLogo} alt=''/>
                 </Button>
               </NavLink>
             </div>
-            <div >
+            <div className="upload-icon-button-div">
               <NavLink to="/posts/new" activeclass="active" >
                 <Button
                   onClick={() => <Redirect to="/posts/new" />}
                 >
-                  <img src={PostLogo} alt=''/>
+                  <img id="hotdogupload" src={hotdog} alt=''/>
                 </Button>
               </NavLink>
             </div>
-            <div>
+            <div className="user-icon-div">
                 <Button
                     id="settings"
                     ref={anchorRef}
@@ -103,7 +103,7 @@ function RightNav(){
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
-                  <img src={UserLogo} alt='' />
+                  <img className="user-icon" src={UserLogo} alt='' />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
@@ -114,7 +114,7 @@ function RightNav(){
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem onClick={handleProfile}><NavLink to='/profile' id='navlink-profile'>Profile</NavLink></MenuItem>
+                                    <MenuItem onClick={handleProfile}><NavLink to={`/users/${user.username}`} id='navlink-profile'>Profile</NavLink></MenuItem>
                                     <MenuItem onClick={logoutUser}><NavLink to='/login' id='navlink-logout'>Logout</NavLink></MenuItem>
                                 </MenuList>
                                 </ClickAwayListener>

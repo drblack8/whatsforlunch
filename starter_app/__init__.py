@@ -16,6 +16,8 @@ from starter_app.api.user_routes import user_routes
 from starter_app.api.post_routes import post_routes
 from starter_app.api.auth_routes import auth_routes
 from starter_app.api.feed_routes import feed_routes
+from starter_app.api.social_routes import social_routes
+from starter_app.api.comment_routes import comment_routes
 
 from starter_app.config import Config
 
@@ -26,6 +28,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(feed_routes, url_prefix='/api/feed')
+app.register_blueprint(social_routes, url_prefix='/api/social')
+app.register_blueprint(comment_routes, url_prefix='/api/comments')
 
 
 db.init_app(app)
@@ -46,7 +50,6 @@ def load_user(user_id):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
-    print("path", path)
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
@@ -70,11 +73,9 @@ def login():
         return {"errors": ["Missing required parameters"]}, 400
 
     authenticated, user = User.authenticate(username, password)
-    print(authenticated)
-    print(user)
     if authenticated:
         login_user(user)
-        return {"current_user_id": current_user.id}, 200
+        return {"current_user_id": current_user.id, "current_username": username}, 200
 
     return {"errors": ["Invalid username or password"]}, 401
 

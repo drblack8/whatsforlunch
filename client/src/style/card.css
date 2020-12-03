@@ -1,0 +1,9 @@
+#card {
+    display: flex;
+    flex-flow: column;
+    margin: 0 363px;
+    padding: 30px 0 0;
+    flex-grow: 0;
+    align-items: center;
+    height: auto;
+}

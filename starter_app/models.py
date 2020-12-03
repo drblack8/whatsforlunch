@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(255))
     pfp = db.Column(db.String(255))
 
+    # socials = db.relationship("Social", back_populates="users")
     posts = db.relationship("Post", back_populates="users")
     comments = db.relationship("Comment", back_populates="users")
 
@@ -49,8 +50,19 @@ class Post(db.Model):
     image_url = db.Column(db.String(200), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     desc = db.Column(db.String(255))
-
+    date = db.Column(db.Date, nullable=False)
     users = db.relationship("User", back_populates="posts")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "image_url": self.image_url,
+            "desc": self.desc,
+            "date": self.date,
+            "username": self.users.username,
+            "user_id": self.user_id
+        }
+
     comments = db.relationship("Comment", back_populates="posts")
 
 
@@ -71,4 +83,6 @@ class Social(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey("users.id"))
-    follower = db.Column(db.Integer, db.ForeignKey("users.id"))
+    following = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    # users = db.relationship("User", back_populates="socials")

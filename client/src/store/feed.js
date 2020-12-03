@@ -1,6 +1,7 @@
 
 const SET_FEED = "feed/SET_FEED";
-
+const SET_COMMENTS = "feed/SET_COMMENTS";
+const SET_FREINDS = "feed/SET_FRIENDS";
 
 export const setFeed = (value) => {
   return {
@@ -9,16 +10,33 @@ export const setFeed = (value) => {
   }
 }
 
-export const getFeed = (userId) => async dispatch => {
-    const data = await fetch(`/api/feed/${userId}`);
+export const setFriends = (value) => {
+  return {
+    type: SET_FEED,
+    friends: value
+  }
+}
+
+export const setComments = (value) => {
+  return {
+    type: SET_COMMENTS,
+    comments: value
+  }
+}
+
+export const getFeed = (userId, numberOfPosts) => async dispatch => {
+    const data = await fetch(`/api/feed/${userId}/${numberOfPosts}`);
     if (data.ok) {
-        const  { feed } = await data.json();
-        dispatch(setFeed(feed))
+        const  { posts, comments } = await data.json();
+        dispatch(setFeed(posts))
+        dispatch(setComments(comments))
     }
 }
 
 const intialState = {
-  feed: {}
+  feed: [],
+  comments: [],
+  friends: [],
 }
 
 export default function reducer(state=intialState, action) {
@@ -29,6 +47,16 @@ export default function reducer(state=intialState, action) {
             ...newState,
             feed: action.feed
         }
+        case SET_COMMENTS:
+          return {
+            ...newState,
+            comments: action.comments
+          }
+        case SET_FREINDS:
+          return {
+            ...newState,
+            friends: action.friends
+          }
         default: 
         return state;
     

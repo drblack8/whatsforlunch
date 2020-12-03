@@ -1,12 +1,15 @@
 .feed-page-container{
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(250,250,250);
+    font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
 }
 
 .feed-container {
-    width: 50%;
+    height: 100%;
+    width: 600px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -14,39 +17,40 @@
 }
 
 .feed-post-container {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-    display: grid;
-    grid-template-rows: 10% 70% 20%;
+    grid-template-rows: 5% 84% 10% 10%, 10%;
     width: 90%;
-    border: 1px solid lightgray;
+    border: 1px solid rgb(208, 207, 207);
     margin: 5%;
     max-width: 550px;
     background-color: white;
-    
+    height: 100%;
 }
 
 .feed-post-image-div {
     width: 100%;
+    height: 100%;
     grid-row: 2/3; 
 }
 
 .feed-post-image {
     width: 100%;
-    max-height: 100%;
+    height: 100%;
 }
 
 .feed-post-poster-div {
-    grid-row: 1/2
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
 }
 
 .feed-post-poster{
     margin-left: 2%;
+    color: gray;
 }
 
 .feed-post-desc-div {
-    grid-row: 3/4
+    grid-row: 4/5;
+    
 }
 
 .feed-post-desc-user{
@@ -56,5 +60,110 @@
 }
 
 .feed-post-desc{
-
+    margin: 10px;
 } 
+
+.feed-post-comments {
+    font-size:.9rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 30px;
+    align-items: center;
+}
+
+
+
+.feed-post-comments > a {
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+.feed-post-comments > img {
+    margin-right: 10px;
+}
+.feed-post-comments > img:hover{
+    cursor: pointer;
+}
+
+.feed-comment-image {
+    width:15px;
+    height: 15;
+}
+
+.feed-post-comment-container {
+    grid-row: 5/6;
+    border-top: 1px solid rgb(238, 236, 236);;
+    display: flex;
+    align-items: center;
+}
+
+.feed-post-comment-container > input {
+    border: none;
+    height: 50px;
+    width: 88%;
+    margin-left: 3%;
+}
+.feed-post-comment-container > input:focus {
+    outline: none;
+}
+
+.feed-post-comment-button {
+    color: gray;
+}
+
+.feed-post-comment-button:hover {
+    color:rgb(0,149,246);
+    cursor: pointer;
+}
+
+.feed-post-likes-container {
+    grid-row: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-top: 10px;
+    margin-left: 10px;
+}
+
+.feed-post-likes-heart:hover {
+    cursor: pointer;
+}
+
+.feed-post-likes-heart {
+    height:20px;
+    padding-left: 10px;
+}
+
+.feed-post-bubble {
+    height:24px;
+    padding-left: 15px;
+}
+
+.feed-post-bubble:hover {
+    cursor: pointer;
+}
+
+.feed-post-comment-count {
+    padding-left: 15px;
+}
+
+.feed-post-profile-link{
+    text-decoration: none;
+    color: black;
+}
+
+.loading-wheel-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+    z-index: 100
+}
+
+.end-of-feed-div {
+    height: 100px;
+    width: 100%;
+}
