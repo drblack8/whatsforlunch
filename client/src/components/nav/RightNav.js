@@ -48,18 +48,8 @@ function RightNav(){
       });
       if(response.ok){
           setCurrentUserId(null)
-          // return (<Redirect to='/login' />)
       }
   }
-
-    // const handleLogOut = (event) => {
-    //     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-    //         return
-    //     }
-    //     setOpen(false);
-
-    //     return (<Redirect to='/login' />)
-    // };
 
     const handleProfile = (event) => {
         setOpen(false);

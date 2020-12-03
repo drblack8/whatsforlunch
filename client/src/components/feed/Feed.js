@@ -1,11 +1,10 @@
-import React, { useEffect, useContext, useState, useRef } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFeed } from '../../store/feed';
 import AuthContext from '../../auth.js';
 import '../../style/feed.css'
 import FeedPost from './FeedPost';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import wheel from '../../style/images/wedge.gif'
 
 
 const Feed = () => {
@@ -15,7 +14,6 @@ const Feed = () => {
     const [numberOfPosts, setNumberOfPosts] = useState(5)
     const [hasNextPage, setHasNextPage] = useState(true)
     const [loading, setLoading] = useState(false)
-    // const pageEnd = useRef()
 
     useEffect(() => {
         setLoading(true)
@@ -41,29 +39,15 @@ const Feed = () => {
         onLoadMore: loadMore,
         scrollContainer
       });
-    // <div className="feed-container" ref={infiniteRef}></div>
 
-    // useEffect(() => {
-    //     if(loading){
-    //       const observer = new IntersectionObserver(entries => {
-    //           if(entries[0].isIntersecting){
-    //             setLoading(true)
-    //             loadMore()
-    //           }
-    //         }, {threshold: 1})
-    //         observer.observe(pageEnd.current)
-    //     }
-    //   },[loading])
 
     return (
-        <div className="feed-page-container"ref={infiniteRef}>
+        <div className="feed-page-container" ref={infiniteRef}>
             <div className="feed-container" >
                 {
                 feed.length > 0 && feed.map((post, i) =>
                     <FeedPost key={i} post={post} numberOfPosts={numberOfPosts}/>
                 )}
-                {/* <div ref={pageEnd} className="end-of-feed-div"></div> */}
-                {/* {loading && <div className="loading-wheel-container"><img src={wheel}/></div>} */}
             </div>
         </div>
     )
