@@ -111,6 +111,22 @@ const Profile = () => {
         fetchFollow()
     }
 
+    const handleUnfollow = async (e) => {
+        const profId = e.target.id
+        setProfileId(profId)
+        const data = await fetchWithCSRF(`/api/social/delete`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_id: currentUserId,
+                follow_id: parseInt(profId)
+            })
+        })
+        fetchFollow()
+    }
+
     return (
         <div className="user-profile-page-container">
             {loading && <div id="wheel" className="loading-wheel-container hidden">
@@ -125,7 +141,7 @@ const Profile = () => {
                         <div id='user-info'>
                             <div id={user.id} className='username'>
                                 <h1>{user.username}</h1>
-                                {!myProfile && <button disabled={followed} onClick={handleFollow} className={`add-follow ${followed ? 'disabled-button' : null}`} id={user.id}>{followed ? 'Followed' : 'Follow'}</button>}
+                                {!myProfile && <button onClick={!followed ? handleFollow : handleUnfollow} className={`add-follow`} id={user.id}>{followed ? 'Unfollow' : 'Follow'}</button>}
                             </div>
                             <div id='follows-posts'>
                                 <span>

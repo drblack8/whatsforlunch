@@ -21,6 +21,19 @@ def new_follow():
         return {"message": 'Already Following'}
 
 
+@social_routes.route('/delete', methods=['Delete'])
+def delete_follow():
+    data = request.get_json()
+    check = Social.query.filter_by(
+        user=data["user_id"], following=data["follow_id"]).first()
+    if check is not None:
+        db.session.delete(check)
+        db.session.commit()
+        return {"message": "Followed"}
+    else:
+        return {"message": 'Not Following'}
+
+
 @social_routes.route('/<friend>')
 def followed(friend):
     profile = friend.split('-@')[0]
