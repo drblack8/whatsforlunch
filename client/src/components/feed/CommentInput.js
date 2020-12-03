@@ -36,7 +36,7 @@ const CommentInput = ({post, numberOfPosts, single}) => {
 
     return (
         <div className="feed-post-comment-container">
-                <input value={comment} id={`comment-input${post.id}`} type="text" placeholder="Add a comment..." onChange={commentChange}></input>
+                <input className="post-comment-input" value={comment} id={`comment-input${post.id}`} type="text" placeholder="Add a comment..." onChange={commentChange}></input>
                 <a id={post.id} className="feed-post-comment-button" onClick={handleComment}>Post</a>
             </div>
     );
