@@ -49,6 +49,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     margin-left: 5%;
+    /* padding-bottom: 1.5%; */
 }
 
 #logoimg {
@@ -123,6 +124,7 @@ body {
     /* font: inherit; */
     justify-content: flex-end;
     align-items: center;
+    padding-bottom: 1%;
     /* margin-right: 2%; */
 }
 
