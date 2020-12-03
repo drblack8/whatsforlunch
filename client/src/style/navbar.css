@@ -72,6 +72,7 @@ body {
     align-items: center;
 }
 
+
 #search {
     position: static;
     flex-direction: row;
@@ -89,9 +90,18 @@ body {
 }
 
 .search-bar-choices-container {
+    /* margin-top: 5%;
     margin-left: 5%;
-    position: relative;
-    width: 90%;
+    position: absolute;
+    width: 8.5%;
+    margin-top: 1%; */
+    position: fixed;
+    /* padding: 2em; */
+    /* left: 49.5%;
+    top: 18%;*/
+    width: 140px;
+    margin-left: 5px; 
+    /* transform: translate(-58%, -50%); */
     background: white;
     z-index: initial;
     border-bottom-left-radius: 5%;
