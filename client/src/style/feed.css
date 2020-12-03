@@ -56,6 +56,10 @@
     padding: 2%;
 }
 
+.feed-post-user-pic:hover {
+    cursor: pointer;
+}
+
 .feed-post-image-username {
     grid-column: 1/2;
     grid-row: 1/2;
@@ -63,6 +67,7 @@
     color: gray;
     font-weight: 700;
     font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    text-decoration: none;
 }
 
 .feed-post-poster{

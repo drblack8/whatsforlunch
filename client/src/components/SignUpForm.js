@@ -45,7 +45,7 @@ const SignUpForm = () => {
         })
         if (data.ok) {
             const response = await data.json();
-            return <Redirect to={`/users/${userName}`} />
+            return <Redirect to={`/login`} />
         }
         else {
             const response = await data.json();
