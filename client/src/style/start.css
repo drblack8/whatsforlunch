@@ -119,6 +119,7 @@ label {
 
 .log-or-sign {
     cursor: pointer;
+    margin-bottom: 50px;
 }
 
 .log-or-sign:hover {
