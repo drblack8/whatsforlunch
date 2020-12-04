@@ -63,7 +63,7 @@ const Profile = () => {
         setFollows(responseData.social);
     }
     async function fetchData(){
-        const res = await fetch(`/api/posts/feed/${currentUserId}`)
+        const res = await fetch(`/api/posts/feed/${url}`)
         const resData = await res.json()
         setPosts(resData.posts)
     }
