@@ -27,11 +27,11 @@ body {
 }
 
 .forms-container {
-    height: 600px;
+    height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    /* flex-direction: row;
+    align-items: flex-start; */
     justify-content: center;
     margin-top: 2%;
 }
@@ -39,7 +39,7 @@ body {
 .login-form-container {
     border: 1px solid lightgray;
     width: 30%;
-    height: 450px;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -53,18 +53,20 @@ body {
 }
 
 .login-form {
-    margin-top: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .login-form-title {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .login-username-submit-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20%;
+    margin-bottom: 5%;
+    /* margin-top: 20%; */
 }
 
 .signup-form-container {
@@ -91,7 +93,7 @@ body {
 }
 
 .signup-form > div > input {
-  height: 30px;  
+  height: 30px;
 }
 
 .form-input {
