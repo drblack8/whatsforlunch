@@ -133,8 +133,8 @@ body {
 }
 
 .errors-div > p {
-    margin: 0px;
-    margin-bottom: 1px;
+    margin-top: 0px;
+    margin-bottom: 25px;
     color: red;
     font-size: smaller;
 }

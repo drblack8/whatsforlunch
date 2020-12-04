@@ -6,7 +6,7 @@ import logo from '../style/images/WFL.jpg'
 
 const Start = () => {
     const [flip, setFlip] = useState(false)
-    
+
     return (
         <>
             <div className="start-page-container">
@@ -16,12 +16,12 @@ const Start = () => {
                 <div className="forms-container">
                     {
                         flip ? <SignUpForm />
-                        : <LoginForm />
+                            : <LoginForm />
                     }
+                    <a className="log-or-sign" onClick={() => flip ? setFlip(false) : setFlip(true)}>
+                        {flip ? 'Already have an account?' : 'Don\'t have an account?'}
+                    </a>
                 </div>
-                <a className="log-or-sign" onClick={() => flip ? setFlip(false) : setFlip(true)}>
-                    {flip ? 'Already have an account?' : 'Don\'t have an account?'}
-                </a>
             </div>
         </>
     );
