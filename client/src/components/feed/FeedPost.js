@@ -1,16 +1,17 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import like from '../../style/images/like.png';
 import liked from '../../style/images/liked.png';
 import PostComment from './PostComment';
 import bubble from '../../style/images/bubble.png'
 import CommentInput from './CommentInput';
+import userPic from '../../style/images/empty-user.png';
+import { useHistory } from 'react-router-dom';
 
 
 
 const FeedPost = ({post, numberOfPosts, single}) => {
     const comments = post.comments
-
+    const history = useHistory()
     const handledLike = (e) => {
         const isLiked = e.target.getAttribute('src')
         if (isLiked == like){
@@ -18,6 +19,10 @@ const FeedPost = ({post, numberOfPosts, single}) => {
         }else {
             e.target.setAttribute('src', like)
         }
+    }
+
+    const handlebubbleClick = () => {
+        history.push(`/users/${post.username}`)
     }
 
 
@@ -29,6 +34,8 @@ const FeedPost = ({post, numberOfPosts, single}) => {
         <div key={post.image_url} className="feed-post-container">
             <div className="feed-post-poster-div">
                 <p className="feed-post-poster">{post.date.split(" ").slice(0,3).join(" ")}</p>
+                <img onClick={handlebubbleClick} className="feed-post-user-pic" src={post.user_pic_url? post.user_pic_url : userPic}/>
+                <a className="feed-post-image-username" href={`/users/${post.username}`}>{post.username}</a>
             </div>
             <a href={`/posts/${post.id}`}>
                 <div className="feed-post-image-div">

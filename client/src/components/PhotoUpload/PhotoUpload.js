@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { uploadFile } from 'react-s3';
 import  { configuration } from '../../config/index.js'
-import { useDispatch } from 'react-redux';
 import '../../style/post-page.css'
 import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
@@ -9,7 +8,8 @@ import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import AuthContext from '../../auth'
 import wheel from '../../style/images/wedge.gif'
-import hotdog from '../../style/images/hotdogupload.png'
+import hotdog from '../../style/images/hotdogupload.png';
+import profileIcon from '../../style/images/edit-user-grey.png'
 
 const config = {
     bucketName: 'whats4lunch-images',
@@ -19,14 +19,11 @@ const config = {
     secretAccessKey: configuration.aws.secretKey,
 }
 
-const PhotoUpload = () => {
-    const dispatch = useDispatch();
+const PhotoUpload = ({type, handleModal, fetchUsers}) => {
     const [caption, setCaption] = useState('')
-    const [ready, setReady] = useState(true)
+    const [ready, setReady] = useState(false)
     const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState()
     const [crop, setCrop] = useState({unit: "%", width: 50, height: 50, x: 25, y: 25, aspect: 1 / 1})
-    const [croppedImageUrl, setCroppedImageUrl] = useState(null)
     const [imageRef, setImageRef] = useState()
     const [croppedImage, setCroppedImage] = useState()
     const [src, setSrc] = useState()
@@ -36,7 +33,9 @@ const PhotoUpload = () => {
     //crop magic
     // https://levelup.gitconnected.com/crop-images-on-upload-in-your-react-app-with-react-image-crop-5f3cd0ad2b35
     const onImageLoaded = image => {
+        setCrop(crop);
         setImageRef(image)
+        getCroppedImg(image, crop)
     }
 
     const onCropChange = (crop) => {
@@ -45,7 +44,7 @@ const PhotoUpload = () => {
 
     const onCropComplete = crop => {
         if (imageRef && crop.width && crop.height) {
-            setCroppedImageUrl(getCroppedImg(imageRef, crop))
+            getCroppedImg(imageRef, crop)
         }
     }
 
@@ -53,22 +52,38 @@ const PhotoUpload = () => {
         const canvas = document.createElement("canvas");
         const scaleX = image.naturalWidth / image.width;
         const scaleY = image.naturalHeight / image.height;
-        canvas.width = crop.width;
-        canvas.height = crop.height;
+        var originWidth = crop.width * scaleX;
+        var originHeight = crop.height * scaleY;
+        // maximum width/height
+        var maxWidth = 1200, maxHeight = 1200 / (16 / 9);
+        var targetWidth = originWidth,
+          targetHeight = originHeight;
+        if (originWidth > maxWidth || originHeight > maxHeight) {
+          if (originWidth / originHeight > maxWidth / maxHeight) {
+            targetWidth = maxWidth;
+            targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+          } else {
+            targetHeight = maxHeight;
+            targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+          }
+        }
+        // set canvas size
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
         const ctx = canvas.getContext("2d");
-        
-        ctx.drawImage(
-            image,
-            crop.x * scaleX,
-            crop.y * scaleY,
-            crop.width * scaleX,
-            crop.height * scaleY,
-            0,
-            0,
-            crop.width,
-            crop.height
-         )
     
+        ctx.drawImage(
+          image, 
+          crop.x * scaleX, 
+          crop.y * scaleY, 
+          crop.width * scaleX, 
+          crop.height * scaleY, 
+          0, 
+          0, 
+          targetWidth, 
+          targetHeight 
+        );
+            
         const reader = new FileReader()
         canvas.toBlob(blob => {
             reader.readAsDataURL(blob)
@@ -94,11 +109,9 @@ const PhotoUpload = () => {
 
     useEffect(() => {
         if (!selectedFile) {
-            setPreview(undefined)
             return
         }
         const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
@@ -120,16 +133,32 @@ const PhotoUpload = () => {
         wheelDiv.setAttribute("class", "loading-wheel-container")
         const data = await uploadFile(croppedImage, config)
         if (data.location) {
-            const post = await fetchWithCSRF('/api/posts/new', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ image_url:data.location, user_id:currentUserId, desc:caption }),
-            })
-            if (post.ok){
-                setReady(true)
-                setCaption('')
-                wheelDiv.setAttribute("class", "loading-wheel-container hidden")
-            }
+            if (type === 'profile') {
+                const post = await fetchWithCSRF('/api/users/profile_pic', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image_url:data.location, user_id:currentUserId }),
+                    })
+                if (post.ok){
+                    setReady(false)
+                    setCaption('')
+                    wheelDiv.setAttribute("class", "loading-wheel-container hidden");
+                    handleModal()
+                    fetchUsers()
+                }
+
+            } else {
+                const post = await fetchWithCSRF('/api/posts/new', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image_url:data.location, user_id:currentUserId, desc:caption }),
+                    })
+                if (post.ok){
+                    setReady(false)
+                    setCaption('')
+                    wheelDiv.setAttribute("class", "loading-wheel-container hidden")
+                }
+                }
         }
     }
 
@@ -138,7 +167,7 @@ const PhotoUpload = () => {
             setSelectedFile(undefined)
             return
         }
-        setReady(false)
+        setReady(true)
         setSelectedFile(e.target.files[0])
         const fileReader = new FileReader()
         fileReader.onloadend = () => {
@@ -154,7 +183,7 @@ const PhotoUpload = () => {
                 <img src={wheel}/>
             </div>
             <div className="upload-form">
-                {ready ? (
+                {!ready ? (
                 <div className="upload-button">
                 <input
                     accept="image/*"
@@ -166,7 +195,7 @@ const PhotoUpload = () => {
                     onChange={onSelectFile}
                 />
                 <label className="upload-button-label" htmlFor="raised-button-file">
-                    <img className="upload-photo" src={hotdog}/>
+                    <img className={type ? 'user-page-modal-icon' : 'upload-photo'} src={type ? profileIcon : hotdog}/>
                     <Button variant="raised" component="span" className="upload-button">
                     </Button>
                 </label> 
@@ -181,12 +210,12 @@ const PhotoUpload = () => {
                       className="react-crop"
                      /> 
                 )}
-                <div className="upload-text-area-div">
+                {!type && <div className="upload-text-area-div">
                     <TextField multiline={true} onChange={handleCaption} value={caption} placeholder="Write a caption"></TextField>
-                </div>
+                </div>}
                 <div>
-                    <Button variant="contained" color="primary" id="upload-button" onClick={upload} disabled={ready}>
-                        Post
+                    <Button variant="contained" color="primary" id="upload-button" onClick={upload} disabled={!ready}>
+                        {type ? 'Save' : 'Post'}
                     </Button>
                 </div>
             </div>

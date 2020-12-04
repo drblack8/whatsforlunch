@@ -21,9 +21,9 @@ function RightNav(){
 
     useEffect(() =>{
       async function fetchUser() {
-          const response = await fetch(`/api/users/${currentUserId}`);
+          const response = await fetch(`/api/users/by_id/${currentUserId}`);
           const responseData = await response.json();
-          setUser(responseData.user);
+          setUser(responseData);
       }
       fetchUser();
     }, [currentUserId])
@@ -48,18 +48,8 @@ function RightNav(){
       });
       if(response.ok){
           setCurrentUserId(null)
-          // return (<Redirect to='/login' />)
       }
   }
-
-    // const handleLogOut = (event) => {
-    //     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-    //         return
-    //     }
-    //     setOpen(false);
-
-    //     return (<Redirect to='/login' />)
-    // };
 
     const handleProfile = (event) => {
         setOpen(false);

@@ -5,7 +5,6 @@ import AuthContext from '../../auth.js';
 import '../../style/feed.css'
 import FeedPost from './FeedPost';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import wheel from '../../style/images/wedge.gif'
 
 
 const Feed = () => {
@@ -23,7 +22,7 @@ const Feed = () => {
     }, [])
 
     const loadMore = () => {
-        if (feed.length < 5) {
+        if (feed.length < 5 || numberOfPosts > feed.length + 20) {
             setHasNextPage(false)
         }
         setLoading(true)
@@ -41,14 +40,14 @@ const Feed = () => {
         scrollContainer
       });
 
+
     return (
-        <div className="feed-page-container">
-            <div className="feed-container" ref={infiniteRef}>
+        <div className="feed-page-container" ref={infiniteRef}>
+            <div className="feed-container" >
                 {
                 feed.length > 0 && feed.map((post, i) =>
                     <FeedPost key={i} post={post} numberOfPosts={numberOfPosts}/>
                 )}
-                {loading && <div className="loading-wheel-container"><img src={wheel}/></div>}
             </div>
         </div>
     )
