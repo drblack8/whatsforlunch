@@ -1,4 +1,43 @@
 /* TODO Add site wide styles */
-#root {
-    margin: -8px;
+html,
+body {
+  /* height: 100%; */
+  font-family: "Neue Plak", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.footer {
+  /* position: relative; */
+  height: 60px;
+  flex-shrink: 0;
+  text-align: center;
+  background-color: rgba(73, 73, 73, 0.726);
+  color: white;
+  width: 100%;
+}
+.footer-content {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+}
+.name-div {
+  margin-left: 17px;
+  margin-right: 17px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+  align-items: center;
+}
+.icons {
+  color: white;
+  margin-left: 7px;
 }

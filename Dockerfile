@@ -10,6 +10,7 @@ RUN ["pip", "install", "psycopg2"]
 
 # Build our React App
 RUN ["npm", "install", "--prefix", "client"]
+# RUN ["npm" "cache" "clear"]
 RUN ["npm", "run", "build", "--prefix", "client"]
 
 # Move our react build for Flask to serve

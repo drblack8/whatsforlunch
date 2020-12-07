@@ -10,19 +10,19 @@ import PhotoUpload from '../components/PhotoUpload/PhotoUpload';
 
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
-    width: "100%",
-    height: "100%",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//     justifyContent: 'space-around',
+//     overflow: 'hidden',
+//     backgroundColor: theme.palette.background.paper,
+//   },
+//   gridList: {
+//     width: "100%",
+//     height: "100%",
+//   },
+// }));
 
 const Profile = () => {
     const [users, setUsers] = useState([]);
