@@ -4,10 +4,6 @@ import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import FormLabel from '@material-ui/core/FormLabel';
 
-
-
-
-
 const SignUpForm = () => {
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
