@@ -8,22 +8,26 @@ const names = [
   {
     name: "Jaron Degen",
     github: "https://github.com/jarondegen",
-    linkedin: "https://www.linkedin.com/in/jarondegen/"
+    linkedin: "https://www.linkedin.com/in/jarondegen/",
+    angellist: "https://angel.co/u/jaron-degen"
   },
   {
     name: "Daniel Black",
     github: "https://github.com/drblack8",
-    linkedin: "https://www.linkedin.com/in/danielrobertblack/"
+    linkedin: "https://www.linkedin.com/in/danielrobertblack/",
+    angellist: "https://angel.co/u/daniel-r-black"
   },
   {
     name: "Andrea Jackson",
     github: "https://github.com/aganesh0988",
-    linkedin: "https://www.linkedin.com/in/andrea-jackson1/"
+    linkedin: "https://www.linkedin.com/in/andrea-jackson1/",
+    angellist: "https://angel.co/u/andrea-jackson-13"
   },
   {
     name: "Quincy Jones",
     github: "https://github.com/doncibo",
-    linkedin: "https://www.linkedin.com/in/don-quincy-jones/"
+    linkedin: "https://www.linkedin.com/in/don-quincy-jones/",
+    angellist: "https://angel.co/u/quincy-jones-8"
   }
 ];
 // ReactDOM.render(
