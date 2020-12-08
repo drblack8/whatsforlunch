@@ -40,10 +40,10 @@ const names = [
         {names.map((el, idx) => (
           <div key ={idx} className={`name-div ${idx}`}>
             <div>{el.name}</div>
-            <a className="icons" href={el.github}>
+            <a className="icons" target="_blank" href={el.github}>
               <i className="fab fa-2x fa-github-square"></i>
             </a>
-            <a className="icons" href={el.linkedin}>
+            <a className="icons" target="_blank" href={el.linkedin}>
               <i className="fab fa-2x fa-linkedin"></i>
             </a>
           </div>
