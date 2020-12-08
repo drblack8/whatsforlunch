@@ -69,12 +69,12 @@ function App() {
           <BrowserRouter>
             {currentUserId && <NavBar />}
             <Switch>
-              <Route  path="/login" exact={true} component={currentUserId ? Feed : Start} />
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId} />
-              <Route  path={`/users/:username`} component={Profile} />
+              <ProtectedRoute path={`/users/:username`} component={Profile} currentUserId={currentUserId}/>
               <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
               <ProtectedRoute path="/posts/:id" component={SinglePost} currentUserId={currentUserId}/>
               <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
+              <Route  path="/*" exact={true} component={currentUserId ? Feed : Start} />
           </Switch>
         </BrowserRouter>
       </AuthContext.Provider>
