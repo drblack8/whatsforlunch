@@ -74,7 +74,7 @@ function App() {
               </Route>
               <ProtectedRoute path="/feed" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId} />
               <Route  path={`/users/:username`} component={Profile} />
-              <Route  path={`/login`} exact={true} component={Start} />
+              <Route  path={`/login`} exact={true} component={Feed} />
               <ProtectedRoute path="/posts/new" exact={true} component={UploadPage} currentUserId={currentUserId}/>
               <ProtectedRoute path="/posts/:id" component={SinglePost} currentUserId={currentUserId}/>
               <ProtectedRoute path="/" exact={true} component={Feed} currentUsername={currentUsername} currentUserId={currentUserId}/>
