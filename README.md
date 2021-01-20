@@ -1,3 +1,6 @@
+[![Live Link][live-link-shield]][live-link-url]
+
+
 # Whatsforlunch
 
  # https://aawhatsforlunch.herokuapp.com/
@@ -7,7 +10,7 @@
 ​-uploading an image as an user
    -where is the uploading coming from?
       -upload link in the nav bar
-      
+
 -how is the feed going to work?
    -how are you going to model out followers?
    -how will follows work?
@@ -174,3 +177,10 @@ This is the backend for the Flask React project.
 10. Under Settings find "Config Vars" and add any additional/secret .env variables.
 11. profit
 
+
+
+
+
+
+[live-link-shield]: https://img.shields.io/badge/-LiveLink-yellow?style=for-the-badge&logo=yellow
+[live-link-url]: https://aawhatsforlunch.herokuapp.com/
