@@ -10,7 +10,10 @@
 
 <br/><br/>
 
+# About The Project
+Whatsforlunch is a clone of instagram, but solely catered towards food. A user can upload pictures, post comments, follow friends, and like posts.
 
+<br/>
 ​
 # User Stories
 ----------------
