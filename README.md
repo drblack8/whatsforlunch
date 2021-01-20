@@ -14,8 +14,13 @@
 Whatsforlunch is a clone of instagram, but solely catered towards food. A user can upload pictures, post comments, follow friends, and like posts.
 
 <br/>
+
+## Built With
+We developed this full-stack application using a JavaScript / React frontend and a Python / Flask backend.
 ​
-# User Stories
+<br/><br/>
+
+## User Stories
 ----------------
 ​-uploading an image as an user
    -where is the uploading coming from?
