@@ -1,9 +1,16 @@
 [![Live Link][live-link-shield]][live-link-url]
 
+<br/>
 
-# Whatsforlunch
+<p align="center">
+  <a target="_blank" href="https://aawhatsforlunch.herokuapp.com/">
+    <img src="client/src/style/images/WFL.jpg" alt="WFLLogo" height="200">
+  </a>
+</p>
 
- # https://aawhatsforlunch.herokuapp.com/
+<br/><br/>
+
+
 ​
 # User Stories
 ----------------
