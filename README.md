@@ -24,6 +24,10 @@ We developed this full-stack application using a JavaScript / React frontend and
 <img align="left" height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png">
 <img align="left" height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png">
 <img align="left" height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sql/sql.png">
+<img align="left" height="20" src="https://wtforms.readthedocs.io/en/stable/_static/wtforms.png">
+<img align="left" height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/postgresql/postgresql.png">
+<img align="left" height="20" src="https://www.sqlalchemy.org/img/sqla_logo.png">
+<img align="left" height="20" src="https://pypi.org/static/images/logo-small.6eef541e.svg">
 ​
 <br/><br/>
 
