@@ -38,6 +38,9 @@ We developed this full-stack application using a JavaScript / React frontend and
 * [SQLAlchemy](https://www.sqlalchemy.org/)
 * [Alembic](https://alembic.sqlalchemy.org/en/latest/)
 
+Deployed with:
+* [<img alt="Heroku icon" src="https://img.icons8.com/color/452/heroku.png" align="left" height="20">](https://www.heroku.com/) [Heroku](https://www.heroku.com/)
+
 ## User Stories
 ----------------
 ​-uploading an image as an user
