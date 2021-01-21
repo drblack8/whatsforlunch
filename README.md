@@ -31,6 +31,13 @@ We developed this full-stack application using a JavaScript / React frontend and
 ​
 <br/><br/>
 
+* [React](https://reactjs.org/)
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* [WTForms](https://wtforms.readthedocs.io/en/2.3.x/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [SQLAlchemy](https://www.sqlalchemy.org/)
+* [Alembic](https://alembic.sqlalchemy.org/en/latest/)
+
 ## User Stories
 ----------------
 ​-uploading an image as an user
