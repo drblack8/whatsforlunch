@@ -41,6 +41,11 @@ We developed this full-stack application using a JavaScript / React frontend and
 Deployed with:
 * [<img alt="Heroku icon" src="https://img.icons8.com/color/452/heroku.png" align="left" height="20">](https://www.heroku.com/) [Heroku](https://www.heroku.com/)
 
+Packaged with:
+* [<img align="left" height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png">](https://www.docker.com/) [Docker](https://www.docker.com/)
+
+<br />
+
 ## User Stories
 ----------------
 ​-uploading an image as an user
