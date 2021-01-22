@@ -2,6 +2,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![LinkedIn][linkedin-shieldd]][linkedin-urld]
 [![LinkedIn][linkedin-shieldj]][linkedin-urlj]
+[![LinkedIn][linkedin-shieldq]][linkedin-urlq]
 
 <br/>
 
@@ -235,3 +236,5 @@ This is the backend for the Flask React project.
 [linkedin-urld]: https://www.linkedin.com/in/danielrobertblack/
 [linkedin-shieldj]: https://img.shields.io/badge/-Jaron-yellow.svg?style=for-the-badge&logo=linkedin&colorB=yellow
 [linkedin-urlj]: https://www.linkedin.com/in/jarondegen/
+[linkedin-shieldq]: https://img.shields.io/badge/-Quincy-yellow.svg?style=for-the-badge&logo=linkedin&colorB=yellow
+[linkedin-urlq]: hhttps://www.linkedin.com/in/don-quincy-jones/
