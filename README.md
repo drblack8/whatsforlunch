@@ -1,4 +1,5 @@
 [![Live Link][live-link-shield]][live-link-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <br/>
 
@@ -226,3 +227,5 @@ This is the backend for the Flask React project.
 
 [live-link-shield]: https://img.shields.io/badge/-LiveLink-yellow?style=for-the-badge&logo=yellow
 [live-link-url]: https://aawhatsforlunch.herokuapp.com/
+[linkedin-shield]: https://img.shields.io/badge/-Andrea-yellow.svg?style=for-the-badge&logo=linkedin&colorB=yellow
+[linkedin-url]: https://www.linkedin.com/in/andrea-jackson1/
