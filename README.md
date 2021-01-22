@@ -1,5 +1,6 @@
 [![Live Link][live-link-shield]][live-link-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shieldd]][linkedin-urld]
 [![LinkedIn][linkedin-shieldj]][linkedin-urlj]
 
 <br/>
