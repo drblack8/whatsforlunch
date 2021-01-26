@@ -84,7 +84,7 @@ Packaged with:
 - [x] signup
 ​
 ​
-# FEATURES - Reach
+## Features - Reach
 --------------------
 - [ ] Bonus: direct messaging
 - [ ] Bonus: hashtags
@@ -92,7 +92,7 @@ Packaged with:
 - [ ] Bonus: Dark Theme
 ​
 ​
-# Tables
+## Tables
 ----------
 - Users
     -id
