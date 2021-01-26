@@ -122,7 +122,7 @@ Packaged with:
     -friendId
 ​
 ​
-# Pages & Routes
+## Pages & Routes
 -----------------
 ​
 `/` Home
