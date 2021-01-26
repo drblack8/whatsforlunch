@@ -74,10 +74,10 @@ Packaged with:
       -number following, number followers
 
 
-# Features - MVP
+## Features / MVP
 -----------------
 - [x] Images
-- [ ] Likes
+- [x] Likes
 - [x] Commenting on images
 - [x] Following & Photo feed
 - [x] login with auth
