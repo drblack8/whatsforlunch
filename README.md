@@ -49,7 +49,7 @@ Deployed with:
 Packaged with:
 * [<img align="left" height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png">](https://www.docker.com/) [Docker](https://www.docker.com/)
 
-<br />
+<br /><br />
 
 <p align="center">
   <a target="_blank" href="https://aawhatsforlunch.herokuapp.com/">
@@ -57,6 +57,7 @@ Packaged with:
   </a>
 </p>
 
+<br /><br />
 
 ## User Stories
 ----------------
