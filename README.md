@@ -149,7 +149,7 @@ Packaged with:
 
 # Flask React Project
 
-This is the backend for the Flask React project.
+<!-- This is the backend for the Flask React project. -->
 
 ## Getting started
 
